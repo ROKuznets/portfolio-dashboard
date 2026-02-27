@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Portfolio Dashboard — 27.02.2026</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
+<style>
+:root {
+  --bg:       #0f1117;
+  --bg2:      #161b27;
+  --bg3:      #1e2537;
+  --bg4:      #252d42;
+  --border:   #2e3750;
+  --border2:  #3a4560;
+  --text:     #e8ecf4;
+  --text2:    #a0acc5;
+  --text3:    #626e8a;
+  --accent:   #3b82f6;
+  --green:    #22c55e;
+  --amber:    #f59e0b;
+  --red:      #ef4444;
+  --teal:     #14b8a6;
+  --purple:   #a855f7;
+  --c1:#3b82f6; --c2:#60a5fa; --c3:#93c5fd;
+  --cg:#22c55e; --cg2:#4ade80;
+  --ct:#14b8a6; --ca:#f59e0b; --cr:#ef4444; --cp:#a855f7; --cw:#78716c;
+  --shadow: 0 2px 8px rgba(0,0,0,.4);
+  --radius: 10px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:var(--text);font-size:13px;-webkit-font-smoothing:antialiased}
+
+/* ── HEADER ── */
+.header{background:var(--bg2);border-bottom:1px solid var(--border);padding:16px 28px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.header h1{font-size:17px;font-weight:700;letter-spacing:.3px;color:var(--text)}
+.header .meta{font-size:10.5px;color:var(--text3);margin-top:2px}
+.nav{display:flex;gap:4px;flex-wrap:wrap}
+.tab-btn{padding:5px 12px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;font-size:11px;font-weight:500;transition:all .15s;white-space:nowrap}
+.tab-btn.active,.tab-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* ── PAGE ── */
+/* ── GRID ── */
+.kpi-row{display:grid;gap:10px;margin-bottom:14px}
+.kpi-5{grid-template-columns:repeat(5,1fr)}
+.kpi-4{grid-template-columns:repeat(4,1fr)}
+.kpi-6{grid-template-columns:repeat(6,1fr)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px}
+.row-wide{display:grid;grid-template-columns:1.5fr 1fr;gap:14px;margin-bottom:14px}
+.mb{margin-bottom:14px}
+
+/* ── KPI ── */
+.kpi{background:var(--bg2);border-radius:var(--radius);padding:13px 15px;box-shadow:var(--shadow);border:1px solid var(--border);border-left:3px solid var(--c1)}
+.kpi.green{border-left-color:var(--cg)}.kpi.amber{border-left-color:var(--ca)}.kpi.red{border-left-color:var(--cr)}.kpi.teal{border-left-color:var(--ct)}.kpi.purple{border-left-color:var(--cp)}
+.kpi label{font-size:9.5px;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;display:block}
+.kpi .val{font-size:20px;font-weight:800;margin-top:3px;color:var(--text);line-height:1.1;letter-spacing:-.3px}
+.kpi .sub{font-size:10px;color:var(--text3);margin-top:2px}
+
+/* ── CARD ── */
+.card{background:var(--bg2);border-radius:var(--radius);padding:15px 17px;box-shadow:var(--shadow);border:1px solid var(--border)}
+.card h3{font-size:10.5px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.6px;margin-bottom:11px;padding-bottom:7px;border-bottom:1px solid var(--border)}
+
+/* ── TABLE ── */
+table{width:100%;border-collapse:collapse}
+th{font-size:9.5px;color:var(--text3);text-transform:uppercase;letter-spacing:.4px;padding:4px 7px;text-align:right;border-bottom:1px solid var(--border);white-space:nowrap}
+th:first-child{text-align:left}
+td{padding:5px 7px;text-align:right;font-size:11.5px;color:var(--text2);border-bottom:1px solid var(--border);white-space:nowrap}
+td:first-child{text-align:left;font-weight:500;max-width:250px;overflow:hidden;text-overflow:ellipsis;color:var(--text)}
+tr:last-child td{border-bottom:none;font-weight:700;color:var(--text);background:var(--bg3)}
+tr:hover td{background:var(--bg3)}
+
+/* ── BADGE ── */
+.badge{display:inline-block;padding:1px 6px;border-radius:4px;font-size:9.5px;font-weight:700;white-space:nowrap}
+.badge.dev{background:rgba(59,130,246,.18);color:#93c5fd}
+.badge.em{background:rgba(34,197,94,.15);color:#4ade80}
+.badge.fr{background:rgba(245,158,11,.15);color:#fcd34d}
+.badge.pos{background:rgba(34,197,94,.15);color:#4ade80}
+.badge.neg{background:rgba(239,68,68,.15);color:#fca5a5}
+.badge.etf{background:rgba(168,85,247,.15);color:#c4b5fd}
+.badge.stk{background:rgba(59,130,246,.15);color:#93c5fd}
+
+/* ── BARS ── */
+.barchart{display:flex;flex-direction:column;gap:8px}
+.bar-row{display:flex;align-items:center;gap:8px}
+.bar-lbl{font-size:10.5px;color:var(--text2);text-align:right;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar-lbl-lg{width:135px}.bar-lbl-md{width:115px}.bar-lbl-sm{width:90px}
+.bar-track{flex:1;background:var(--bg4);border-radius:5px;height:20px;overflow:hidden;position:relative}
+.bar-fill{height:20px;border-radius:5px;display:flex;align-items:center;padding:0 8px;transition:width .4s ease;justify-content:space-between}
+.bar-fill .bl{font-size:9.5px;color:rgba(255,255,255,.9);font-weight:700;white-space:nowrap}
+.bar-fill .br{font-size:9.5px;color:rgba(255,255,255,.75);white-space:nowrap}
+.bar-val{font-size:10.5px;color:var(--text2);flex-shrink:0;text-align:right;min-width:75px}
+
+/* ── LTV ── */
+.ltv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.ltv-card{text-align:center;padding:16px 10px;background:var(--bg3);border-radius:8px;border:1px solid var(--border)}
+.ltv-bank{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.ltv-pct{font-size:30px;font-weight:800;letter-spacing:-.5px}
+.ltv-detail{font-size:10px;color:var(--text3);margin-top:5px;line-height:1.5}
+
+/* ── COUPON ── */
+.coupon-list{display:flex;flex-direction:column;gap:7px}
+.coupon-item{display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--bg3);border-radius:7px;border-left:3px solid var(--c1)}
+.coupon-item.today{border-color:var(--cg)}
+.coupon-days{font-size:10.5px;font-weight:700;color:var(--accent);min-width:52px}
+.coupon-item.today .coupon-days{color:var(--cg)}
+.coupon-name{flex:1;font-size:11px;font-weight:500;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.coupon-amt{font-size:12px;font-weight:700;color:var(--cg);min-width:72px;text-align:right}
+
+/* ── CHART CONTAINERS ── */
+.chart-wrap{position:relative}
+.h220{height:220px}.h260{height:260px}.h300{height:300px}.h340{height:340px}
+
+/* ── TEXT COLORS ── */
+.green-txt{color:var(--cg)}.amber-txt{color:var(--ca)}.red-txt{color:var(--cr)}.text3{color:var(--text3)}
+.rk{color:var(--text3);font-weight:400;font-size:11px}
+
+/* ── SECTION DIVIDER ── */
+.sdiv{font-size:9.5px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;padding:12px 0 4px;border-top:1px solid var(--border);margin-top:2px}
+
+/* ── FOOTER ── */
+.footer{padding:10px 28px;font-size:10px;color:var(--text3);border-top:1px solid var(--border);background:var(--bg2);margin-top:8px}
+
+/* ── MOBILE ── */
+@media(max-width:768px){
+  .header{padding:12px 16px}
+  .header h1{font-size:15px}
+  .kpi-5,.kpi-4,.kpi-6{grid-template-columns:repeat(2,1fr)}
+  .row2,.row3,.row-wide{grid-template-columns:1fr}
+  .kpi .val{font-size:17px}
+  .ltv-grid{grid-template-columns:1fr}
+  .bar-lbl-lg,.bar-lbl-md{width:85px;font-size:9.5px}
+  td,th{font-size:10.5px;padding:4px 5px}
+  .nav{gap:3px}
+  .tab-btn{padding:4px 9px;font-size:10px}
+}
+@media(max-width:430px){
+  .kpi-5,.kpi-4{grid-template-columns:1fr 1fr}
+  .kpi .val{font-size:16px}
+  .bar-fill .br{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>📊 Portfolio Analytics</h1>
+    <div class="meta">27 February 2026 · USD equiv · Excl. Real Estate unless noted</div>
+  </div>
+  <div class="nav">
+    <button class="tab-btn" style="background:#3b82f6;color:#fff;border-color:#3b82f6" id="btn-results" onclick="show('results',this)">Results</button>
+    <button class="tab-btn" id="btn-composition" onclick="show('composition',this)">Composition</button>
+    <button class="tab-btn" id="btn-bonds" onclick="show('bonds',this)">Bonds</button>
+    <button class="tab-btn" id="btn-equity" onclick="show('equity',this)">Equity</button>
+    <button class="tab-btn" id="btn-ltv" onclick="show('ltv',this)">LTV</button>
+    <button class="tab-btn" id="btn-cf" onclick="show('cf',this)">Cash Flow</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- RESULTS                                                       -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div id="results" style="display:block">
+  <div class="kpi-row kpi-5">
+    <div class="kpi"><label>Total NAV (incl. RE)</label><div class="val">$247.8M</div><div class="sub">All assets</div></div>
+    <div class="kpi teal"><label>Portfolio NAV (excl. RE)</label><div class="val">$174.1M</div><div class="sub">Investable assets only</div></div>
+    <div class="kpi green"><label>AW Current Yield</label><div class="val">6.14%</div><div class="sub">Non-RE, all CCY weighted</div></div>
+    <div class="kpi amber"><label>Annual Inflows (non-RE)</label><div class="val">$10.3M</div><div class="sub">Coupons + Div + Interest</div></div>
+    <div class="kpi red"><label>Total Debt</label><div class="val">$36.8M</div><div class="sub">JPM + UBS + Vontobel</div></div>
+  </div>
+
+  <div class="row2">
+    <div class="card">
+      <h3>All-Portfolio by Currency</h3>
+      <table>
+        <thead><tr><th>CCY</th><th>Weight</th><th>AW Yield</th><th>Inflows USD</th><th>MV USD</th></tr></thead>
+        <tbody>
+          <tr><td>USD</td><td>59.4%</td><td>6.00%</td><td>$6,549K</td><td>$146,792K</td></tr>
+          <tr><td>GBP</td><td>20.8%</td><td>6.95%</td><td>$2,572K</td><td>$51,393K</td></tr>
+          <tr><td>EUR</td><td>17.4%</td><td>5.21%</td><td>$741K</td><td>$43,073K</td></tr>
+          <tr><td>BRL</td><td>1.0%</td><td>11.0%</td><td>$242K</td><td>$2,403K</td></tr>
+          <tr><td>TRY</td><td>0.4%</td><td>30.1%</td><td>$206K</td><td>$921K</td></tr>
+          <tr><td>Other</td><td>1.1%</td><td>—</td><td>—</td><td>$2,609K</td></tr>
+          <tr><td>Total</td><td>100%</td><td>6.14%</td><td>$10,310K</td><td>$247,192K</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Yield / Return by Asset Class</h3>
+      <div class="barchart">
+        <div class="bar-row"><div class="bar-lbl bar-lbl-md">Bonds USD</div><div class="bar-track"><div class="bar-fill" style="width:75%;background:var(--c1)"><span class="bl">YTM 7.25%</span><span class="br">dur 8.7y</span></div></div></div>
+        <div class="bar-row"><div class="bar-lbl bar-lbl-md">Bonds GBP</div><div class="bar-track"><div class="bar-fill" style="width:70%;background:var(--c1)"><span class="bl">YTM 7.01%</span><span class="br">dur 9.0y</span></div></div></div>
+        <div class="bar-row"><div class="bar-lbl bar-lbl-md">Bonds EUR</div><div class="bar-track"><div class="bar-fill" style="width:55%;background:var(--c2)"><span class="bl">YTM 5.54%</span><span class="br">dur 4.1y</span></div></div></div>
+        <div class="bar-row"><div class="bar-lbl bar-lbl-md">Bonds ETF</div><div class="bar-track"><div class="bar-fill" style="width:67%;background:var(--c3)"><span class="bl">6.70%</span></div></div></div>
+        <div class="bar-row"><div class="bar-lbl bar-lbl-md">Deposits USD</div><div class="bar-track"><div class="bar-fill" style="width:37%;background:var(--ct)"><span class="bl">3.73%</span></div></div></div>
+        <div class="bar-row"><div class="bar-lbl bar-lbl-md">Equities (div)</div><div class="bar-track"><div class="bar-fill" style="width:32%;background:var(--cg)"><span class="bl">~3.2% div</span></div></div></div>
+        <div class="bar-row"><div class="bar-lbl bar-lbl-md">Bonds BRL</div><div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--ca)"><span class="bl">YTM 11.9%</span></div></div></div>
+        <div class="bar-row"><div class="bar-lbl bar-lbl-md">Bonds TRY</div><div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--cr)"><span class="bl">YTM 31.1% 🔥</span></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row3">
+    <div class="card">
+      <h3>Bonds by Currency</h3>
+      <table>
+        <thead><tr><th>CCY</th><th>Wt</th><th>Cpn</th><th>YTM</th><th>Dur</th><th>MV</th></tr></thead>
+        <tbody>
+          <tr><td>USD</td><td>65.7%</td><td>6.73%</td><td>7.25%</td><td>8.7y</td><td>$46,987K</td></tr>
+          <tr><td>GBP</td><td>16.8%</td><td>6.43%</td><td>7.01%</td><td>9.0y</td><td>$12,239K</td></tr>
+          <tr><td>EUR</td><td>13.2%</td><td>6.66%</td><td>5.54%</td><td>4.1y</td><td>$9,409K</td></tr>
+          <tr><td>BRL</td><td>3.2%</td><td>10.4%</td><td>11.9%</td><td>3.4y</td><td>$2,403K</td></tr>
+          <tr><td>TRY</td><td>1.0%</td><td>27.5%</td><td>31.1%</td><td>1.9y</td><td>$921K</td></tr>
+          <tr><td>Total</td><td>100%</td><td>7.00%</td><td>7.37%</td><td>8.2y</td><td>$71,958K</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Equities by Currency</h3>
+      <table>
+        <thead><tr><th>CCY</th><th>Wt</th><th>Div</th><th>P&L</th><th>MV</th></tr></thead>
+        <tbody>
+          <tr><td>USD</td><td>44.1%</td><td>2.4%</td><td><span class="badge pos">+14.5%</span></td><td>$17,446K</td></tr>
+          <tr><td>EUR</td><td>13.8%</td><td>2.9%</td><td><span class="badge pos">+6.1%</span></td><td>$5,458K</td></tr>
+          <tr><td>GBP</td><td>5.8%</td><td>5.6%</td><td><span class="badge pos">+15.3%</span></td><td>$2,278K</td></tr>
+          <tr><td>CAD</td><td>1.3%</td><td>0.1%</td><td><span class="badge pos">+184%</span></td><td>$496K</td></tr>
+          <tr><td>JPM DP</td><td>35.1%</td><td>—</td><td><span class="badge pos">+25.2%</span></td><td>$13,865K</td></tr>
+          <tr><td>Total</td><td>100%</td><td>~3.2%</td><td>—</td><td>$39,543K</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Other Classes</h3>
+      <table>
+        <thead><tr><th>Class</th><th>MV USD</th><th>Yield</th><th>P&L</th></tr></thead>
+        <tbody>
+          <tr><td>Bonds ETF</td><td>$37,212K</td><td>6.70%</td><td><span class="badge neg">−5.0%</span></td></tr>
+          <tr><td>Deposits (USD)</td><td>$12,945K</td><td>3.73%</td><td>—</td></tr>
+          <tr><td>Private Credit</td><td>$8,286K</td><td>—</td><td>—</td></tr>
+          <tr><td>Alt. Assets (PE)</td><td>$9,541K</td><td>—</td><td>—</td></tr>
+          <tr><td>Cash</td><td>$2,914K</td><td>—</td><td>—</td></tr>
+          <tr><td>JPM Modules</td><td>$13,865K</td><td>—</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TOP 20 — BONDS + BONDS ETF -->
+  <div class="row2">
+    <div class="card">
+      <h3>Top 20 — Individual Bonds</h3>
+      <table>
+        <thead><tr><th>#</th><th>Bond</th><th>CCY</th><th>Cpn</th><th>YTM</th><th>MV USD</th></tr></thead>
+        <tbody>
+          <tr><td class="rk">1</td><td title="5.625% United Mex States 2114">5.625% Mexico 2114</td><td>USD</td><td>5.6%</td><td>7.11%</td><td>$4,512K</td></tr>
+          <tr><td class="rk">2</td><td>6.625% Turkey 2045</td><td>USD</td><td>6.6%</td><td>7.65%</td><td>$2,733K</td></tr>
+          <tr><td class="rk">3</td><td>6.375% ABN AMRO FRN Sub</td><td>GBP</td><td>6.4%</td><td>5.41%</td><td>$2,532K</td></tr>
+          <tr><td class="rk">4</td><td>6.85% Petrobras 2115</td><td>USD</td><td>6.9%</td><td>7.43%</td><td>$1,878K</td></tr>
+          <tr><td class="rk">5</td><td>7% Erste Group FRN Sub</td><td>EUR</td><td>7.0%</td><td>—</td><td>$1,802K</td></tr>
+          <tr><td class="rk">6</td><td>7.125% Brazil 2054</td><td>USD</td><td>7.1%</td><td>7.29%</td><td>$1,791K</td></tr>
+          <tr><td class="rk">7</td><td>7.375% EDF FRN Sub</td><td>GBP</td><td>7.4%</td><td>6.99%</td><td>$1,683K</td></tr>
+          <tr><td class="rk">8</td><td>6.5% Rabobank FRN Sub</td><td>GBP</td><td>6.5%</td><td>—</td><td>$1,368K</td></tr>
+          <tr><td class="rk">9</td><td>6.375% KazMunayGaz 2048</td><td>USD</td><td>6.4%</td><td>8.53%</td><td>$1,357K</td></tr>
+          <tr><td class="rk">10</td><td>6.875% OCP 2044</td><td>USD</td><td>6.9%</td><td>6.71%</td><td>$1,244K</td></tr>
+          <tr><td class="rk">11</td><td>5.875% Crédit Agricole FRN</td><td>GBP</td><td>5.9%</td><td>5.57%</td><td>$1,218K</td></tr>
+          <tr><td class="rk">12</td><td>7.75% Aviva FRN Sub</td><td>GBP</td><td>7.8%</td><td>6.50%</td><td>$1,163K</td></tr>
+          <tr><td class="rk">13</td><td>10.75% IBRD 2031</td><td>USD</td><td>10.8%</td><td>12.22%</td><td>$1,115K</td></tr>
+          <tr><td class="rk">14</td><td>7.65% Turkcell 2032</td><td>USD</td><td>7.7%</td><td>6.57%</td><td>$1,058K</td></tr>
+          <tr><td class="rk">15</td><td>9.125% Vedanta 2032</td><td>USD</td><td>9.1%</td><td>8.47%</td><td>$1,042K</td></tr>
+          <tr><td class="rk">16</td><td>6.375% ICL Group 2038</td><td>USD</td><td>6.4%</td><td>5.99%</td><td>$1,041K</td></tr>
+          <tr><td class="rk">17</td><td>6.95% HSBC FRN Sub</td><td>GBP</td><td>7.0%</td><td>6.19%</td><td>$1,040K</td></tr>
+          <tr><td class="rk">18</td><td>8.375% Ecopetrol 2036</td><td>USD</td><td>8.4%</td><td>8.56%</td><td>$1,021K</td></tr>
+          <tr><td class="rk">19</td><td>6.7% Crédit Agricole FRN</td><td>EUR</td><td>6.7%</td><td>6.56%</td><td>$1,019K</td></tr>
+          <tr><td class="rk">20</td><td>7% SoftBank 2031</td><td>USD</td><td>7.0%</td><td>6.91%</td><td>$1,009K</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>Top 15 — Bonds ETF Positions</h3>
+      <table>
+        <thead><tr><th>#</th><th>Fund</th><th>Yield</th><th>YTM</th><th>P&L</th><th>MV USD</th></tr></thead>
+        <tbody>
+          <tr><td class="rk">1</td><td title="PIMCO Income Fund Inst USD">PIMCO Income Fund USD</td><td>5.9%</td><td>6.71%</td><td><span class="badge pos">+3.6%</span></td><td>$6,359K</td></tr>
+          <tr><td class="rk">2</td><td>PIMCO Asia HY Bond USD</td><td>8.4%</td><td>9.05%</td><td><span class="badge neg">−9.1%</span></td><td>$5,934K</td></tr>
+          <tr><td class="rk">3</td><td>Blackstone Priv. Credit</td><td>9.7%</td><td>9.70%</td><td><span class="badge neg">−30.7%</span></td><td>$4,911K</td></tr>
+          <tr><td class="rk">4</td><td>PIMCO Income Fund USD ×2</td><td>5.9%</td><td>6.71%</td><td><span class="badge pos">+4.2%</span></td><td>$4,184K</td></tr>
+          <tr><td class="rk">5</td><td>Pictet EM Local Ccy Debt</td><td>5.9%</td><td>—</td><td><span class="badge pos">+0.01%</span></td><td>$2,004K</td></tr>
+          <tr><td class="rk">6</td><td>Neuberger EM DB HD USD</td><td>4.9%</td><td>6.40%</td><td><span class="badge pos">+8.7%</span></td><td>$1,666K</td></tr>
+          <tr><td class="rk">7</td><td>Barings EM Local Debt</td><td>—</td><td>9.19%</td><td><span class="badge neg">−0.2%</span></td><td>$1,499K</td></tr>
+          <tr><td class="rk">8</td><td>Vontobel EM Debt USD</td><td>5.0%</td><td>8.57%</td><td><span class="badge pos">+15.2%</span></td><td>$1,448K</td></tr>
+          <tr><td class="rk">9</td><td>UI Aktia EM Frontier Bond</td><td>—</td><td>12.40%</td><td><span class="badge neg">−0.1%</span></td><td>$1,394K</td></tr>
+          <tr><td class="rk">10</td><td>Neuberger EM Debt LC Dist</td><td>7.3%</td><td>8.83%</td><td><span class="badge pos">+3.7%</span></td><td>$1,246K</td></tr>
+          <tr><td class="rk">11</td><td>Vontobel Credit Opport.</td><td>—</td><td>9.48%</td><td><span class="badge pos">+6.1%</span></td><td>$1,068K</td></tr>
+          <tr><td class="rk">12</td><td>Algebris Fin. Credit USD</td><td>5.7%</td><td>5.40%</td><td><span class="badge pos">+1.9%</span></td><td>$1,031K</td></tr>
+          <tr><td class="rk">13</td><td>Vontobel TwentyFour Strat</td><td>5.0%</td><td>—</td><td><span class="badge pos">+1.8%</span></td><td>$1,022K</td></tr>
+          <tr><td class="rk">14</td><td>HPS Mezzanine 2019 II</td><td>29.9%</td><td>—</td><td><span class="badge neg">−7.2%</span></td><td>$772K</td></tr>
+          <tr><td class="rk">15</td><td>HPS CLF (HLEND) Dist</td><td>10.2%</td><td>—</td><td><span class="badge neg">−2.5%</span></td><td>$644K</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- COMPOSITION                                                   -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div id="composition" style="display:none">
+  <div class="kpi-row kpi-5">
+    <div class="kpi"><label>Portfolio NAV (excl. RE)</label><div class="val">$174.1M</div><div class="sub">Investable assets</div></div>
+    <div class="kpi" style="border-left-color:#3b82f6"><label>Developed</label><div class="val" style="color:#93c5fd">67.6%</div><div class="sub">$121.7M</div></div>
+    <div class="kpi green"><label>Emerging Markets</label><div class="val" style="color:#4ade80">29.5%</div><div class="sub">$53.1M</div></div>
+    <div class="kpi amber"><label>Frontier Markets</label><div class="val" style="color:#fcd34d">2.9%</div><div class="sub">$5.2M</div></div>
+    <div class="kpi teal"><label>Asset Classes</label><div class="val">9</div><div class="sub">excl. RE</div></div>
+  </div>
+
+  <div class="row2">
+    <div class="card">
+      <h3>Asset Allocation (excl. RE)</h3>
+      <div class="chart-wrap h300"><canvas id="donutChart"></canvas></div>
+    </div>
+    <div class="card">
+      <h3>Asset Class Size (USD)</h3>
+      <div class="barchart" style="margin-top:6px">
+        <div class="bar-row"><div class="bar-lbl bar-lbl-lg">Bonds</div><div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--c1)"><span class="bl">$71.8M</span><span class="br">41.2%</span></div></div></div>
+        <div class="bar-row"><div class="bar-lbl bar-lbl-lg">Bonds ETF</div><div class="bar-track"><div class="bar-fill" style="width:52%;background:var(--c2)"><span class="bl">$37.2M</span><span class="br">21.4%</span></div></div></div>
+        <div class="bar-row"><div class="bar-lbl bar-lbl-lg">JPM Modules</div><div class="bar-track"><div class="bar-fill" style="width:19%;background:var(--ct)"><span class="bl">$13.9M</span></div></div></div>
+        <div class="bar-row"><div class="bar-lbl bar-lbl-lg">Deposits</div><div class="bar-track"><div class="bar-fill" style="width:18%;background:#0f766e"><span class="bl">$12.9M</span></div></div></div>
+        <div class="bar-row"><div class="bar-lbl bar-lbl-lg">Equity ETF</div><div class="bar-track"><div class="bar-fill" style="width:19%;background:var(--cg2)"><span class="bl">$13.3M</span></div></div></div>
+        <div class="bar-row"><div class="bar-lbl bar-lbl-lg">Equities</div><div class="bar-track"><div class="bar-fill" style="width:12%;background:var(--cg)"><span class="bl">$8.8M</span></div></div></div>
+        <div class="bar-row"><div class="bar-lbl bar-lbl-lg">Alt. Assets (PE)</div><div class="bar-track"><div class="bar-fill" style="width:13%;background:var(--cp)"><span class="bl">$9.5M</span></div></div></div>
+        <div class="bar-row"><div class="bar-lbl bar-lbl-lg">Private Credit</div><div class="bar-track"><div class="bar-fill" style="width:12%;background:#7c3aed"><span class="bl">$8.3M</span></div></div></div>
+        <div class="bar-row"><div class="bar-lbl bar-lbl-lg">Cash</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:var(--cw)"><span class="bl">$10.9M</span></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row2">
+    <div class="card">
+      <h3>Dev / EM / Frontier by Asset Class</h3>
+      <table>
+        <thead><tr><th>Asset Class</th><th>Developed</th><th>EM</th><th>Frontier</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td>Bonds</td><td><span class="badge dev">48.4%</span></td><td><span class="badge em">45.8%</span></td><td><span class="badge fr">5.8%</span></td><td>$71.8M</td></tr>
+          <tr><td>Bonds ETF</td><td><span class="badge dev">47.4%</span></td><td><span class="badge em">49.2%</span></td><td><span class="badge fr">3.4%</span></td><td>$29.6M</td></tr>
+          <tr><td>Private Credit</td><td><span class="badge dev">100%</span></td><td>—</td><td>—</td><td>$8.3M</td></tr>
+          <tr><td>Equities</td><td><span class="badge dev">79.9%</span></td><td><span class="badge em">20.1%</span></td><td>—</td><td>$26.3M</td></tr>
+          <tr><td>JPM + Deposits</td><td><span class="badge dev">100%</span></td><td>—</td><td>—</td><td>$26.8M</td></tr>
+          <tr><td>Cash</td><td><span class="badge dev">100%</span></td><td>—</td><td>—</td><td>$10.9M</td></tr>
+          <tr><td>Total (ex-RE)</td><td>67.6%</td><td>29.5%</td><td>2.9%</td><td>$174.1M</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Top 10 Countries (Bonds + Equities)</h3>
+      <div class="chart-wrap h300"><canvas id="countryChart"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- BONDS                                                         -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div id="bonds" style="display:none">
+  <div class="kpi-row kpi-5">
+    <div class="kpi"><label>Bonds NAV</label><div class="val">$71.9M</div><div class="sub">Market value</div></div>
+    <div class="kpi green"><label>AW YTM</label><div class="val">7.37%</div><div class="sub">Weighted avg.</div></div>
+    <div class="kpi"><label>AW Coupon</label><div class="val">7.00%</div><div class="sub">Weighted avg.</div></div>
+    <div class="kpi teal"><label>AW Duration</label><div class="val">8.2y</div><div class="sub">Modified duration</div></div>
+    <div class="kpi amber"><label>Upcoming Coupons</label><div class="val">3</div><div class="sub">Next 14 days</div></div>
+  </div>
+
+  <div class="card mb">
+    <h3>⏰ Upcoming Coupons — Next 14 Days (from 27 Feb 2026)</h3>
+    <div class="coupon-list">
+      <div class="coupon-item today"><div class="coupon-days">📅 Today</div><div class="coupon-name">6.95% HSBC Holdings FRN Conv Subordinated</div><div class="coupon-amt">$69,500</div></div>
+      <div class="coupon-item"><div class="coupon-days">📅 08 Mar</div><div class="coupon-name">6.3% Corp Nacional de Cobre Chile 08.09.2053</div><div class="coupon-amt">$37,800</div></div>
+      <div class="coupon-item"><div class="coupon-days">📅 11 Mar</div><div class="coupon-name">Woodside Energy 5.7% 2054</div><div class="coupon-amt">$22,800</div></div>
+    </div>
+  </div>
+
+  <div class="row2">
+    <div class="card">
+      <h3>Bonds by Currency — Yield, Duration &amp; Size</h3>
+      <table>
+        <thead><tr><th>CCY</th><th>Weight</th><th>AW Coupon</th><th>AW YTM</th><th>AW Duration</th><th>MV USD</th></tr></thead>
+        <tbody>
+          <tr><td>USD</td><td>63.8%</td><td>6.89%</td><td>7.08%</td><td>8.7y</td><td>$45,938K</td></tr>
+          <tr><td>GBP</td><td>16.3%</td><td>6.55%</td><td>6.67%</td><td>9.0y</td><td>$11,764K</td></tr>
+          <tr><td>EUR</td><td>12.8%</td><td>6.61%</td><td>3.39%</td><td>4.1y</td><td>$9,231K</td></tr>
+          <tr><td>BRL</td><td>3.1%</td><td>10.38%</td><td>11.90%</td><td>3.4y</td><td>$2,244K</td></tr>
+          <tr><td>TRY</td><td>1.0%</td><td>27.50%</td><td>31.12%</td><td>1.9y</td><td>$705K</td></tr>
+          <tr><td>Total</td><td>100%</td><td>7.00%</td><td>7.37%</td><td>8.2y</td><td>$71,882K</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Bonds: Developed / EM / Frontier</h3>
+      <div class="chart-wrap h260"><canvas id="bondsMktChart"></canvas></div>
+    </div>
+  </div>
+
+  <div class="row2">
+    <div class="card">
+      <h3>Geographic Distribution by Region</h3>
+      <div class="chart-wrap h300"><canvas id="regionChart"></canvas></div>
+    </div>
+    <div class="card">
+      <h3>Top 12 Countries</h3>
+      <div class="chart-wrap h300"><canvas id="bondCountryChart"></canvas></div>
+    </div>
+  </div>
+
+  <div class="row2">
+    <div class="card">
+      <h3>Top 15 Sectors</h3>
+      <table>
+        <thead><tr><th>#</th><th>Sector</th><th>% Bonds</th><th>% Total</th><th>USD</th></tr></thead>
+        <tbody>
+          <tr><td class="rk">1</td><td>Government</td><td>21.9%</td><td>6.4%</td><td>$15,783K</td></tr>
+          <tr><td class="rk">2</td><td>AT1</td><td>14.7%</td><td>4.3%</td><td>$10,561K</td></tr>
+          <tr><td class="rk">3</td><td>Oil &amp; Gas</td><td>12.7%</td><td>3.7%</td><td>$9,158K</td></tr>
+          <tr><td class="rk">4</td><td>Banks</td><td>11.7%</td><td>3.4%</td><td>$8,404K</td></tr>
+          <tr><td class="rk">5</td><td>Chemicals / Petrochem</td><td>5.5%</td><td>1.6%</td><td>$3,988K</td></tr>
+          <tr><td class="rk">6</td><td>Power</td><td>5.4%</td><td>1.6%</td><td>$3,858K</td></tr>
+          <tr><td class="rk">7</td><td>Non-ferrous metals</td><td>5.0%</td><td>1.5%</td><td>$3,603K</td></tr>
+          <tr><td class="rk">8</td><td>Insurance &amp; Reins.</td><td>2.6%</td><td>0.8%</td><td>$1,893K</td></tr>
+          <tr><td class="rk">9</td><td>Food &amp; Beverage</td><td>1.8%</td><td>0.5%</td><td>$1,331K</td></tr>
+          <tr><td class="rk">10</td><td>Ferrous metals</td><td>1.8%</td><td>0.5%</td><td>$1,262K</td></tr>
+          <tr><td class="rk">11</td><td>Other Fin. Inst.</td><td>1.7%</td><td>0.5%</td><td>$1,240K</td></tr>
+          <tr><td class="rk">12</td><td>Comm. Services</td><td>1.5%</td><td>0.4%</td><td>$1,058K</td></tr>
+          <tr><td class="rk">13</td><td>Holding Cos</td><td>1.3%</td><td>0.4%</td><td>$901K</td></tr>
+          <tr><td class="rk">14</td><td>Media</td><td>1.1%</td><td>0.3%</td><td>$820K</td></tr>
+          <tr><td class="rk">15</td><td>Technology</td><td>1.1%</td><td>0.3%</td><td>$795K</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Duration Distribution</h3>
+      <div class="chart-wrap h300"><canvas id="durationChart"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- EQUITY                                                        -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div id="equity" style="display:none">
+  <div class="kpi-row kpi-5">
+    <div class="kpi"><label>Equity + ETF NAV</label><div class="val">$26.3M</div><div class="sub">Direct + ETF (ex JPM DP)</div></div>
+    <div class="kpi teal"><label>Incl. JPM DP</label><div class="val">$39.5M</div><div class="sub">Full equity exposure</div></div>
+    <div class="kpi" style="border-left-color:#3b82f6"><label>Developed</label><div class="val" style="color:#93c5fd">79.9%</div><div class="sub">$21.0M direct</div></div>
+    <div class="kpi green"><label>Emerging Markets</label><div class="val" style="color:#4ade80">20.1%</div><div class="sub">$5.3M direct</div></div>
+    <div class="kpi amber"><label>Avg Div Yield</label><div class="val">~3.2%</div><div class="sub">Weighted avg.</div></div>
+  </div>
+
+  <div class="row2">
+    <div class="card">
+      <h3>Equity Mix: Dev / EM &amp; Stocks vs ETF</h3>
+      <div class="chart-wrap h300"><canvas id="eqMixChart"></canvas></div>
+    </div>
+    <div class="card">
+      <h3>Top Countries — Direct Stocks</h3>
+      <div class="chart-wrap h300"><canvas id="eqCountryChart"></canvas></div>
+    </div>
+  </div>
+
+  <div class="row2">
+    <div class="card">
+      <h3>Individual Stocks — Top 20</h3>
+      <table>
+        <thead><tr><th>#</th><th>Name</th><th>Country</th><th>Mkt</th><th>P&L</th><th>Div</th><th>MV</th></tr></thead>
+        <tbody>
+          <tr><td class="rk">1</td><td>Freeport-McMoRan</td><td>USA</td><td><span class="badge dev">Dev</span></td><td><span class="badge pos">+61.6%</span></td><td>0.2%</td><td>$810K</td></tr>
+          <tr><td class="rk">2</td><td>Petrobras ADR</td><td>USA</td><td><span class="badge em">EM</span></td><td><span class="badge pos">+28.6%</span></td><td>11.7%</td><td>$768K</td></tr>
+          <tr><td class="rk">3</td><td>Vale SA ADR</td><td>USA</td><td><span class="badge em">EM</span></td><td><span class="badge pos">+24.4%</span></td><td>4.5%</td><td>$623K</td></tr>
+          <tr><td class="rk">4</td><td>Repsol SA</td><td>Spain</td><td><span class="badge dev">Dev</span></td><td><span class="badge pos">+11.2%</span></td><td>4.3%</td><td>$534K</td></tr>
+          <tr><td class="rk">5</td><td>TotalEnergies SE</td><td>France</td><td><span class="badge dev">Dev</span></td><td><span class="badge pos">+9.8%</span></td><td>4.9%</td><td>$529K</td></tr>
+          <tr><td class="rk">6</td><td>OMV AG</td><td>Austria</td><td><span class="badge dev">Dev</span></td><td><span class="badge pos">+9.5%</span></td><td>8.5%</td><td>$518K</td></tr>
+          <tr><td class="rk">7</td><td>ENI SpA</td><td>Italy</td><td><span class="badge dev">Dev</span></td><td><span class="badge pos">+7.7%</span></td><td>5.5%</td><td>$515K</td></tr>
+          <tr><td class="rk">8</td><td>Shell PLC</td><td>UK</td><td><span class="badge dev">Dev</span></td><td><span class="badge pos">+4.6%</span></td><td>3.7%</td><td>$500K</td></tr>
+          <tr><td class="rk">9</td><td>Cameco Corp</td><td>Canada</td><td><span class="badge dev">Dev</span></td><td><span class="badge pos">+184%</span></td><td>0.1%</td><td>$496K</td></tr>
+          <tr><td class="rk">10</td><td>Equinor ASA ADR</td><td>USA</td><td><span class="badge dev">Dev</span></td><td><span class="badge pos">+9.2%</span></td><td>4.9%</td><td>$437K</td></tr>
+          <tr><td class="rk">11</td><td>Circle Internet Group</td><td>USA</td><td><span class="badge dev">Dev</span></td><td><span class="badge neg">−15.8%</span></td><td>—</td><td>$414K</td></tr>
+          <tr><td class="rk">12</td><td>Pfizer Inc</td><td>USA</td><td><span class="badge dev">Dev</span></td><td><span class="badge pos">+8.4%</span></td><td>1.6%</td><td>$325K</td></tr>
+          <tr><td class="rk">13</td><td>Vistra Corp</td><td>USA</td><td><span class="badge dev">Dev</span></td><td><span class="badge pos">+0.4%</span></td><td>0.5%</td><td>$302K</td></tr>
+          <tr><td class="rk">14</td><td>LondonMetric Property</td><td>UK</td><td><span class="badge dev">Dev</span></td><td><span class="badge pos">+7.7%</span></td><td>6.3%</td><td>$291K</td></tr>
+          <tr><td class="rk">15</td><td>Taylor Wimpey PLC</td><td>UK</td><td><span class="badge dev">Dev</span></td><td><span class="badge pos">+6.2%</span></td><td>8.7%</td><td>$288K</td></tr>
+          <tr><td class="rk">16</td><td>Derwent London REIT</td><td>UK</td><td><span class="badge dev">Dev</span></td><td><span class="badge neg">−0.4%</span></td><td>4.4%</td><td>$275K</td></tr>
+          <tr><td class="rk">17</td><td>Glencore PLC</td><td>Jersey</td><td><span class="badge dev">Dev</span></td><td><span class="badge pos">+67.8%</span></td><td>1.5%</td><td>$253K</td></tr>
+          <tr><td class="rk">18</td><td>Rio Tinto PLC</td><td>UK</td><td><span class="badge dev">Dev</span></td><td><span class="badge pos">+57.7%</span></td><td>4.7%</td><td>$251K</td></tr>
+          <tr><td class="rk">19</td><td>BHP Group Ltd</td><td>Australia</td><td><span class="badge dev">Dev</span></td><td><span class="badge pos">+42.9%</span></td><td>4.6%</td><td>$242K</td></tr>
+          <tr><td class="rk">20</td><td>SLB Limited</td><td>Netherlands</td><td><span class="badge dev">Dev</span></td><td><span class="badge pos">+10.3%</span></td><td>2.2%</td><td>$222K</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Equity ETFs — Top 15</h3>
+      <table>
+        <thead><tr><th>#</th><th>Fund</th><th>Mkt</th><th>P&L</th><th>Div</th><th>MV</th></tr></thead>
+        <tbody>
+          <tr><td class="rk">1</td><td>iShares Core S&P 500 Acc</td><td><span class="badge dev">Dev</span></td><td><span class="badge pos">+97.5%</span></td><td>—</td><td>$1,857K</td></tr>
+          <tr><td class="rk">2</td><td>ROBO Global Robotics</td><td><span class="badge dev">Dev</span></td><td><span class="badge pos">+21.5%</span></td><td>0.4%</td><td>$1,284K</td></tr>
+          <tr><td class="rk">3</td><td>THEAM Quant Equity Europe</td><td><span class="badge dev">Dev</span></td><td><span class="badge pos">+2.8%</span></td><td>—</td><td>$1,252K</td></tr>
+          <tr><td class="rk">4</td><td>WisdomTree EM Equity Inc</td><td><span class="badge em">EM</span></td><td><span class="badge pos">+4.6%</span></td><td>4.1%</td><td>$1,048K</td></tr>
+          <tr><td class="rk">5</td><td>iShares EM Dividend Dist</td><td><span class="badge em">EM</span></td><td><span class="badge pos">+4.8%</span></td><td>5.2%</td><td>$1,046K</td></tr>
+          <tr><td class="rk">6</td><td>Global X Cybersecurity</td><td><span class="badge dev">Dev</span></td><td><span class="badge neg">−11.4%</span></td><td>0.1%</td><td>$709K</td></tr>
+          <tr><td class="rk">7</td><td>Defiance AI &amp; Power Infra</td><td><span class="badge dev">Dev</span></td><td><span class="badge pos">+7.4%</span></td><td>—</td><td>$644K</td></tr>
+          <tr><td class="rk">8</td><td>Ninety One GSF European</td><td><span class="badge dev">Dev</span></td><td><span class="badge pos">+2.2%</span></td><td>—</td><td>$605K</td></tr>
+          <tr><td class="rk">9</td><td>Amundi MSCI EMU Dist</td><td><span class="badge dev">Dev</span></td><td><span class="badge pos">+2.1%</span></td><td>3.1%</td><td>$600K</td></tr>
+          <tr><td class="rk">10</td><td>THEAM Quant Nuclear</td><td><span class="badge dev">Dev</span></td><td><span class="badge pos">+13.4%</span></td><td>—</td><td>$577K</td></tr>
+          <tr><td class="rk">11</td><td>Pacific NoS Global EM</td><td><span class="badge em">EM</span></td><td><span class="badge pos">+3.6%</span></td><td>6.0%</td><td>$518K</td></tr>
+          <tr><td class="rk">12</td><td>DB X MSCI US Health Care</td><td><span class="badge dev">Dev</span></td><td><span class="badge pos">+37.9%</span></td><td>1.1%</td><td>$505K</td></tr>
+          <tr><td class="rk">13</td><td>Defiance Quantum ETF</td><td><span class="badge dev">Dev</span></td><td><span class="badge neg">−0.1%</span></td><td>0.9%</td><td>$503K</td></tr>
+          <tr><td class="rk">14</td><td>Utilities SPDR ETF</td><td><span class="badge dev">Dev</span></td><td><span class="badge neg">−1.5%</span></td><td>1.9%</td><td>$494K</td></tr>
+          <tr><td class="rk">15</td><td>WisdomTree Europe Defence</td><td><span class="badge dev">Dev</span></td><td><span class="badge pos">+14.3%</span></td><td>—</td><td>$404K</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- LTV                                                           -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div id="ltv" style="display:none">
+  <div class="kpi-row kpi-5">
+    <div class="kpi red"><label>Total Debt</label><div class="val">$36.8M</div><div class="sub">All banks</div></div>
+    <div class="kpi"><label>Total NAV</label><div class="val">$247.8M</div><div class="sub">All assets incl. RE</div></div>
+    <div class="kpi green"><label>LTV (All Assets)</label><div class="val">14.8%</div><div class="sub">↓ Lower = more capacity</div></div>
+    <div class="kpi amber"><label>LTV (Pledged Coll.)</label><div class="val">24.8%</div><div class="sub">↓ Lower = more capacity</div></div>
+    <div class="kpi teal"><label>Est. Annual Interest</label><div class="val">~$1.25M</div><div class="sub">Cost of all debt</div></div>
+  </div>
+
+  <div class="row2">
+    <div class="card">
+      <h3>LTV by Bank — Pledged Collateral</h3>
+      <p style="font-size:10.5px;color:var(--text3);margin-bottom:12px">↓ Lower LTV = more available leverage capacity (room to borrow more against same collateral)</p>
+      <div class="ltv-grid">
+        <div class="ltv-card">
+          <div class="ltv-bank">Vontobel</div>
+          <div class="ltv-pct amber-txt">24.0%</div>
+          <div class="ltv-detail">Collateral: $96.6M<br>Debt: $23.2M<br>Available ~$73M</div>
+        </div>
+        <div class="ltv-card">
+          <div class="ltv-bank">UBS</div>
+          <div class="ltv-pct green-txt">24.5%</div>
+          <div class="ltv-detail">Collateral: $20.9M<br>Debt: $5.1M<br>Available ~$15.8M</div>
+        </div>
+        <div class="ltv-card">
+          <div class="ltv-bank">JPM</div>
+          <div class="ltv-pct green-txt">27.7%</div>
+          <div class="ltv-detail">Collateral: $31.1M<br>Debt: $8.6M<br>Available ~$22.5M</div>
+        </div>
+      </div>
+      <div style="margin-top:16px">
+        <table>
+          <thead><tr><th>Bank</th><th>Coll. MV</th><th>Debt</th><th>LTV (pledged)</th><th>Full NAV</th><th>LTV (all)</th></tr></thead>
+          <tbody>
+            <tr><td>Vontobel</td><td>$96,642K</td><td>$23,164K</td><td class="amber-txt">24.0%</td><td>$131,727K</td><td class="green-txt">17.6%</td></tr>
+            <tr><td>UBS</td><td>$20,910K</td><td>$5,127K</td><td class="green-txt">24.5%</td><td>$20,910K</td><td class="green-txt">24.5%</td></tr>
+            <tr><td>JPM</td><td>$31,079K</td><td>$8,598K</td><td class="green-txt">27.7%</td><td>$41,079K</td><td class="green-txt">20.9%</td></tr>
+            <tr><td>Non-bank</td><td>—</td><td>—</td><td>—</td><td>$54,122K</td><td>—</td></tr>
+            <tr><td>Total</td><td>$148,631K</td><td>$36,889K</td><td>24.8%</td><td>$247,839K</td><td class="green-txt">14.9%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Loans by Currency &amp; Cost of Debt</h3>
+      <table>
+        <thead><tr><th>CCY</th><th>Rate</th><th>Debt (CCY)</th><th>Debt USD</th><th>Ann. Int.</th></tr></thead>
+        <tbody>
+          <tr><td>EUR</td><td class="green-txt">2.53%</td><td>€24,559K</td><td>$29,016K</td><td>$735K</td></tr>
+          <tr><td>CHF</td><td class="green-txt">0.66%</td><td>CHF 13,190K</td><td>$17,040K</td><td>$113K</td></tr>
+          <tr><td>GBP</td><td>4.33%</td><td>£1,467K</td><td>$1,988K</td><td>$86K</td></tr>
+          <tr><td>USD</td><td>4.48%</td><td>$210K</td><td>$210K</td><td>$9K</td></tr>
+          <tr><td>JPY</td><td class="green-txt">1.50%</td><td>¥148,246K</td><td>~$1,040K</td><td>~$16K</td></tr>
+          <tr><td>Total (ex JPY)</td><td class="green-txt">~2.3%</td><td>—</td><td>$48,254K</td><td>$943K</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top:18px">Debt by Bank ('000 USD equiv.)</h3>
+      <table>
+        <thead><tr><th>CCY</th><th>JPM</th><th>UBS</th><th>Vontobel</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td>USD</td><td>−$210K</td><td>—</td><td>—</td><td>−$210K</td></tr>
+          <tr><td>GBP</td><td>−$1,467K</td><td>—</td><td>—</td><td>−$1,467K</td></tr>
+          <tr><td>EUR</td><td>−$5,389K</td><td>−$2,152K</td><td>−$17,018K</td><td>−$24,559K</td></tr>
+          <tr><td>CHF</td><td>−$26K</td><td>−$2,000K</td><td>−$11,165K</td><td>−$13,191K</td></tr>
+          <tr><td>JPY</td><td>—</td><td>—</td><td>−¥148,246K</td><td>—</td></tr>
+          <tr><td>Total USD</td><td>−$8,598K</td><td>−$5,127K</td><td>−$23,164K</td><td>−$36,889K</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- CASH FLOW                                                     -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div id="cf" style="display:none">
+  <div class="kpi-row kpi-5">
+    <div class="kpi green"><label>Annual Total Income</label><div class="val">$8.7M</div><div class="sub">Bonds+ETF+Div+Dep</div></div>
+    <div class="kpi"><label>Vontobel</label><div class="val">$5.68M</div><div class="sub">65% of total</div></div>
+    <div class="kpi"><label>UBS</label><div class="val">$1.45M</div><div class="sub">17%</div></div>
+    <div class="kpi"><label>JPM</label><div class="val">$0.76M</div><div class="sub">9%</div></div>
+    <div class="kpi teal"><label>Personal</label><div class="val">$0.83M</div><div class="sub">10%</div></div>
+  </div>
+  <div class="card mb">
+    <h3>Monthly Total Income by Bank — 2025–2026 (USD $K)</h3>
+    <div class="chart-wrap h220"><canvas id="cfChart"></canvas></div>
+  </div>
+  <div class="row2">
+    <div class="card">
+      <h3>Annual Income by Source</h3>
+      <table>
+        <thead><tr><th>Source</th><th>Vontobel</th><th>UBS</th><th>JPM</th><th>Personal</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td>Bond Coupons</td><td>$4,774K</td><td>$52K</td><td>$76K</td><td>$208K</td><td>$5,110K</td></tr>
+          <tr><td>ETF Distributions</td><td>$391K</td><td>$1,385K</td><td>$682K</td><td>$91K</td><td>$2,549K</td></tr>
+          <tr><td>Deposit Interest</td><td>$2K</td><td>—</td><td>—</td><td>$373K</td><td>$375K</td></tr>
+          <tr><td>Equity Dividends</td><td>$513K</td><td>$17K</td><td>$6K</td><td>$161K</td><td>$697K</td></tr>
+          <tr><td>Total</td><td>$5,680K</td><td>$1,454K</td><td>$764K</td><td>$833K</td><td>$8,731K</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h3>PE &amp; RE Cash Flows ('000 USD, 2026)</h3>
+      <table>
+        <thead><tr><th>Period</th><th>PE &amp; RE (ex-US)</th><th>US Projects</th><th>PE</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td>Jan 2026</td><td class="red-txt">−$384K</td><td>—</td><td class="green-txt">+$72K</td><td class="red-txt">−$312K</td></tr>
+          <tr><td>Feb 2026</td><td class="red-txt">−$332K</td><td>—</td><td>—</td><td class="red-txt">−$332K</td></tr>
+          <tr><td>Mar 2026</td><td class="green-txt">+$40K</td><td>—</td><td>—</td><td class="green-txt">+$40K</td></tr>
+          <tr><td>Apr–May 2026</td><td class="green-txt">+$285K</td><td>—</td><td>—</td><td class="green-txt">+$285K</td></tr>
+          <tr><td>Jun 2026 🔑</td><td class="green-txt">+$3,881K</td><td class="green-txt">+$8,154K</td><td>—</td><td class="green-txt">+$12,035K</td></tr>
+          <tr><td>H2 2026</td><td class="green-txt">+$1,746K</td><td class="green-txt">+$550K</td><td>—</td><td class="green-txt">+$2,296K</td></tr>
+          <tr><td>Total 2026</td><td class="green-txt">$5,211K</td><td class="green-txt">$8,704K</td><td>$72K</td><td class="green-txt">$13,987K</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="footer">Portfolio Analytics v3 · Data: 2026_02_20_Portfolio_analysis_v2.xlsx · 27 Feb 2026 · Internal use only</div>
+
+<script>
+Chart.register(ChartDataLabels);
+
+// Global dark-theme defaults
+Chart.defaults.color = '#a0acc5';
+Chart.defaults.borderColor = '#2e3750';
+Chart.defaults.font.family = "'Helvetica Neue', Arial, sans-serif";
+Chart.defaults.plugins.legend.labels.boxWidth = 12;
+Chart.defaults.plugins.legend.labels.padding = 10;
+
+const C = {
+  b1:'#3b82f6',b2:'#60a5fa',b3:'#93c5fd',
+  g:'#22c55e',g2:'#4ade80',
+  t:'#14b8a6',a:'#f59e0b',r:'#ef4444',p:'#a855f7',p2:'#7c3aed',w:'#78716c',
+  bg3:'#1e2537'
+};
+
+const charts = {};
+
+// ── IDs of all pages ──────────────────────────────────
+var _PAGES = ['results','composition','bonds','equity','ltv','cf'];
+
+function show(tabId, btn) {
+  // Hide all
+  for (var i = 0; i < _PAGES.length; i++) {
+    var el = document.getElementById(_PAGES[i]);
+    if (el) el.style.display = 'none';
+  }
+  // Deactivate buttons
+  var allBtns = document.querySelectorAll('.tab-btn');
+  for (var j = 0; j < allBtns.length; j++) {
+    allBtns[j].style.background = 'transparent';
+    allBtns[j].style.color = '#a0acc5';
+    allBtns[j].style.borderColor = '#2e3750';
+  }
+  // Show selected
+  var page = document.getElementById(tabId);
+  if (page) {
+    page.style.display = 'block';
+    page.style.padding = '18px 28px 32px';
+    page.style.maxWidth = '1600px';
+    page.style.margin = '0 auto';
+  }
+  // Activate button
+  if (btn) {
+    btn.style.background = '#3b82f6';
+    btn.style.color = '#fff';
+    btn.style.borderColor = '#3b82f6';
+  }
+  // Scroll top
+  window.scrollTo(0, 0);
+  // Charts lazy init
+  if (tabId === 'composition' && !charts.donut) initComposition();
+  if (tabId === 'bonds' && !charts.region) initBonds();
+  if (tabId === 'equity' && !charts.eqMix) initEquity();
+  if (tabId === 'cf' && !charts.cf) initCF();
+}
+
+// Show Results on load
+
+
+
+
+// ── HELPER: donut with % labels inside ──────────────────────────
+function makeDonut(id, labels, data, colors) {
+  const ctx = document.getElementById(id).getContext('2d');
+  return new Chart(ctx, {
+    type: 'doughnut',
+    data: { labels, datasets: [{ data, backgroundColor: colors, borderWidth: 2, borderColor: '#161b27', hoverOffset: 6 }] },
+    options: {
+      responsive: true, maintainAspectRatio: false, cutout: '52%',
+      plugins: {
+        legend: { position: 'right', labels: { font: { size: 11 }, color: '#a0acc5' } },
+        datalabels: {
+          color: '#fff', font: { size: 10, weight: 'bold' },
+          formatter: (v) => v >= 4 ? v.toFixed(1) + '%' : '',
+          textStrokeColor: 'rgba(0,0,0,.6)', textStrokeWidth: 2
+        },
+        tooltip: { callbacks: { label: ctx => `${ctx.label}: ${ctx.raw}%` } }
+      }
+    }
+  });
+}
+
+// ── HELPER: horizontal bar chart ──────────────────────────────
+function makeHBar(id, labels, data, colors, unit='$', suffix='M') {
+  const ctx = document.getElementById(id).getContext('2d');
+  return new Chart(ctx, {
+    type: 'bar',
+    data: { labels, datasets: [{ data, backgroundColor: colors, borderRadius: 4, borderSkipped: false }] },
+    options: {
+      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          anchor: 'end', align: 'end', color: '#a0acc5', font: { size: 10 },
+          formatter: v => `${unit}${v.toFixed(1)}${suffix}`
+        }
+      },
+      scales: {
+        x: { ticks: { font: { size: 10 }, callback: v => `${unit}${v}${suffix}` }, grid: { color: '#2e3750' } },
+        y: { ticks: { font: { size: 10.5 } }, grid: { display: false } }
+      },
+      layout: { padding: { right: 55 } }
+    }
+  });
+}
+
+// ── COMPOSITION ──────────────────────────────────────────────
+function initComposition() {
+  makeDonut('donutChart',
+    ['Bonds 19.2%','Bonds ETF 7.8%','Priv.Credit 4.6%','Equity 5.1%','Eq.ETF 5.1%','JPM 7.7%','Deposits 7.2%','PE 5.3%','Cash 6.0%','RE 11.9%','Options 0.2%'],
+    [19.2,7.8,4.6,5.1,5.1,7.7,7.2,5.3,6.0,11.9,0.2],
+    [C.b1,C.b2,C.b3,C.g,C.g2,C.t,'#0f766e',C.p2,C.w,C.a,C.r]
+  );
+
+  // stacked country chart
+  const ctx = document.getElementById('countryChart').getContext('2d');
+  charts.country = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['USA','Brazil','UK','France','Mexico','Turkey','Netherlands','India','Colombia','Israel'],
+      datasets: [
+        { label: 'Bonds ($M)', data: [7.47,8.62,5.77,6.54,6.16,4.21,3.90,3.69,3.56,3.11], backgroundColor: C.b1, borderRadius: 3 },
+        { label: 'Equities ($M)', data: [5.20,0,2.14,0.53,0,0,0,0,0,0], backgroundColor: C.g, borderRadius: 3 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'top', labels: { font: { size: 10 } } },
+        datalabels: { display: false },
+        tooltip: { callbacks: { footer: items => `Total: $${items.reduce((s,i)=>s+i.raw,0).toFixed(2)}M` } }
+      },
+      scales: {
+        x: { stacked: true, ticks: { font: { size: 10 } }, grid: { color: '#2e3750' } },
+        y: { stacked: true, ticks: { font: { size: 10 }, callback: v => `$${v}M` }, grid: { color: '#2e3750' } }
+      }
+    }
+  });
+}
+
+// ── BONDS ──────────────────────────────────────────────
+function initBonds() {
+  // Dev/EM/Frontier doughnut
+  makeDonut('bondsMktChart',
+    ['Developed 48.4%','Emerging Mkts 45.8%','Frontier 5.8%'],
+    [48.4,45.8,5.8],
+    ['#1d4ed8','#065f46','#92400e']
+  );
+
+  // Region horizontal bar
+  makeHBar('regionChart',
+    ['Latin America','Europe','Mid.East & Africa','US+Canada','Asia','Aus & Pacific','Africa'],
+    [20.47,16.44,12.17,8.00,6.79,4.98,1.02],
+    [C.b1,C.b2,C.a,C.t,C.g,C.p2,C.r]
+  );
+
+  // Country horizontal bar
+  makeHBar('bondCountryChart',
+    ['Brazil','USA','France','Mexico','UK','Turkey','Netherlands','India','Colombia','Israel','Japan','S.Africa'],
+    [8.62,7.47,6.54,6.16,5.77,4.21,3.90,3.69,3.56,3.11,2.61,2.22],
+    [C.b1,C.b1,C.b2,C.b2,C.b3,C.a,C.b3,C.g,C.g,C.t,C.p,C.r]
+  );
+
+  // Duration distribution
+  const dCtx = document.getElementById('durationChart').getContext('2d');
+  charts.duration = new Chart(dCtx, {
+    type: 'bar',
+    data: {
+      labels: ['0–2y','2–4y','4–6y','6–8y','8–10y','10–15y','>15y'],
+      datasets: [{
+        label: 'MV USD ($M)',
+        data: [1.51, 5.29, 11.21, 16.84, 1.72, 27.43, 0.94],
+        backgroundColor: [C.g2, C.g, C.t, C.b2, C.b1, C.a, C.r],
+        borderRadius: 4
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          anchor: 'end', align: 'top', color: '#a0acc5', font: { size: 10 },
+          formatter: v => v > 0.5 ? `$${v.toFixed(1)}M\n${(v/71.88*100).toFixed(0)}%` : ''
+        }
+      },
+      scales: {
+        x: { ticks: { font: { size: 11 } }, grid: { color: '#2e3750' } },
+        y: { ticks: { font: { size: 10 }, callback: v => `$${v}M` }, grid: { color: '#2e3750' } }
+      },
+      layout: { padding: { top: 25 } }
+    }
+  });
+}
+
+// ── EQUITY ──────────────────────────────────────────────
+function initEquity() {
+  makeDonut('eqMixChart',
+    ['Dev Stocks 33.5%','Dev ETFs 46.4%','EM Stocks 9.3%','EM ETFs 10.8%'],
+    [33.5,46.4,9.3,10.8],
+    ['#1d4ed8','#60a5fa','#065f46','#4ade80']
+  );
+
+  makeHBar('eqCountryChart',
+    ['USA','United Kingdom','Spain','France','Austria','Italy','Canada','Jersey','Australia','Netherlands'],
+    [5.20,2.14,0.53,0.53,0.52,0.52,0.50,0.39,0.24,0.22],
+    [C.b1,C.t,C.a,C.b2,C.g,C.g2,C.r,C.p,C.b3,C.w]
+  );
+}
+
+// ── CASH FLOW ──────────────────────────────────────────────
+function initCF() {
+  const labels = ['Jan25','Feb25','Mar25','Apr25','May25','Jun25','Jul25','Aug25','Sep25','Oct25','Nov25','Dec25',
+                  'Jan26','Feb26','Mar26','Apr26','May26','Jun26','Jul26','Aug26','Sep26','Oct26','Nov26','Dec26'];
+  const past = i => i < 13;
+  const vont = [383,577,989,414,227,393,383,273,666,557,298,521,383,577,987,415,227,393,383,273,666,557,298,521];
+  const ubs =  [141,122,118,115,115,118,141,115,118,115,115,118,141,122,118,115,115,118,141,115,118,115,115,118];
+  const jpm =  [104,26,87,46,64,84,46,26,87,46,64,84,104,26,87,46,64,84,46,26,87,46,64,84];
+  const pers = [96,40,69,82,58,62,57,40,132,51,55,92,96,40,69,82,58,62,57,40,132,51,55,92];
+
+  const ctx = document.getElementById('cfChart').getContext('2d');
+  charts.cf = new Chart(ctx, {
+    type: 'bar',
+    data: { labels, datasets: [
+      { label: 'Vontobel', data: vont, backgroundColor: labels.map((_,i) => past(i) ? C.b1 : C.b1+'88'), stack: 's' },
+      { label: 'UBS',      data: ubs,  backgroundColor: labels.map((_,i) => past(i) ? C.t  : C.t+'88'),  stack: 's' },
+      { label: 'JPM',      data: jpm,  backgroundColor: labels.map((_,i) => past(i) ? C.g  : C.g+'88'),  stack: 's' },
+      { label: 'Personal', data: pers, backgroundColor: labels.map((_,i) => past(i) ? C.a  : C.a+'88'),  stack: 's' },
+    ]},
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'top', labels: { font: { size: 10 } } },
+        datalabels: { display: false },
+        tooltip: { callbacks: { footer: items => `Total: $${items.reduce((s,i)=>s+i.raw,0).toFixed(0)}K` } }
+      },
+      scales: {
+        x: { stacked: true, ticks: { font: { size: 9 }, maxRotation: 45 }, grid: { color: '#2e3750' } },
+        y: { stacked: true, ticks: { font: { size: 10 }, callback: v => `$${v}K` }, grid: { color: '#2e3750' } }
+      }
+    }
+  });
+}
+</script>
+
+<!-- ── PASSWORD SCREEN ─────────────────────────────── -->
+<div id="pw-overlay" style="
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:#0f1117;
+  display:flex;align-items:center;justify-content:center;
+  z-index:9999;flex-direction:column;gap:20px;
+">
+  <div style="text-align:center;margin-bottom:8px">
+    <div style="font-size:28px;margin-bottom:6px">🔐</div>
+    <div style="color:#e8ecf4;font-size:18px;font-weight:700;font-family:'Helvetica Neue',Arial,sans-serif">Portfolio Analytics</div>
+    <div style="color:#626e8a;font-size:12px;margin-top:4px;font-family:'Helvetica Neue',Arial,sans-serif">Enter password to continue</div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:10px;width:260px">
+    <input id="pw-input" type="password"
+      placeholder="Password"
+      style="
+        padding:12px 16px;border-radius:8px;border:1px solid #2e3750;
+        background:#161b27;color:#e8ecf4;font-size:16px;
+        font-family:'Helvetica Neue',Arial,sans-serif;
+        outline:none;width:100%;letter-spacing:2px;
+      "
+      onkeydown="if(event.key==='Enter')checkPw()"
+    />
+    <button onclick="checkPw()" style="
+      padding:12px;border-radius:8px;border:none;
+      background:#3b82f6;color:#fff;font-size:14px;font-weight:600;
+      font-family:'Helvetica Neue',Arial,sans-serif;cursor:pointer;
+    ">Unlock</button>
+    <div id="pw-error" style="
+      color:#ef4444;font-size:12px;text-align:center;
+      font-family:'Helvetica Neue',Arial,sans-serif;
+      min-height:16px;
+    "></div>
+  </div>
+</div>
+
+<script>
+async function checkPw() {
+  var val = document.getElementById('pw-input').value;
+  var err = document.getElementById('pw-error');
+  if (!val) { err.textContent = 'Please enter a password'; return; }
+  // SHA-256 via WebCrypto (works in all modern browsers incl Safari iOS)
+  var msgBuffer = new TextEncoder().encode(val);
+  var hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+  var hashArray = Array.from(new Uint8Array(hashBuffer));
+  var hashHex = hashArray.map(b => b.toString(16).padStart(2,'0')).join('');
+  var correct = '22eebc79e65017d34d74b14ad8f438db09337defa89dbc5e6164b62ea321a9e2';
+  if (hashHex === correct) {
+    document.getElementById('pw-overlay').style.display = 'none';
+    // init results tab
+    var btn = document.getElementById('btn-results');
+    show('results', btn);
+  } else {
+    err.textContent = 'Incorrect password';
+    document.getElementById('pw-input').value = '';
+    document.getElementById('pw-input').focus();
+    // shake animation
+    var input = document.getElementById('pw-input');
+    input.style.borderColor = '#ef4444';
+    setTimeout(function(){ input.style.borderColor = '#2e3750'; }, 1000);
+  }
+}
+// Auto-focus on load
+window.addEventListener('load', function(){
+  document.getElementById('pw-input').focus();
+});
+</script>
+
+</body>
+</html>
