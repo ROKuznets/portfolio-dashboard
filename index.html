@@ -209,7 +209,7 @@ tr:hover:not(:last-child) td{background:var(--bg3)}
 </div>
 <script>
 // ── CONFIG ────────────────────────────────────────────────────────
-const XLSX_URL='https://cdn.jsdelivr.net/gh/rokuznets/portfolio-dashboard@main/portfolio.xlsx';
+const XLSX_URL='https://www.dropbox.com/scl/fi/snni5ipr2ckubbhdxl0ah/portfolio.xlsx?rlkey=ef4jblpuxkzpny422zun8hirt&dl=1';
 
 // ── PASSWORD ──────────────────────────────────────────────────────
 const PW_HASH='22eebc79e65017d34d74b14ad8f438db09337defa89dbc5e6164b62ea321a9e2';
@@ -236,7 +236,7 @@ async function fetchFromGitHub(){
   try{
     // Add cache-bust timestamp so jsDelivr doesn't serve stale file
     const url=XLSX_URL+'?t='+Math.floor(Date.now()/60000); // refresh every minute
-    const resp=await fetch(url);
+    const resp=await fetch(url,{mode:'cors'});
     if(!resp.ok)throw new Error('HTTP '+resp.status+' fetching '+url);
     txt.textContent='Parsing sheets…';
     const buf=await resp.arrayBuffer();
