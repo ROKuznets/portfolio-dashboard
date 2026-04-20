@@ -196,6 +196,149 @@ th.sort-desc::after{content:' ▼';color:var(--blue);font-size:9px}
 .nf-error{color:var(--amber);font-size:12px;padding:12px 0}
 
   .coup-usd { width:60px; font-size:10px; color:var(--text3,#546080); flex-shrink:0; text-align:right; }
+
+/* ═══════════════════════════════════════════════════════════
+   MOBILE RESPONSIVE — Safari/Chrome iOS/Android
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Password overlay box ── */
+@media(max-width:480px){
+  .pw-box{width:calc(100vw - 32px);padding:32px 24px}
+}
+
+/* ── Nav: scrollable tab strip on mobile ── */
+@media(max-width:768px){
+  nav{
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    overflow-y:hidden;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    padding:0 8px;
+    gap:0;
+  }
+  nav::-webkit-scrollbar{display:none}
+  .logo{padding:10px 12px 10px 4px;margin-right:4px;font-size:10px}
+  .logo span{font-size:11px}
+  .tab-btn{padding:10px 10px;font-size:11px;white-space:nowrap;flex-shrink:0}
+  /* Hide FX ticker on mobile — too much nav space */
+  .fx-ticker{display:none}
+  .nm-btn-update{margin-left:4px;flex-shrink:0}
+}
+
+/* ── Page padding ── */
+@media(max-width:600px){
+  .page{padding:12px 10px 36px}
+}
+
+/* ── KPI rows: 2-column grid on mobile, allow shrink ── */
+@media(max-width:600px){
+  .kpi-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .kpi{min-width:0;padding:12px 12px}
+  .kpi .val{font-size:18px}
+  .kpi .ico{font-size:16px;right:10px;top:10px}
+}
+@media(max-width:360px){
+  .kpi-row{grid-template-columns:1fr}
+}
+
+/* ── Grid: all multi-column → single on mobile ── */
+@media(max-width:600px){
+  .grid2,.grid3{grid-template-columns:1fr;gap:10px}
+}
+
+/* ── Yield bars: shrink fixed-width labels ── */
+@media(max-width:600px){
+  .ybar-row{gap:6px}
+  .ybar-label{width:110px;font-size:11px}
+  .ybar-val{width:72px;font-size:11px}
+}
+@media(max-width:400px){
+  .ybar-label{width:90px;font-size:10px}
+  .ybar-val{width:60px;font-size:10px}
+}
+
+/* ── CCY bars: shrink fixed widths ── */
+@media(max-width:600px){
+  .cbar-row{gap:6px}
+  .cbar-label{width:38px;font-size:11px}
+  .cbar-val{width:54px;font-size:10px}
+  .cbar-pct{width:34px;font-size:10px}
+}
+
+/* ── Mandate row: allow name wrap ── */
+@media(max-width:600px){
+  .mandate-row{flex-wrap:wrap;gap:4px}
+  .mandate-name{width:90px}
+  .mandate-total{width:60px;font-size:12px}
+  .mandate-ccys{flex:none;width:100%;padding:0 2px 4px}
+}
+
+/* ── Coupon calendar rows ── */
+@media(max-width:480px){
+  .coup-row{flex-wrap:wrap;gap:2px;padding:6px 8px}
+  .coup-dt{width:46px;font-size:10px}
+  .coup-nm{padding:0 4px;font-size:11px}
+  .coup-cy{width:26px}
+  .coup-am{width:60px;font-size:11px}
+  .coup-usd{width:50px;font-size:9px}
+  /* month header */
+  .month-header{padding:6px 8px}
+  .month-name{font-size:12px}
+  .month-ccy{flex-wrap:wrap;gap:6px}
+}
+
+/* ── Tables: ensure horizontal scroll, don't break layout ── */
+@media(max-width:768px){
+  .card > div[style*="overflow-x:auto"],
+  .card > div > div[style*="overflow-x:auto"]{
+    -webkit-overflow-scrolling:touch;
+  }
+  th,td{font-size:11px;padding:5px 6px}
+  th:first-child,td:first-child{font-size:11px}
+}
+@media(max-width:480px){
+  th,td{font-size:10px;padding:4px 5px}
+}
+
+/* ── Canvas / Chart heights on mobile ── */
+@media(max-width:600px){
+  canvas{max-height:180px}
+  #cfChart{max-height:none}
+  #divChart{max-height:none}
+  #bondSectorChart{max-height:280px}
+  #regionPieChart{max-height:240px}
+}
+
+/* ── News modal: full-width textarea on mobile ── */
+@media(max-width:600px){
+  .nm-box{padding:20px 16px;gap:10px}
+  .nm-box textarea{height:200px}
+  .nm-actions{flex-wrap:wrap;gap:8px}
+}
+
+/* ── News feed cards: prevent overflow ── */
+@media(max-width:480px){
+  .nf-card{padding:8px 10px;gap:7px}
+  .nf-hl{font-size:11px}
+  .nf-sub{font-size:10px}
+}
+
+/* ── Card headers with margin-left:auto labels (truncate gracefully) ── */
+@media(max-width:480px){
+  .card-header{flex-wrap:wrap;gap:4px}
+  .card-header h3{font-size:10px}
+}
+
+/* ── p6 cashflow: currency KPI row ── */
+@media(max-width:600px){
+  /* second kpi-row in cashflow with 6 items */
+  #cashflow .kpi-row:nth-child(2){grid-template-columns:repeat(3,1fr);gap:6px}
+  #cashflow .kpi-row:nth-child(2) .kpi .val{font-size:15px}
+}
+@media(max-width:380px){
+  #cashflow .kpi-row:nth-child(2){grid-template-columns:1fr 1fr}
+}
 </style>
 </head>
 <body>
@@ -255,8 +398,8 @@ th.sort-desc::after{content:' ▼';color:var(--blue);font-size:9px}
         <div class="ybar-row"><span class="ybar-label">Bonds coupon yield</span><div class="ybar-track"><div class="ybar-fill" style="width:61%;background:var(--blue)"></div></div><span class="ybar-val">7.32%</span></div>
         <div class="ybar-row"><span class="ybar-label">Bonds YTM/YTC</span><div class="ybar-track"><div class="ybar-fill" style="width:70%;background:var(--teal)"></div></div><span class="ybar-val">8.42%</span></div>
         <div class="ybar-row"><span class="ybar-label">Bond ETFs (est.)</span><div class="ybar-track"><div class="ybar-fill" style="width:57%;background:var(--amber)"></div></div><span class="ybar-val">~7–9% yield</span></div>
-        <div class="ybar-row"><span class="ybar-label">Equity dividends</span><div class="ybar-track"><div class="ybar-fill" style="width:10%;background:var(--purple)"></div></div><span class="ybar-val">1.24% div</span></div>
-        <div style="margin-top:12px;padding:8px 10px;background:var(--bg3);border-radius:8px;font-size:11px;color:var(--text3)">⏱ AW Duration: <strong style="color:var(--text2)">8.53y</strong> &nbsp;·&nbsp; Annual dividends: <strong style="color:var(--text2)">$335K</strong></div>
+        <div class="ybar-row"><span class="ybar-label">Equity dividends</span><div class="ybar-track"><div class="ybar-fill" style="width:26%;background:var(--purple)"></div></div><span class="ybar-val">3.12% div</span></div>
+        <div style="margin-top:12px;padding:8px 10px;background:var(--bg3);border-radius:8px;font-size:11px;color:var(--text3)">⏱ AW Duration: <strong style="color:var(--text2)">8.53y</strong> &nbsp;·&nbsp; Annual dividends: <strong style="color:var(--text2)">$891K</strong></div>
       </div>
     </div>
     <div class="card">
@@ -515,7 +658,7 @@ th.sort-desc::after{content:' ▼';color:var(--blue);font-size:9px}
     <div class="kpi" style="--accent:#c084fc"><label>Equity ETFs</label><div class="val">$21.6M</div><div class="sub">28 positions</div></div>
     <div class="kpi" style="--accent:#4f8ef7"><label>Total Equity</label><div class="val">$51.32M</div><div class="sub">incl. JPM modules $14.02M</div></div>
     <div class="kpi" style="--accent:#34d399"><label>Equity P&amp;L</label><div class="val pos">$+1820K</div></div>
-    <div class="kpi" style="--accent:#2dd4bf"><label>Annual Dividends</label><div class="val">$335K</div><div class="sub">AW yield 1.24%</div></div>
+    <div class="kpi" style="--accent:#2dd4bf"><label>Annual Dividends</label><div class="val">$891K</div><div class="sub">AW yield 3.12%</div></div>
   </div>
   <div class="grid2">
     <div class="card"><div class="card-header"><span class="ico">🥧</span><h3>Equity Mix</h3></div><canvas id="eqMixChart"></canvas></div>
@@ -979,13 +1122,13 @@ function initLTV(){
 function initDivChart(){
   if(charts.divChart) return;
   charts.divChart=new Chart(document.getElementById('divChart'),{type:'bar',
-    data:{labels:['OMV AG Bearer', 'UBS SMIM® ETF CHF dis', 'UBS SMI® ETF CHF dis', 'TotalEnergies SE Bearer', 'Annaly Capital Management', 'State Street Energy Selec', 'Amundi Core MSCI EMU UCIT', 'National Atomic Company K', 'Pacific NoS Global EM Equ', 'Cheniere Energy Inc Regis', 'SECTOR SPDR TRUST UTILITI', 'Canadian Natural Resource', 'Microchip Technology Inc ', 'Equinor ASA ADR', 'Constellation Energy Corp'],
-      datasets:[{data:[4.75, 4.42, 3.31, 3.28, 2.75, 2.56, 2.42, 2.34, 2.26, 2.06, 2.0, 1.84, 1.82, 1.81, 1.55],backgroundColor:['#34d399', '#2dd4bf', '#4f8ef7', '#a78bfa', '#fbbf24', '#f87171', '#f472b6', '#94a3c4', '#34d399', '#2dd4bf', '#4f8ef7', '#fbbf24', '#c084fc', '#f87171', '#34d399'],borderRadius:4,label:'Yield %'}]},
+    data:{labels:['AGNC Investment Corp Regi', 'Annaly Capital Management', 'Pacific NoS Global EM Equ', 'Taylor Wimpey PLC Registe', 'OMV AG Bearer', 'Petroleo Brasileiro SA - ', 'Equinor ASA ADR', 'iShares EM Dividend UCITS', 'Pacific Nrth of Sth EM Eq', 'State Street Energy Selec', 'ENI S.p.A. Registered', 'SECTOR SPDR TRUST UTILITI', 'TotalEnergies SE Bearer', 'Canadian Natural Resource', 'Segro PLC (REIT) Register'],
+      datasets:[{data:[13.5, 12.32, 5.89, 5.51, 5.46, 5.43, 5.15, 5.05, 4.76, 4.65, 4.35, 4.31, 4.26, 4.21, 4.18],backgroundColor:['#34d399', '#2dd4bf', '#4f8ef7', '#a78bfa', '#fbbf24', '#f87171', '#f472b6', '#94a3c4', '#34d399', '#2dd4bf', '#4f8ef7', '#fbbf24', '#c084fc', '#f87171', '#34d399'],borderRadius:4,label:'Yield %'}]},
     options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
       plugins:{legend:{display:false},
         datalabels:{anchor:'end',align:'right',color:'#94a3c4',font:{size:10},
           formatter:v=>v+'%'}},
-      scales:{x:{grid:{color:'#1a2235'},ticks:{color:'#546080',callback:v=>v+'%'},max:6.6},
+      scales:{x:{grid:{color:'#1a2235'},ticks:{color:'#546080',callback:v=>v+'%'},max:18.9},
                y:{grid:{display:false},ticks:{color:'#94a3c4'}}},
       layout:{padding:{right:50}}}
   });
