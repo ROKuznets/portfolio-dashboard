@@ -183,15 +183,38 @@ th.sort-desc::after{content:' ▼';color:var(--blue);font-size:9px}
 .nm-btn:hover{opacity:.85}
 .nm-btn-cancel{background:var(--bg3);color:var(--text2)}
 .nm-btn-apply{background:var(--blue);color:#fff}
-.nm-btn-update{background:transparent;border:1px solid var(--border);color:var(--text2);padding:5px 11px;border-radius:6px;font-size:11px;cursor:pointer;transition:all .2s;margin-left:auto;white-space:nowrap}
-.nm-btn-update:hover{border-color:var(--blue);color:var(--blue)}
-.fx-ticker{display:flex;align-items:center;gap:10px;margin-left:auto;margin-right:8px;font-size:11px;color:var(--text2)}
-.fx-pair{display:flex;align-items:center;gap:4px;white-space:nowrap}
-.fx-pair .fx-lbl{color:var(--text3)}
-.fx-pair .fx-val{color:var(--text);font-weight:600;font-variant-numeric:tabular-nums}
-.fx-pair .fx-chg{font-size:10px}
-.fx-pair .fx-chg.up{color:var(--green)}
-.fx-pair .fx-chg.dn{color:var(--red)}
+.nm-btn-update{display:none}
+/* ── UPDATE DROPDOWN ── */
+.upd-wrap{position:relative;margin-left:auto;flex-shrink:0}
+.upd-btn{background:transparent;border:1px solid var(--border);color:var(--text2);padding:5px 11px;border-radius:6px;font-size:11px;cursor:pointer;transition:all .2s;white-space:nowrap}
+.upd-btn:hover{border-color:var(--blue);color:var(--blue)}
+.upd-menu{display:none;position:absolute;right:0;top:calc(100% + 6px);background:var(--bg2);border:1px solid var(--border2);border-radius:8px;padding:4px;min-width:170px;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.upd-menu.open{display:block}
+.upd-item{display:block;width:100%;text-align:left;background:transparent;border:none;color:var(--text2);font-size:12px;padding:7px 12px;border-radius:5px;cursor:pointer;transition:background .1s}
+.upd-item:hover{background:var(--bg3);color:var(--text)}
+/* ── ADD TO CALENDAR button on news cards ── */
+
+/* ── ADD TO CALENDAR MODAL ── */
+#ac-modal{display:none;position:fixed;inset:0;background:rgba(10,13,20,.88);backdrop-filter:blur(4px);z-index:9999;align-items:center;justify-content:center}
+#ac-modal.open{display:flex}
+.ac-box{background:var(--bg2);border:1px solid var(--border2);border-radius:14px;padding:26px 30px;width:min(480px,94vw);display:flex;flex-direction:column;gap:14px}
+.ac-box h3{font-size:14px;font-weight:600;color:var(--text);margin:0}
+.ac-field{display:flex;flex-direction:column;gap:5px}
+.ac-field label{font-size:11px;color:var(--text3);font-weight:500;text-transform:uppercase;letter-spacing:.5px}
+.ac-field input,.ac-field select,.ac-field textarea{background:var(--bg3);border:1px solid var(--border);border-radius:7px;color:var(--text);font-size:12px;padding:8px 10px;outline:none;transition:border-color .2s;font-family:inherit}
+.ac-field input:focus,.ac-field select:focus,.ac-field textarea:focus{border-color:var(--blue)}
+.ac-field textarea{resize:vertical;min-height:60px;line-height:1.5}
+.ac-field select option{background:var(--bg2)}
+.ac-source{font-size:11px;color:var(--text3);font-style:italic;margin-top:2px}
+.ac-actions{display:flex;gap:10px;align-items:center;justify-content:flex-end;margin-top:2px}
+.ac-status{flex:1;font-size:11px}
+.ac-status.ok{color:var(--green)}
+.ac-status.err{color:var(--red)}
+
+.nf-add-cal{display:inline-flex;align-items:center;gap:3px;margin-top:5px;padding:2px 8px;border-radius:4px;border:1px solid var(--border);background:transparent;color:var(--text3);font-size:10px;cursor:pointer;transition:all .15s}
+.nf-add-cal:hover{border-color:var(--teal);color:var(--teal)}
+.nf-add-cal.added{border-color:var(--green);color:var(--green);cursor:default}
+
 .nf-loading{color:var(--text3);font-size:12px;padding:12px 0}
 .nf-error{color:var(--amber);font-size:12px;padding:12px 0}
 
@@ -222,7 +245,6 @@ th.sort-desc::after{content:' ▼';color:var(--blue);font-size:9px}
   .logo span{font-size:11px}
   .tab-btn{padding:10px 10px;font-size:11px;white-space:nowrap;flex-shrink:0}
   /* Hide FX ticker on mobile — too much nav space */
-  .fx-ticker{display:none}
   .nm-btn-update{margin-left:4px;flex-shrink:0}
 }
 
@@ -339,6 +361,71 @@ th.sort-desc::after{content:' ▼';color:var(--blue);font-size:9px}
 @media(max-width:380px){
   #cashflow .kpi-row:nth-child(2){grid-template-columns:1fr 1fr}
 }
+
+/* ── EVENTS ── */
+.ev-warn-badge{display:none;align-items:center;gap:5px;margin-left:8px;padding:5px 11px;background:rgba(248,113,113,.15);border:1px solid rgba(248,113,113,.35);border-radius:20px;color:#f87171;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;transition:background .15s;flex-shrink:0}
+.ev-warn-badge:hover{background:rgba(248,113,113,.25)}
+.ev-warn-badge.visible{display:flex}
+.ev-modal-bg{display:none;position:fixed;inset:0;background:rgba(10,13,20,.85);z-index:500;align-items:center;justify-content:center}
+.ev-modal-bg.open{display:flex}
+.ev-modal-box{background:var(--bg2);border:1px solid var(--border2);border-radius:14px;padding:24px 28px;width:min(580px,92vw);max-height:78vh;overflow-y:auto}
+.ev-modal-box h3{font-size:14px;font-weight:600;margin-bottom:14px}
+.ev-warn-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border)}
+.ev-warn-row:last-child{border-bottom:none}
+.ev-warn-date{font-size:11px;color:var(--text3);width:82px;flex-shrink:0}
+.ev-type-pill{font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px;flex-shrink:0}
+.ev-warn-name{flex:1;font-size:12px;color:var(--text2)}
+.ev-warn-amt{font-size:11px;color:var(--text3);text-align:right;flex-shrink:0;min-width:60px}
+.ev-dismiss{font-size:10px;color:var(--text3);cursor:pointer;padding:2px 6px;border:1px solid var(--border);border-radius:5px;flex-shrink:0}
+.ev-dismiss:hover{color:var(--text)}
+.ev-modal-close{margin-top:14px;display:flex;justify-content:flex-end}
+.ev-modal-close button{padding:6px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text2);font-size:12px;cursor:pointer}
+.ev-filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.ev-fbtn{padding:4px 12px;border-radius:20px;border:1px solid var(--border2);background:transparent;color:var(--text3);font-size:11px;cursor:pointer;transition:all .15s}
+.ev-fbtn:hover{color:var(--text2)}
+.ev-fbtn.on{font-weight:600;color:var(--bg)}
+.ev-fbtn[data-t="all"].on{background:#546080;border-color:#546080;color:var(--text)}
+.ev-fbtn[data-t="coupon"].on{background:var(--blue);border-color:var(--blue)}
+.ev-fbtn[data-t="dividend"].on{background:var(--green);border-color:var(--green)}
+.ev-fbtn[data-t="maturity"].on{background:var(--amber);border-color:var(--amber);color:#0a0d14}
+.ev-fbtn[data-t="loan_maturity"].on{background:var(--red);border-color:var(--red)}
+.ev-fbtn[data-t="call"].on{background:var(--purple);border-color:var(--purple)}
+.ev-fbtn[data-t="earnings"].on{background:var(--teal);border-color:var(--teal);color:#0a0d14}
+.ev-fbtn[data-t="other"].on{background:#546080;border-color:#546080;color:var(--text)}
+.ev-months{display:flex;flex-direction:column;gap:24px}
+.ev-month-lbl{font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px}
+.ev-cal{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.ev-dow{text-align:center;font-size:10px;color:var(--text3);font-weight:600;padding:3px 0;text-transform:uppercase}
+.ev-day{min-height:68px;background:var(--bg2);border:1px solid var(--border);border-radius:5px;padding:3px 4px;cursor:default}
+.ev-day:hover{background:var(--bg3)}
+.ev-day.empty{background:transparent;border-color:transparent}
+.ev-day.today{border-color:var(--blue);background:rgba(79,142,247,.07)}
+.ev-day-n{font-size:10px;color:var(--text3);margin-bottom:2px;display:flex;align-items:center;gap:2px}
+.ev-today-dot{width:16px;height:16px;background:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:9px;font-weight:700}
+.ev-pill{display:flex;align-items:center;gap:2px;font-size:9px;padding:1px 3px;border-radius:3px;margin-bottom:1px;cursor:pointer;overflow:hidden;white-space:nowrap}
+.ev-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.ev-pill.t-coupon{background:rgba(79,142,247,.12);color:#7eb5ff}
+.ev-pill.t-dividend{background:rgba(52,211,153,.1);color:#34d399}
+.ev-pill.t-maturity{background:rgba(251,191,36,.12);color:#fbbf24}
+.ev-pill.t-loan_maturity{background:rgba(248,113,113,.12);color:#f87171}
+.ev-pill.t-call{background:rgba(192,132,252,.12);color:#c084fc}
+.ev-pill.t-earnings{background:rgba(45,212,191,.12);color:#2dd4bf}
+.ev-pill.t-other{background:rgba(148,163,196,.1);color:#94a3c4}
+.ev-more{font-size:9px;color:var(--text3);cursor:pointer}
+.ev-more:hover{color:var(--text2)}
+.ev-popup{display:none;position:fixed;z-index:400;background:var(--bg2);border:1px solid var(--border2);border-radius:10px;padding:12px 14px;width:240px;box-shadow:0 8px 28px rgba(0,0,0,.5)}
+.ev-popup.open{display:block}
+.ev-popup-hdr{font-size:11px;color:var(--text3);font-weight:600;margin-bottom:8px}
+.ev-popup-item{display:flex;gap:7px;padding:4px 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.ev-popup-item:last-child{border-bottom:none}
+.ev-popup-dot{width:6px;height:6px;border-radius:50%;margin-top:3px;flex-shrink:0}
+.ev-popup-name{font-size:11px;color:var(--text);line-height:1.3}
+.ev-popup-sub{font-size:10px;color:var(--text3);margin-top:1px}
+.ev-popup-x{position:absolute;top:8px;right:10px;font-size:13px;cursor:pointer;color:var(--text3)}
+.ev-popup-del{display:inline-flex;align-items:center;gap:3px;margin-top:4px;padding:2px 7px;border-radius:4px;border:1px solid rgba(248,113,113,.4);background:transparent;color:#f87171;font-size:10px;cursor:pointer;transition:all .15s}
+.ev-popup-del:hover{background:rgba(248,113,113,.12)}
+.ev-popup-del.done{color:var(--text3);border-color:var(--border);cursor:default}
+@media(max-width:600px){.ev-day{min-height:50px}.ev-pill{font-size:0;padding:3px;width:7px;height:7px;border-radius:50%}.ev-dot{display:none}}
 </style>
 
 <style id="dm-css">
@@ -390,21 +477,75 @@ th.sort-desc::after{content:' ▼';color:var(--blue);font-size:9px}
   <button class="tab-btn"        id="btn-ltv"         onclick="show(&apos;ltv&apos;,this)">⚖️ Loans &amp; LTV</button>
   <button class="tab-btn"        id="btn-cashflow"    onclick="show(&apos;cashflow&apos;,this)">💸 Cash Flow</button>
   <button class="tab-btn"        id="btn-pere"        onclick="show(&apos;pere&apos;,this)">🏗️ PE &amp; RE</button>
-  <div class="fx-ticker" id="fx-ticker">
-    <span class="fx-pair"><span class="fx-lbl">EUR/USD</span><span class="fx-val" id="fx-eur">…</span><span class="fx-chg" id="fx-eur-chg"></span></span>
-    <span class="fx-pair"><span class="fx-lbl">GBP/USD</span><span class="fx-val" id="fx-gbp">…</span><span class="fx-chg" id="fx-gbp-chg"></span></span>
-    <span class="fx-pair"><span class="fx-lbl">CHF/USD</span><span class="fx-val" id="fx-chf">…</span><span class="fx-chg" id="fx-chf-chg"></span></span>
+  <button class="tab-btn"        id="btn-events"     onclick="show(&apos;events&apos;,this)">📅 Events</button>
+  <button class="ev-warn-badge" id="ev-warn-badge" onclick="openWarnModal()">⚠ <span id="ev-warn-count">0</span> expired</button>
+  <div class="upd-wrap" id="upd-wrap">
+    <button class="upd-btn" onclick="toggleUpdMenu()">✏️ Update ▾</button>
+    <div class="upd-menu" id="upd-menu">
+      <button class="upd-item" onclick="openNewsModal();closeUpdMenu()">📰 Update News</button>
+      <button class="upd-item" onclick="openCalModal();closeUpdMenu()">📅 Update Calendar</button>
+    </div>
   </div>
-  <button class="nm-btn-update" style="margin-left:0" onclick="openNewsModal()">✏️ News</button>
 </nav>
 <div id="daily-metrics-bar"><div class="dm-track"><div class="dm-scroll"><span class="dm-item dm-ok"><span class="dm-lbl">Margin Call Buffer</span><span class="dm-val">$13.9M / 20.7%</span></span><span class="dm-sep">·</span><span class="dm-item dm-ok"><span class="dm-lbl">Gross Leverage</span><span class="dm-val">32.4%</span></span><span class="dm-sep">·</span><span class="dm-item dm-ok"><span class="dm-lbl">Net Carry Spread</span><span class="dm-val">6.34%</span></span><span class="dm-sep">·</span><span class="dm-item dm-ok"><span class="dm-lbl">Loan Rate (WA)</span><span class="dm-val">2.07%</span></span><span class="dm-sep">·</span><span class="dm-item dm-ok"><span class="dm-lbl">DV01</span><span class="dm-val">$54,226/bp</span></span><span class="dm-sep">·</span><span class="dm-item dm-ok"><span class="dm-lbl">DV01 (incl ETF)</span><span class="dm-val">$85,371/bp</span></span><span class="dm-sep">·</span><span class="dm-item dm-ok"><span class="dm-lbl">AW YTM</span><span class="dm-val">8.41%</span></span><span class="dm-sep">·</span><span class="dm-item dm-ok"><span class="dm-lbl">AW Duration</span><span class="dm-val">8.58y</span></span><span class="dm-sep">·</span><span class="dm-item dm-crit"><span class="dm-lbl">Sub/AT1</span><span class="dm-val">29.2% of bonds</span></span><span class="dm-sep">·</span><span class="dm-item dm-ok"><span class="dm-lbl">EM Cluster</span><span class="dm-val">16.7% of NAV</span></span><span class="dm-sep">·</span><span class="dm-item dm-ok"><span class="dm-lbl">Coupons 90d</span><span class="dm-val">$1914.7K</span></span><span class="dm-sep">·</span><span class="dm-item dm-ok"><span class="dm-lbl">Annual Yield/NAV</span><span class="dm-val">3.51%</span></span><span class="dm-sep">·</span><span class="dm-item dm-ok"><span class="dm-lbl">CF Coverage</span><span class="dm-val">7.7x</span></span><span class="dm-sep">·</span><span class="dm-item dm-ok"><span class="dm-lbl">Debt Svc/mo</span><span class="dm-val">$87K</span></span><span class="dm-sep">·</span><span class="dm-item dm-ok"><span class="dm-lbl">Equity % NAV</span><span class="dm-val">31.7%</span></span><span class="dm-sep">·</span><span class="dm-item dm-ok"><span class="dm-lbl">BETF P&L</span><span class="dm-val">$-1746K</span></span><span class="dm-sep">·</span><span class="dm-item dm-ok"><span class="dm-lbl">30d Loans</span><span class="dm-val">None</span></span><span class="dm-sep">·</span><span class="dm-item dm-ok"><span class="dm-lbl">Cash Cover (30d)</span><span class="dm-val">✓</span></span><span class="dm-sep">·</span><span class="dm-item dm-ok"><span class="dm-lbl">Margin Call Buffer</span><span class="dm-val">$13.9M / 20.7%</span></span><span class="dm-sep">·</span><span class="dm-item dm-ok"><span class="dm-lbl">Gross Leverage</span><span class="dm-val">32.4%</span></span><span class="dm-sep">·</span><span class="dm-item dm-ok"><span class="dm-lbl">Net Carry Spread</span><span class="dm-val">6.34%</span></span><span class="dm-sep">·</span><span class="dm-item dm-ok"><span class="dm-lbl">Loan Rate (WA)</span><span class="dm-val">2.07%</span></span><span class="dm-sep">·</span><span class="dm-item dm-ok"><span class="dm-lbl">DV01</span><span class="dm-val">$54,226/bp</span></span><span class="dm-sep">·</span><span class="dm-item dm-ok"><span class="dm-lbl">DV01 (incl ETF)</span><span class="dm-val">$85,371/bp</span></span><span class="dm-sep">·</span><span class="dm-item dm-ok"><span class="dm-lbl">AW YTM</span><span class="dm-val">8.41%</span></span><span class="dm-sep">·</span><span class="dm-item dm-ok"><span class="dm-lbl">AW Duration</span><span class="dm-val">8.58y</span></span><span class="dm-sep">·</span><span class="dm-item dm-crit"><span class="dm-lbl">Sub/AT1</span><span class="dm-val">29.2% of bonds</span></span><span class="dm-sep">·</span><span class="dm-item dm-ok"><span class="dm-lbl">EM Cluster</span><span class="dm-val">16.7% of NAV</span></span><span class="dm-sep">·</span><span class="dm-item dm-ok"><span class="dm-lbl">Coupons 90d</span><span class="dm-val">$1914.7K</span></span><span class="dm-sep">·</span><span class="dm-item dm-ok"><span class="dm-lbl">Annual Yield/NAV</span><span class="dm-val">3.51%</span></span><span class="dm-sep">·</span><span class="dm-item dm-ok"><span class="dm-lbl">CF Coverage</span><span class="dm-val">7.7x</span></span><span class="dm-sep">·</span><span class="dm-item dm-ok"><span class="dm-lbl">Debt Svc/mo</span><span class="dm-val">$87K</span></span><span class="dm-sep">·</span><span class="dm-item dm-ok"><span class="dm-lbl">Equity % NAV</span><span class="dm-val">31.7%</span></span><span class="dm-sep">·</span><span class="dm-item dm-ok"><span class="dm-lbl">BETF P&L</span><span class="dm-val">$-1746K</span></span><span class="dm-sep">·</span><span class="dm-item dm-ok"><span class="dm-lbl">30d Loans</span><span class="dm-val">None</span></span><span class="dm-sep">·</span><span class="dm-item dm-ok"><span class="dm-lbl">Cash Cover (30d)</span><span class="dm-val">✓</span></span><span class="dm-sep">·</span></div></div></div>
+
+<!-- ADD TO CALENDAR MODAL -->
+<div id="ac-modal">
+  <div class="ac-box">
+    <h3>📅 Add to Calendar</h3>
+    <div class="ac-field">
+      <label>Date</label>
+      <input type="date" id="ac-date">
+    </div>
+    <div class="ac-field">
+      <label>Event type</label>
+      <select id="ac-type">
+        <option value="other">Other</option>
+        <option value="earnings">Earnings</option>
+        <option value="dividend">Dividend</option>
+        <option value="corporate">Corporate action</option>
+        <option value="maturity">Maturity</option>
+        <option value="call">Call</option>
+      </select>
+    </div>
+    <div class="ac-field">
+      <label>Description</label>
+      <textarea id="ac-headline" rows="2"></textarea>
+    </div>
+    <div class="ac-field">
+      <label>Issuer</label>
+      <input type="text" id="ac-issuer">
+    </div>
+    <div class="ac-source" id="ac-source-lbl"></div>
+    <div class="ac-actions">
+      <span class="ac-status" id="ac-status"></span>
+      <button class="nm-btn nm-btn-cancel" onclick="closeAcModal()">Cancel</button>
+      <button class="nm-btn nm-btn-apply" onclick="confirmAddToCalendar()">✓ Add to Calendar</button>
+    </div>
+  </div>
+</div>
+
+<!-- EXPIRED EVENTS MODAL -->
+<div class="ev-modal-bg" id="ev-warn-modal">
+  <div class="ev-modal-box">
+    <h3 style="color:var(--red)">⚠ Expired — not yet resolved</h3>
+    <div id="ev-warn-list"></div>
+    <div class="ev-modal-close"><button onclick="document.getElementById('ev-warn-modal').classList.remove('open')">Close</button></div>
+  </div>
+</div>
+<!-- DAY POPUP -->
+<div class="ev-popup" id="ev-popup">
+  <span class="ev-popup-x" onclick="document.getElementById('ev-popup').classList.remove('open')">✕</span>
+  <div class="ev-popup-hdr" id="ev-popup-hdr"></div>
+  <div id="ev-popup-list"></div>
+</div>
 
 <!-- NEWS UPDATE MODAL -->
 <div id="news-modal">
   <div class="nm-box">
     <h3>✏️ Update News Feed</h3>
-    <p class="nm-desc">Вставь содержимое <code>news.json</code> из чата с Claude — весь JSON от <code>{</code> до <code>}</code>.<br>
-    После Apply данные сохранятся в localStorage и переживут перезагрузку.</p>
+    <p class="nm-desc">Вставь содержимое блока <code>news</code> из <code>events.json</code> — JSON объект с ключами <code>bonds</code> и <code>equity</code>.<br>
+    После Apply данные сохранятся локально и переживут перезагрузку.</p>
     <textarea id="nm-textarea" placeholder='{ "_updated": "DD.MM.YYYY", "bonds": [...], "equity": [...] }'></textarea>
     <div class="nm-actions">
       <span class="nm-status" id="nm-status"></span>
@@ -1118,12 +1259,38 @@ th.sort-desc::after{content:' ▼';color:var(--blue);font-size:9px}
 </div>
 
 
+<!-- p8 EVENTS -->
+<div id="events" class="page" style="display:none">
+  <div class="kpi-row">
+    <div class="kpi" style="--accent:#4f8ef7"><div class="ico">📅</div><label>Upcoming 90d</label><div class="val" id="ev-k-90d">—</div><div class="sub" id="ev-k-90d-s">loading…</div></div>
+    <div class="kpi" style="--accent:#f87171"><div class="ico">⚠</div><label>Loan Maturities</label><div class="val" id="ev-k-loans">—</div><div class="sub" id="ev-k-loans-s">next 90 days</div></div>
+    <div class="kpi" style="--accent:#2dd4bf"><div class="ico">💰</div><label>Coupons 90d</label><div class="val" id="ev-k-coup">—</div><div class="sub">total USD</div></div>
+    <div class="kpi" style="--accent:#34d399"><div class="ico">📊</div><label>Total Events</label><div class="val" id="ev-k-total">—</div><div class="sub" id="ev-k-total-s">in calendar</div></div>
+  </div>
+  <div class="card">
+    <div class="card-header"><span class="ico">🔍</span><h3>Filter</h3></div>
+    <div class="ev-filters">
+      <button class="ev-fbtn on" data-t="all"          onclick="evFilter('all',this)">All</button>
+      <button class="ev-fbtn"    data-t="coupon"        onclick="evFilter('coupon',this)">🔵 Coupons</button>
+      <button class="ev-fbtn"    data-t="dividend"      onclick="evFilter('dividend',this)">🟢 Dividends</button>
+      <button class="ev-fbtn"    data-t="maturity"      onclick="evFilter('maturity',this)">🟡 Maturities</button>
+      <button class="ev-fbtn"    data-t="loan_maturity" onclick="evFilter('loan_maturity',this)">🔴 Loan Mat.</button>
+      <button class="ev-fbtn"    data-t="call"          onclick="evFilter('call',this)">🟣 Calls</button>
+      <button class="ev-fbtn"    data-t="earnings"      onclick="evFilter('earnings',this)">🔵 Earnings</button>
+      <button class="ev-fbtn"    data-t="other"         onclick="evFilter('other',this)">⚪ Other</button>
+    </div>
+  </div>
+  <div class="ev-months" id="ev-months">
+    <div style="color:var(--text3);padding:40px;text-align:center">Loading events…</div>
+  </div>
+</div>
+
 <script>
 var PW_HASH='22eebc79e65017d34d74b14ad8f438db09337defa89dbc5e6164b62ea321a9e2';
 async function sha256(s){var b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('');}
 async function checkPw(){var pw=document.getElementById('pw-input').value;if(await sha256(pw)===PW_HASH){document.getElementById('overlay').style.display='none';}else{var el=document.getElementById('pw-input');el.classList.add('error');el.value='';setTimeout(()=>el.classList.remove('error'),800);el.focus();}}
 
-var _PAGES=['results','composition','bonds','equity','ltv','cashflow','pere'];
+var _PAGES=['results','composition','bonds','equity','ltv','cashflow','pere','events'];
 var charts={};
 function show(id,btn){
   _PAGES.forEach(p=>{var el=document.getElementById(p);if(el)el.style.display='none';});
@@ -1136,6 +1303,7 @@ function show(id,btn){
   if(id==='equity'){if(!charts.eqMix)initEquity();if(!charts.divChart)initDivChart();fetchAndRenderNews('equity');}
   if(id==='cashflow'&&!charts.cfChart)initCashFlow();
   if(id==='ltv'&&!charts.debtPie)initLTV();
+  if(id==='events')initEvents();
 }
 
 Chart.defaults.color='#546080';
@@ -1316,44 +1484,10 @@ function initBondSector(){
 }
 
 
-// ── FX TICKER ────────────────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', function() {
-  var pairs = [{id:'eur',sym:'EUR'},{id:'gbp',sym:'GBP'},{id:'chf',sym:'CHF'}];
-  var prev = {};
-  function load(){
-    fetch('https://api.frankfurter.app/latest?from=USD&to=EUR,GBP,CHF')
-      .then(function(r){return r.json();})
-      .then(function(data){
-        var rates = data.rates || {};
-        pairs.forEach(function(p){
-          var inv = rates[p.sym] ? (1/rates[p.sym]) : null;
-          if(!inv) return;
-          var val = inv.toFixed(4);
-          var el = document.getElementById('fx-'+p.id);
-          var chgEl = document.getElementById('fx-'+p.id+'-chg');
-          if(el) el.textContent = val;
-          if(chgEl && prev[p.sym] !== undefined){
-            var diff = inv - prev[p.sym];
-            chgEl.textContent = (diff>=0?'+':'')+diff.toFixed(4);
-            chgEl.className = 'fx-chg ' + (diff>=0?'up':'dn');
-          } else if(chgEl){ chgEl.textContent=''; }
-          prev[p.sym] = inv;
-        });
-      })
-      .catch(function(){
-        pairs.forEach(function(p){
-          var el=document.getElementById('fx-'+p.id);
-          if(el) el.textContent='n/a';
-        });
-      });
-  }
-  load();
-  setInterval(load, 300000);
-});
 
 // ── NEWS FEED ──────────────────────────────────────────────────────────────────
-// Priority: 1) fetch news.json from repo  2) localStorage cache  3) built-in default
-// Update: ✏️ News button → paste news.json content → Apply
+// Priority: 1) fetch events.json from repo  2) localStorage cache  3) built-in default
+// Update: ✏️ News button → paste events.json content → Apply
 
 var NEWS_DATA = null;
 var _NF_KEY   = 'portfolio_news';
@@ -1408,7 +1542,7 @@ function _nfSaveCache(data){
 }
 function _nfFetch(cb){
   try{
-    fetch('news.json?t='+Date.now())
+    fetch('events.json?t='+Date.now())
       .then(function(r){return r.ok?r.json():Promise.reject(r.status);})
       .then(function(d){cb((d&&Array.isArray(d.bonds)&&Array.isArray(d.equity))?d:null);})
       .catch(function(){cb(null);});
@@ -1434,7 +1568,10 @@ function renderNewsFeed(tab){
   var items=NEWS_DATA[tab]||[];
   if(dateEl)dateEl.textContent=NEWS_DATA._updated?'updated '+NEWS_DATA._updated:'';
   if(!items.length){list.innerHTML='<div class="nf-loading">No news</div>';return;}
-  list.innerHTML=items.map(function(n){
+  var _calAdded=_evGetFromNews().map(function(e){return e._news_key||'';});
+  list.innerHTML=items.map(function(n,idx){
+    var nkey=tab+'_'+idx;
+    var isAdded=_calAdded.indexOf(nkey)>=0;
     return '<div class="nf-card '+n.importance+'">'
       +'<div class="nf-pip"></div>'
       +'<div class="nf-body">'
@@ -1446,6 +1583,7 @@ function renderNewsFeed(tab){
         +'<div class="nf-hl">'+n.headline+'</div>'
         +'<div class="nf-sub">'+n.summary+'</div>'
         +'<div class="nf-meta">'+n.date+(n.source?' &middot; '+n.source:'')+'</div>'
+        +'<button class="nf-add-cal'+(isAdded?' added':'')+'" onclick="evAddFromNews(this,\''+tab+'\','+idx+')">'+(isAdded?'✓ Added':'+ Calendar')+'</button>'
       +'</div>'
     +'</div>';
   }).join('');
@@ -1466,7 +1604,7 @@ function applyNewsData(){
   var raw=document.getElementById('nm-textarea').value.trim();
   var st=document.getElementById('nm-status');
   var ta=document.getElementById('nm-textarea');
-  if(!raw){st.textContent='Paste news.json content first';st.className='nm-status err';return;}
+  if(!raw){st.textContent='Paste events.json news content first';st.className='nm-status err';return;}
   try{
     var parsed=JSON.parse(raw);
     if(!parsed||!Array.isArray(parsed.bonds)||!Array.isArray(parsed.equity))
@@ -1485,9 +1623,453 @@ function applyNewsData(){
     ta.className='err';
   }
 }
+
+/* ══ EVENTS CALENDAR ══════════════════════════════════════ */
+var _evData=null,_evFilter='all',_evInited=false;
+var _evDismissed=(function(){try{return JSON.parse(localStorage.getItem('ev_dismissed')||'{}')}catch(e){return{}}})();
+function _evSaveDismissed(){try{localStorage.setItem('ev_dismissed',JSON.stringify(_evDismissed))}catch(e){}}
+
+var _EV_CFG={
+  coupon:      {label:'Coupon',    dot:'#4f8ef7'},
+  dividend:    {label:'Dividend',  dot:'#34d399'},
+  maturity:    {label:'Maturity',  dot:'#fbbf24'},
+  loan_maturity:{label:'Loan Mat.',dot:'#f87171'},
+  call:        {label:'Call',      dot:'#c084fc'},
+  earnings:    {label:'Earnings',  dot:'#2dd4bf'},
+  other:       {label:'Other',     dot:'#94a3c4'},
+};
+
+function _fmtUsd(v){
+  if(!v||v<=0)return'';
+  return v>=1e6?'$'+(v/1e6).toFixed(2)+'M':v>=1e3?'$'+(v/1e3).toFixed(0)+'K':'$'+v;
+}
+
+/* ── Parse events.csv ─────────────────────────────────── */
+function _parseCSV(text){
+  var lines=text.trim().split('\n'),evs=[];
+  if(lines.length<2)return evs;
+  var hdr=lines[0].split(',');
+  var today=new Date();today.setHours(0,0,0,0);
+  for(var i=1;i<lines.length;i++){
+    var cols=lines[i].split(","),row={};
+    hdr.forEach(function(h,j){row[h.trim()]=(cols[j]||"").trim();});
+    if(!row.date)continue;
+    var dt=new Date(row.date);dt.setHours(0,0,0,0);
+    if(isNaN(dt.getTime()))continue;
+    evs.push({
+      id:row.id||'',date:row.date,dt:dt,
+      issuer:(row.issuer||'').slice(0,38),isin:row.isin||'',
+      type:row.type||'other',headline:row.headline||'',
+      amount_usd:parseFloat(row.amount_usd)||0,
+      importance:row.importance||'info',
+      status:row.status||'upcoming',notes:row.notes||''
+    });
+  }
+  evs.sort(function(a,b){return a.dt-b.dt;});
+  return evs;
+}
+
+/* ── Load events.csv ──────────────────────────────────── */
+function _loadEvents(cb){
+  if(_evData){if(cb)cb(_evData);return;}
+  fetch('events.json?t='+Date.now())
+    .then(function(r){if(!r.ok)throw new Error(r.status);return r.json();})
+    .then(function(j){
+      var local=(j.events&&j.events.from_local)||[];
+      var fnews=(j.events&&j.events.from_news)||[];
+      var stored=_evGetFromNews();
+      var storedIds=stored.map(function(e){return e.id;});
+      var merged=fnews.filter(function(e){return storedIds.indexOf(e.id)<0;});
+      _evData=local.concat(stored).concat(merged);
+      _evData.forEach(function(e){e.dt=new Date(e.date);});
+      _evData.sort(function(a,b){return a.dt-b.dt;});
+      if(cb)cb(_evData);
+    })
+    .catch(function(){_evData=_evGetFromNews();if(cb)cb(_evData);});
+}
+
+/* ── Warning badge ────────────────────────────────────── */
+function _updateBadge(){
+  if(!_evData)return;
+  var today=new Date();today.setHours(0,0,0,0);
+  var n=_evData.filter(function(e){return e.status==='upcoming'&&e.dt<today&&!_evDismissed[e.id];}).length;
+  var b=document.getElementById('ev-warn-badge');
+  var c=document.getElementById('ev-warn-count');
+  if(!b)return;
+  if(n>0){b.classList.add('visible');if(c)c.textContent=n;}
+  else{b.classList.remove('visible');}
+}
+
+function openWarnModal(){
+  if(!_evData)return;
+  var today=new Date();today.setHours(0,0,0,0);
+  var expired=_evData.filter(function(e){return e.status==='upcoming'&&e.dt<today&&!_evDismissed[e.id];});
+  var list=document.getElementById('ev-warn-list');
+  if(!list)return;
+  if(!expired.length){
+    list.innerHTML='<p style="color:var(--text3);font-size:12px;padding:6px 0">No expired events.</p>';
+  }else{
+    var rows=expired.map(function(e){
+      var c=_EV_CFG[e.type]||_EV_CFG.other;
+      var row=document.createElement('div');row.className='ev-warn-row';
+      row.innerHTML='<span class="ev-warn-date">'+e.date+'</span>'
+        +'<span class="ev-type-pill" style="background:'+c.dot+'22;color:'+c.dot+'">'+c.label+'</span>'
+        +'<span class="ev-warn-name">'+e.issuer+'</span>'
+        +'<span class="ev-warn-amt">'+_fmtUsd(e.amount_usd)+'</span>'
+        +'<span class="ev-dismiss">Dismiss</span>';
+      row.querySelector('.ev-dismiss').addEventListener('click',function(){evDismiss(e.id,row);});
+      return row;
+    });
+    list.innerHTML='';
+    rows.forEach(function(r){list.appendChild(r);});
+  }
+  document.getElementById('ev-warn-modal').classList.add('open');
+}
+
+function evDismiss(id,row){
+  _evDismissed[id]=true;_evSaveDismissed();
+  if(row){row.style.opacity='0.3';setTimeout(function(){if(row.parentNode)row.parentNode.removeChild(row);_updateBadge();},300);}
+}
+
+
+function evFilter(t,btn){
+  _evFilter=t;
+  document.querySelectorAll('.ev-fbtn').forEach(function(b){b.classList.remove('on');});
+  if(btn)btn.classList.add('on');
+  _renderCal();
+}
+
+/* ── KPIs ─────────────────────────────────────────────── */
+function _updateKPIs(evs){
+  var today=new Date();today.setHours(0,0,0,0);
+  var d90=new Date(today.getTime()+90*864e5);
+  var up90=evs.filter(function(e){return e.dt>=today&&e.dt<=d90;});
+  var loans90=evs.filter(function(e){return e.type==='loan_maturity'&&e.dt>=today&&e.dt<=d90;});
+  var coup90sum=evs.filter(function(e){return e.type==='coupon'&&e.dt>=today&&e.dt<=d90;}).reduce(function(s,e){return s+e.amount_usd;},0);
+  function sv(id,v){var el=document.getElementById(id);if(el)el.textContent=v;}
+  sv('ev-k-90d',up90.length); sv('ev-k-90d-s','events next 90 days');
+  sv('ev-k-loans',loans90.length); sv('ev-k-loans-s',loans90.length?_fmtUsd(loans90.reduce(function(s,e){return s+e.amount_usd;},0)):'none due');
+  sv('ev-k-coup',_fmtUsd(coup90sum)||'$0');
+  sv('ev-k-total',evs.length); sv('ev-k-total-s',evs.filter(function(e){return e.status==='upcoming';}).length+' upcoming');
+}
+
+/* ── Calendar render ──────────────────────────────────── */
+var _MN=['January','February','March','April','May','June','July','August','September','October','November','December'];
+var _MN3=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+var _DOW=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+
+function _renderCal(){
+  if(!_evData)return;
+  var today=new Date();today.setHours(0,0,0,0);
+  var filtered=_evFilter==='all'?_evData:_evData.filter(function(e){return e.type===_evFilter;});
+  var byDate={};
+  filtered.forEach(function(e){if(!byDate[e.date])byDate[e.date]=[];byDate[e.date].push(e);});
+  var months=[-1,0,1].map(function(d){var x=new Date(today.getFullYear(),today.getMonth()+d,1);return{y:x.getFullYear(),m:x.getMonth()};});
+  var wrap=document.getElementById('ev-months');
+  if(!wrap)return;
+  wrap.innerHTML='';
+  months.forEach(function(mo){
+    var yr=mo.y,mn=mo.m;
+    var first=new Date(yr,mn,1),last=new Date(yr,mn+1,0);
+    var startDow=(first.getDay()+6)%7;
+    var mDiv=document.createElement('div');
+    var lbl=document.createElement('div');
+    lbl.className='ev-month-lbl';lbl.textContent=_MN[mn]+' '+yr;
+    mDiv.appendChild(lbl);
+    var grid=document.createElement('div');grid.className='ev-cal';
+    _DOW.forEach(function(d){var dh=document.createElement('div');dh.className='ev-dow';dh.textContent=d;grid.appendChild(dh);});
+    for(var i=0;i<startDow;i++){var em=document.createElement('div');em.className='ev-day empty';grid.appendChild(em);}
+    for(var day=1;day<=last.getDate();day++){
+      (function(day){
+        var dt=new Date(yr,mn,day);dt.setHours(0,0,0,0);
+        var ds=yr+'-'+String(mn+1).padStart(2,'0')+'-'+String(day).padStart(2,'0');
+        var isToday=dt.getTime()===today.getTime();
+        var cell=document.createElement('div');
+        cell.className='ev-day'+(isToday?' today':'');
+        cell.addEventListener('click',function(evt){evDayClick(ds,evt);});
+        var dn=document.createElement('div');dn.className='ev-day-n';
+        if(isToday){var dot=document.createElement('span');dot.className='ev-today-dot';dot.textContent=day;dn.appendChild(dot);}
+        else{dn.textContent=day;}
+        cell.appendChild(dn);
+        var dayEvs=byDate[ds]||[],shown=0;
+        dayEvs.forEach(function(e){
+          if(shown>=3)return;
+          var c=_EV_CFG[e.type]||_EV_CFG.other;
+          var pill=document.createElement('div');
+          pill.className='ev-pill t-'+e.type;pill.title=e.issuer;
+          var dot=document.createElement('span');dot.className='ev-dot';dot.style.background=c.dot;
+          var lbl=e.issuer.length>11?e.issuer.slice(0,10)+'…':e.issuer;
+          pill.appendChild(dot);pill.appendChild(document.createTextNode(lbl));
+          cell.appendChild(pill);shown++;
+        });
+        if(dayEvs.length>3){var more=document.createElement('div');more.className='ev-more';more.textContent='+'+(dayEvs.length-3)+' more';cell.appendChild(more);}
+        grid.appendChild(cell);
+      })(day);
+    }
+    var total=startDow+last.getDate(),rem=(7-total%7)%7;
+    for(var i=0;i<rem;i++){var em=document.createElement('div');em.className='ev-day empty';grid.appendChild(em);}
+    mDiv.appendChild(grid);wrap.appendChild(mDiv);
+  });
+}
+
+
+/* ── Day popup ────────────────────────────────────────── */
+function evDayClick(ds,evt){
+  evt.stopPropagation();
+  if(!_evData)return;
+  var filtered=_evFilter==='all'?_evData:_evData.filter(function(e){return e.type===_evFilter;});
+  var evs=filtered.filter(function(e){return e.date===ds;});
+  if(!evs.length)return;
+  var p=document.getElementById('ev-popup');
+  var hdr=document.getElementById('ev-popup-hdr');
+  var lst=document.getElementById('ev-popup-list');
+  if(!p)return;
+  var pts=ds.split('-');
+  if(hdr)hdr.textContent=_MN3[parseInt(pts[1])-1]+' '+parseInt(pts[2])+', '+pts[0];
+  if(lst){
+    lst.innerHTML='';
+    evs.forEach(function(e){
+      var c=_EV_CFG[e.type]||_EV_CFG.other;
+      var isManual=e.notes==='from_news';
+      var item=document.createElement('div');
+      item.className='ev-popup-item';
+      var dot=document.createElement('span');
+      dot.className='ev-popup-dot';
+      dot.style.background=c.dot;
+      var body=document.createElement('div');
+      body.style.flex='1';
+      var name=document.createElement('div');
+      name.className='ev-popup-name';
+      name.textContent=e.issuer;
+      var sub=document.createElement('div');
+      sub.className='ev-popup-sub';
+      sub.textContent=c.label+(e.amount_usd>0?' · '+_fmtUsd(e.amount_usd):'');
+      if(e.headline&&e.headline!==e.issuer){
+        var hl=document.createElement('span');
+        hl.style.cssText='display:block;font-size:9.5px;color:var(--text3);margin-top:1px';
+        hl.textContent=e.headline;
+        sub.appendChild(hl);
+      }
+      body.appendChild(name);
+      body.appendChild(sub);
+      if(isManual){
+        var del=document.createElement('button');
+        del.className='ev-popup-del';
+        del.setAttribute('data-evid',e.id);
+        del.textContent='🗑 Delete';
+        body.appendChild(del);
+      }
+      item.appendChild(dot);
+      item.appendChild(body);
+      lst.appendChild(item);
+    });
+  }
+    var vw=window.innerWidth,vh=window.innerHeight,pw=260,ph=320;
+  var x=evt.clientX,y=evt.clientY;
+  p.style.left=Math.min(x+10,vw-pw-10)+'px';
+  p.style.top=Math.min(y+10,vh-ph-10)+'px';
+  p.classList.add('open');
+}
+
+/* ── Delete manual event ──────────────────────────────── */
+function evDeleteFromNews(id,btn){
+  // Remove from localStorage
+  var stored=_evGetFromNews().filter(function(e){return e.id!==id;});
+  _evSaveFromNews(stored);
+  // Remove from active _evData
+  if(_evData){
+    _evData=_evData.filter(function(e){return e.id!==id;});
+    _updateBadge();
+    if(document.getElementById('events')&&document.getElementById('events').style.display!=='none'){
+      _updateKPIs(_evData);_renderCal();
+    }
+  }
+  // Mark button as deleted in popup
+  btn.textContent='✓ Deleted';
+  btn.classList.add('done');
+  btn.disabled=true;
+  // Remove popup item after short delay
+  setTimeout(function(){
+    var item=btn.closest('.ev-popup-item');
+    if(item){item.style.opacity='0.3';}
+    // Close popup if no events left for this day
+    setTimeout(function(){
+      if(item&&item.parentNode)item.parentNode.removeChild(item);
+      var lst=document.getElementById('ev-popup-list');
+      if(lst&&!lst.children.length)document.getElementById('ev-popup').classList.remove('open');
+    },300);
+  },600);
+}
+
+/* ── Init ─────────────────────────────────────────────── */
+function initEvents(){
+  if(_evInited&&_evData){_renderCal();return;}
+  _loadEvents(function(evs){
+    _evInited=true;
+    _updateBadge();
+    _updateKPIs(evs);
+    _renderCal();
+  });
+}
+
+document.addEventListener('click',function(e){
+  var p=document.getElementById('ev-popup');
+  if(p&&p.classList.contains('open')&&!p.contains(e.target)&&!e.target.closest('.ev-day'))
+    p.classList.remove('open');
+  if(e.target.classList.contains('ev-popup-del')&&!e.target.disabled){
+    var id=e.target.getAttribute('data-evid');
+    if(id)evDeleteFromNews(id,e.target);
+  }
+  var wm=document.getElementById('ev-warn-modal');
+  if(wm&&wm.classList.contains('open')&&e.target===wm)wm.classList.remove('open');
+});
+
+
+/* ── UPDATE DROPDOWN ──────────────────────────────────── */
+function toggleUpdMenu(){
+  var m=document.getElementById('upd-menu');
+  if(m)m.classList.toggle('open');
+}
+function closeUpdMenu(){
+  var m=document.getElementById('upd-menu');
+  if(m)m.classList.remove('open');
+}
+document.addEventListener('click',function(e){
+  var w=document.getElementById('upd-wrap');
+  if(w&&!w.contains(e.target))closeUpdMenu();
+});
+
+/* ── CALENDAR MODAL ───────────────────────────────────── */
+function openCalModal(){
+  var ta=document.getElementById('cal-textarea');
+  var st=document.getElementById('cal-status');
+  if(ta)ta.value='';if(st)st.textContent='';
+  var m=document.getElementById('cal-modal');
+  if(m){m.style.display='flex';setTimeout(function(){if(ta)ta.focus();},50);}
+}
+function closeCalModal(){
+  var m=document.getElementById('cal-modal');
+  if(m)m.style.display='none';
+}
+function applyCalData(){
+  var raw=document.getElementById('cal-textarea').value.trim();
+  var st=document.getElementById('cal-status');
+  var ta=document.getElementById('cal-textarea');
+  if(!raw){st.textContent='Paste events block first';st.className='nm-status err';return;}
+  try{
+    var parsed=JSON.parse(raw);
+    if(!parsed||(!Array.isArray(parsed.from_local)&&!Array.isArray(parsed.from_news)))
+      throw new Error('Missing from_local/from_news arrays');
+    // Merge: from_local replaces, from_news merges preserving existing
+    var existing=_evGetFromNews();
+    var existingIds=existing.map(function(e){return e.id;});
+    var newFromNews=(parsed.from_news||[]).filter(function(e){return existingIds.indexOf(e.id)<0;});
+    _evData=(parsed.from_local||[]).concat(existing).concat(newFromNews);
+    _evData.sort(function(a,b){return(a.date||'').localeCompare(b.date||'');});
+    _evData.forEach(function(e){if(e.date&&!e.dt)e.dt=new Date(e.date);});
+    _evSaveFromNews(_evGetFromNews()); // persist from_news
+    _evInited=true;
+    _updateBadge();
+    if(document.getElementById('events')&&document.getElementById('events').style.display!=='none'){
+      _updateKPIs(_evData);_renderCal();
+    }
+    st.textContent='✓ Calendar updated: '+(parsed.from_local||[]).length+' local + '+existing.length+' news events';
+    st.className='nm-status ok';
+    ta.className='ok';
+    setTimeout(closeCalModal,1600);
+  }catch(e){
+    st.textContent='JSON error: '+e.message;
+    st.className='nm-status err';
+    ta.className='err';
+  }
+}
+
+/* ── ADD NEWS ITEM TO CALENDAR ────────────────────────── */
+var _EV_FROM_NEWS_KEY='ev_from_news';
+function _evGetFromNews(){
+  try{return JSON.parse(localStorage.getItem(_EV_FROM_NEWS_KEY)||'[]');}catch(e){return[];}
+}
+function _evSaveFromNews(arr){
+  try{localStorage.setItem(_EV_FROM_NEWS_KEY,JSON.stringify(arr));}catch(e){}
+}
+
+var _acBtn=null,_acNkey=null;
+
+function evAddFromNews(btn,tab,idx){
+  if(!NEWS_DATA)return;
+  var n=NEWS_DATA[tab]&&NEWS_DATA[tab][idx];
+  if(!n)return;
+  var nkey=tab+'_'+idx;
+  // If already added just highlight
+  var existing=_evGetFromNews();
+  if(existing.some(function(e){return e._news_key===nkey;})){
+    btn.textContent='✓ Added';btn.classList.add('added');return;
+  }
+  // Open modal pre-filled with news data
+  _acBtn=btn;_acNkey=nkey;
+  var today=new Date().toISOString().slice(0,10);
+  document.getElementById('ac-date').value=n.event_date||today;
+  document.getElementById('ac-type').value=n.event_type||'other';
+  document.getElementById('ac-headline').value=n.headline||'';
+  document.getElementById('ac-issuer').value=n.issuer||'';
+  document.getElementById('ac-source-lbl').textContent=n.source?('Source: '+n.source+(n.date?' · '+n.date:'')):'';
+  document.getElementById('ac-status').textContent='';
+  document.getElementById('ac-modal').classList.add('open');
+  setTimeout(function(){document.getElementById('ac-date').focus();},50);
+}
+
+function closeAcModal(){
+  document.getElementById('ac-modal').classList.remove('open');
+  _acBtn=null;_acNkey=null;
+}
+
+function confirmAddToCalendar(){
+  var evDate=document.getElementById('ac-date').value;
+  var evType=document.getElementById('ac-type').value;
+  var headline=document.getElementById('ac-headline').value.trim();
+  var issuer=document.getElementById('ac-issuer').value.trim();
+  var st=document.getElementById('ac-status');
+  if(!evDate){st.textContent='Please set a date';st.className='ac-status err';return;}
+  if(!headline){st.textContent='Description is required';st.className='ac-status err';return;}
+  var today=new Date().toISOString().slice(0,10);
+  var id='ev_'+Math.random().toString(36).slice(2,10);
+  var ev={
+    id:id,
+    date:evDate,
+    issuer:issuer,
+    isin:'',
+    type:evType,
+    headline:headline,
+    amount_usd:0,
+    importance:'info',
+    source:'news',
+    status:evDate<today?'completed':'upcoming',
+    notes:'from_news',
+    _news_key:_acNkey,
+  };
+  var existing=_evGetFromNews();
+  existing.push(ev);
+  _evSaveFromNews(existing);
+  if(_evData){
+    ev.dt=new Date(ev.date);
+    _evData.push(ev);
+    _evData.sort(function(a,b){return a.dt-b.dt;});
+    _updateBadge();
+    if(document.getElementById('events')&&document.getElementById('events').style.display!=='none'){
+      _updateKPIs(_evData);_renderCal();
+    }
+  }
+  if(_acBtn){_acBtn.textContent='✓ Added';_acBtn.classList.add('added');}
+  st.textContent='✓ Added to calendar';st.className='ac-status ok';
+  setTimeout(closeAcModal,900);
+}
+
 document.addEventListener('DOMContentLoaded',function(){
   var m=document.getElementById('news-modal');
   if(m)m.addEventListener('click',function(e){if(e.target===this)closeNewsModal();});
+  var acm=document.getElementById('ac-modal');
+  if(acm)acm.addEventListener('click',function(e){if(e.target===this)closeAcModal();});
+  _loadEvents(function(){_updateBadge();});
 });
 </script>
 </body>
