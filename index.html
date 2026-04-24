@@ -392,17 +392,20 @@ th.sort-desc::after{content:' ▼';color:var(--blue);font-size:9px}
 .ev-fbtn[data-t="call"].on{background:var(--purple);border-color:var(--purple)}
 .ev-fbtn[data-t="earnings"].on{background:var(--teal);border-color:var(--teal);color:#0a0d14}
 .ev-fbtn[data-t="other"].on{background:#546080;border-color:#546080;color:var(--text)}
-.ev-months{display:flex;flex-direction:column;gap:24px}
-.ev-month-lbl{font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px}
-.ev-cal{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
-.ev-dow{text-align:center;font-size:10px;color:var(--text3);font-weight:600;padding:3px 0;text-transform:uppercase}
-.ev-day{min-height:68px;background:var(--bg2);border:1px solid var(--border);border-radius:5px;padding:3px 4px;cursor:default}
+.ev-months{display:flex;flex-direction:column;gap:0}
+.ev-month-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.ev-month-lbl{font-size:16px;font-weight:600;color:var(--text)}
+.ev-nav-btn{background:transparent;border:1px solid var(--border);color:var(--text2);width:32px;height:32px;border-radius:6px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.ev-nav-btn:hover{border-color:var(--blue);color:var(--blue)}
+.ev-cal{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.ev-dow{text-align:center;font-size:11px;color:var(--text3);font-weight:600;padding:6px 0;text-transform:uppercase}
+.ev-day{min-height:110px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:5px 6px;cursor:default}
 .ev-day:hover{background:var(--bg3)}
 .ev-day.empty{background:transparent;border-color:transparent}
 .ev-day.today{border-color:var(--blue);background:rgba(79,142,247,.07)}
-.ev-day-n{font-size:10px;color:var(--text3);margin-bottom:2px;display:flex;align-items:center;gap:2px}
+.ev-day-n{font-size:12px;color:var(--text3);margin-bottom:4px;display:flex;align-items:center;gap:2px}
 .ev-today-dot{width:16px;height:16px;background:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:9px;font-weight:700}
-.ev-pill{display:flex;align-items:center;gap:2px;font-size:9px;padding:1px 3px;border-radius:3px;margin-bottom:1px;cursor:pointer;overflow:hidden;white-space:nowrap}
+.ev-pill{display:flex;align-items:center;gap:3px;font-size:10px;padding:2px 5px;border-radius:3px;margin-bottom:2px;cursor:pointer;overflow:hidden;white-space:nowrap}
 .ev-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
 .ev-pill.t-coupon{background:rgba(79,142,247,.12);color:#7eb5ff}
 .ev-pill.t-dividend{background:rgba(52,211,153,.1);color:#34d399}
@@ -425,7 +428,7 @@ th.sort-desc::after{content:' ▼';color:var(--blue);font-size:9px}
 .ev-popup-del{display:inline-flex;align-items:center;gap:3px;margin-top:4px;padding:2px 7px;border-radius:4px;border:1px solid rgba(248,113,113,.4);background:transparent;color:#f87171;font-size:10px;cursor:pointer;transition:all .15s}
 .ev-popup-del:hover{background:rgba(248,113,113,.12)}
 .ev-popup-del.done{color:var(--text3);border-color:var(--border);cursor:default}
-@media(max-width:600px){.ev-day{min-height:50px}.ev-pill{font-size:0;padding:3px;width:7px;height:7px;border-radius:50%}.ev-dot{display:none}}
+@media(max-width:768px){.ev-day{min-height:70px}}@media(max-width:480px){.ev-day{min-height:48px}.ev-pill{font-size:0;padding:3px;width:8px;height:8px;border-radius:50%}.ev-dot{display:none}}
 </style>
 
 <style id="dm-css">
@@ -1197,17 +1200,20 @@ th.sort-desc::after{content:' ▼';color:var(--blue);font-size:9px}
           <th style="cursor:pointer" onclick="sortTable('pe-table',2)" class="sortable">CCY ↕</th>
           <th style="cursor:pointer" onclick="sortTable('pe-table',3)" class="sortable">MV USD ↕</th>
           <th style="cursor:pointer" onclick="sortTable('pe-table',4)" class="sortable">P&amp;L % ↕</th>
+          <th style="cursor:pointer" onclick="sortTable('pe-table',5)" class="sortable">Drawn ↕</th>
+          <th style="cursor:pointer" onclick="sortTable('pe-table',6)" class="sortable">Rem. Commit ↕</th>
+          <th style="cursor:pointer" onclick="sortTable('pe-table',7)" class="sortable">Cash Distrib ↕</th>
         </tr></thead>
         <tbody>
-<tr><td style="text-align:left">Elbrus Capital III Fund</td><td style="text-align:center">Non-bank</td><td style="text-align:center"><span class="badge" style="background:#4f8ef722;color:#4f8ef7">USD</span></td><td data-val="3638000.0">$3.64M</td><td data-val="7.44"><span class="pos">+7.4%</span></td></tr>
-<tr><td style="text-align:left">COATUE GROWTH V PI OFF LP CL A RS</td><td style="text-align:center">JPM</td><td style="text-align:center"><span class="badge" style="background:#4f8ef722;color:#4f8ef7">USD</span></td><td data-val="1944040.0">$1.94M</td><td data-val="-6.99"><span class="neg">-7.0%</span></td></tr>
-<tr><td style="text-align:left">4BIO II</td><td style="text-align:center">Non-bank</td><td style="text-align:center"><span class="badge" style="background:#4f8ef722;color:#4f8ef7">USD</span></td><td data-val="1821559.42">$1.82M</td><td data-val="-11.39"><span class="neg">-11.4%</span></td></tr>
-<tr><td style="text-align:left">4BIO III</td><td style="text-align:center">Non-bank</td><td style="text-align:center"><span class="badge" style="background:#4f8ef722;color:#4f8ef7">USD</span></td><td data-val="727568.95">$728K</td><td data-val="-21.01"><span class="neg">-21.0%</span></td></tr>
-<tr><td style="text-align:left">Shiller's fund</td><td style="text-align:center">Non-bank</td><td style="text-align:center"><span class="badge" style="background:#2dd4bf22;color:#2dd4bf">EUR</span></td><td data-val="528840.0">$529K</td><td data-val="13.00"><span class="pos">+13.0%</span></td></tr>
-<tr><td style="text-align:left">Flashpoint Venture Growth Fund IV</td><td style="text-align:center">Non-bank</td><td style="text-align:center"><span class="badge" style="background:#4f8ef722;color:#4f8ef7">USD</span></td><td data-val="430777.48">$431K</td><td data-val="-7.89"><span class="neg">-7.9%</span></td></tr>
-<tr><td style="text-align:left">Trogenix (4 BIO SPV)</td><td style="text-align:center">Non-bank</td><td style="text-align:center"><span class="badge" style="background:#34d39922;color:#34d399">GBP</span></td><td data-val="263246.72">$263K</td><td data-val="-2.41"><span class="neg">-2.4%</span></td></tr>
-<tr><td style="text-align:left">L CAPITAL ASIA 2 LP CLASS A $500000</td><td style="text-align:center">JPM</td><td style="text-align:center"><span class="badge" style="background:#4f8ef722;color:#4f8ef7">USD</span></td><td data-val="147440.0">$147K</td><td data-val="-85.69"><span class="neg">-85.7%</span></td></tr>
-<tr><td style="text-align:left">Joynery Company (Green Oak)</td><td style="text-align:center">Non-bank</td><td style="text-align:center"><span class="badge" style="background:#4f8ef722;color:#4f8ef7">USD</span></td><td data-val="24786.0">$25K</td><td data-val="-75.28"><span class="neg">-75.3%</span></td></tr>
+<tr><td style="text-align:left">Elbrus Capital III Fund</td><td style="text-align:center">Non-bank</td><td style="text-align:center"><span class="badge" style="background:#4f8ef722;color:#4f8ef7">USD</span></td><td data-val="3638000.0">$3.64M</td><td data-val="7.44"><span class="pos">+7.4%</span></td><td data-val="2639512.0">$2.64M</td><td data-val="2360488.0">$2.36M</td><td data-val="1006634.0">$1.01M</td></tr>
+<tr><td style="text-align:left">COATUE GROWTH V PI OFF LP CL A RS</td><td style="text-align:center">JPM</td><td style="text-align:center"><span class="badge" style="background:#4f8ef722;color:#4f8ef7">USD</span></td><td data-val="1944040.0">$1.94M</td><td data-val="-6.99"><span class="neg">-7.0%</span></td><td data-val="2000000.0">$2.00M</td><td data-val="0">—</td><td data-val="0">—</td></tr>
+<tr><td style="text-align:left">4BIO II</td><td style="text-align:center">Non-bank</td><td style="text-align:center"><span class="badge" style="background:#4f8ef722;color:#4f8ef7">USD</span></td><td data-val="1821559.42">$1.82M</td><td data-val="-11.39"><span class="neg">-11.4%</span></td><td data-val="2129888.33">$2.13M</td><td data-val="165367.15">$165K</td><td data-val="1458361.32">$1.46M</td></tr>
+<tr><td style="text-align:left">4BIO III</td><td style="text-align:center">Non-bank</td><td style="text-align:center"><span class="badge" style="background:#4f8ef722;color:#4f8ef7">USD</span></td><td data-val="727568.95">$728K</td><td data-val="-21.01"><span class="neg">-21.0%</span></td><td data-val="772107.99">$772K</td><td data-val="1227892.01">$1.23M</td><td data-val="128675.54">$129K</td></tr>
+<tr><td style="text-align:left">Shiller's fund</td><td style="text-align:center">Non-bank</td><td style="text-align:center"><span class="badge" style="background:#2dd4bf22;color:#2dd4bf">EUR</span></td><td data-val="528840.0">$529K</td><td data-val="13.00"><span class="pos">+13.0%</span></td><td data-val="400000.0">$400K</td><td data-val="0">—</td><td data-val="0">—</td></tr>
+<tr><td style="text-align:left">Flashpoint Venture Growth Fund IV</td><td style="text-align:center">Non-bank</td><td style="text-align:center"><span class="badge" style="background:#4f8ef722;color:#4f8ef7">USD</span></td><td data-val="430777.48">$431K</td><td data-val="-7.89"><span class="neg">-7.9%</span></td><td data-val="456874.05">$457K</td><td data-val="543125.95">$543K</td><td data-val="0">—</td></tr>
+<tr><td style="text-align:left">Trogenix (4 BIO SPV)</td><td style="text-align:center">Non-bank</td><td style="text-align:center"><span class="badge" style="background:#34d39922;color:#34d399">GBP</span></td><td data-val="263246.72">$263K</td><td data-val="-2.41"><span class="neg">-2.4%</span></td><td data-val="200000.0">$200K</td><td data-val="0">—</td><td data-val="0">—</td></tr>
+<tr><td style="text-align:left">L CAPITAL ASIA 2 LP CLASS A $500000</td><td style="text-align:center">JPM</td><td style="text-align:center"><span class="badge" style="background:#4f8ef722;color:#4f8ef7">USD</span></td><td data-val="147440.0">$147K</td><td data-val="-85.69"><span class="neg">-85.7%</span></td><td data-val="1000000.0">$1.00M</td><td data-val="0">—</td><td data-val="0">—</td></tr>
+<tr><td style="text-align:left">Joynery Company (Green Oak)</td><td style="text-align:center">Non-bank</td><td style="text-align:center"><span class="badge" style="background:#4f8ef722;color:#4f8ef7">USD</span></td><td data-val="24786.0">$25K</td><td data-val="-75.28"><span class="neg">-75.3%</span></td><td data-val="100286.0">$100K</td><td data-val="0">—</td><td data-val="0">—</td></tr>
 </tbody>
       </table></div>
     </div>
@@ -1219,24 +1225,26 @@ th.sort-desc::after{content:' ▼';color:var(--blue);font-size:9px}
           <th style="cursor:pointer" onclick="sortTable('re-table',1)" class="sortable">Source ↕</th>
           <th style="cursor:pointer" onclick="sortTable('re-table',2)" class="sortable">CCY ↕</th>
           <th style="cursor:pointer" onclick="sortTable('re-table',3)" class="sortable">MV USD ↕</th>
+          <th style="cursor:pointer" onclick="sortTable('re-table',4)" class="sortable">Drawn ↕</th>
+          <th style="cursor:pointer" onclick="sortTable('re-table',5)" class="sortable">Rem. Commit ↕</th>
         </tr></thead>
         <tbody>
-<tr><td style="text-align:left">Luton</td><td style="text-align:center">Valorem</td><td style="text-align:center"><span class="badge" style="background:#34d39922;color:#34d399">GBP</span></td><td data-val="14920910.4">$14.92M</td></tr>
-<tr><td style="text-align:left">CFP II - Commitment</td><td style="text-align:center">CFP</td><td style="text-align:center"><span class="badge" style="background:#34d39922;color:#34d399">GBP</span></td><td data-val="6743000.0">$6.74M</td></tr>
-<tr><td style="text-align:left">West Broadway (MREI III)</td><td style="text-align:center">US RE</td><td style="text-align:center"><span class="badge" style="background:#4f8ef722;color:#4f8ef7">USD</span></td><td data-val="4400000.0">$4.40M</td></tr>
-<tr><td style="text-align:left">Modular</td><td style="text-align:center">Valorem</td><td style="text-align:center"><span class="badge" style="background:#34d39922;color:#34d399">GBP</span></td><td data-val="2846220.3">$2.85M</td></tr>
-<tr><td style="text-align:left">CFP GP</td><td style="text-align:center">CFP</td><td style="text-align:center"><span class="badge" style="background:#34d39922;color:#34d399">GBP</span></td><td data-val="2697200.0">$2.70M</td></tr>
-<tr><td style="text-align:left">Post Collection (MREI II)</td><td style="text-align:center">US RE</td><td style="text-align:center"><span class="badge" style="background:#4f8ef722;color:#4f8ef7">USD</span></td><td data-val="2550000.0">$2.55M</td></tr>
-<tr><td style="text-align:left">South Godstone</td><td style="text-align:center">Valorem</td><td style="text-align:center"><span class="badge" style="background:#34d39922;color:#34d399">GBP</span></td><td data-val="2494910.0">$2.49M</td></tr>
-<tr><td style="text-align:left">Doncaster (Structured Note Lighthouse 31.12.28 on VALOREM MA</td><td style="text-align:center">Valorem</td><td style="text-align:center"><span class="badge" style="background:#34d39922;color:#34d399">GBP</span></td><td data-val="2489640.91">$2.49M</td></tr>
-<tr><td style="text-align:left">Ware</td><td style="text-align:center">Valorem</td><td style="text-align:center"><span class="badge" style="background:#34d39922;color:#34d399">GBP</span></td><td data-val="1888040.0">$1.89M</td></tr>
-<tr><td style="text-align:left">CFP III - Commitment</td><td style="text-align:center">CFP</td><td style="text-align:center"><span class="badge" style="background:#34d39922;color:#34d399">GBP</span></td><td data-val="1618320.0">$1.62M</td></tr>
-<tr><td style="text-align:left">149 Church</td><td style="text-align:center">US RE</td><td style="text-align:center"><span class="badge" style="background:#4f8ef722;color:#4f8ef7">USD</span></td><td data-val="1293000.0">$1.29M</td></tr>
-<tr><td style="text-align:left">CFP III/IV - Fundraising (loan)</td><td style="text-align:center">CFP</td><td style="text-align:center"><span class="badge" style="background:#34d39922;color:#34d399">GBP</span></td><td data-val="674300.0">$674K</td></tr>
-<tr><td style="text-align:left">Bedford</td><td style="text-align:center">Valorem</td><td style="text-align:center"><span class="badge" style="background:#34d39922;color:#34d399">GBP</span></td><td data-val="387722.5">$388K</td></tr>
-<tr><td style="text-align:left">140 West</td><td style="text-align:center">US RE</td><td style="text-align:center"><span class="badge" style="background:#4f8ef722;color:#4f8ef7">USD</span></td><td data-val="239000.0">$239K</td></tr>
-<tr><td style="text-align:left">Aberdeen</td><td style="text-align:center">UK PRS</td><td style="text-align:center"><span class="badge" style="background:#34d39922;color:#34d399">GBP</span></td><td data-val="195547.0">$196K</td></tr>
-<tr><td style="text-align:left">Menlove Loan</td><td style="text-align:center">Valorem</td><td style="text-align:center"><span class="badge" style="background:#34d39922;color:#34d399">GBP</span></td><td data-val="99307.53">$99K</td></tr>
+<tr><td style="text-align:left">Luton</td><td style="text-align:center">Valorem</td><td style="text-align:center"><span class="badge" style="background:#34d39922;color:#34d399">GBP</span></td><td data-val="14920910.4">$14.92M</td><td data-val="0">—</td><td data-val="0">—</td></tr>
+<tr><td style="text-align:left">CFP II - Commitment</td><td style="text-align:center">CFP</td><td style="text-align:center"><span class="badge" style="background:#34d39922;color:#34d399">GBP</span></td><td data-val="6743000.0">$6.74M</td><td data-val="0">—</td><td data-val="0">—</td></tr>
+<tr><td style="text-align:left">West Broadway (MREI III)</td><td style="text-align:center">US RE</td><td style="text-align:center"><span class="badge" style="background:#4f8ef722;color:#4f8ef7">USD</span></td><td data-val="4400000.0">$4.40M</td><td data-val="0">—</td><td data-val="0">—</td></tr>
+<tr><td style="text-align:left">Modular</td><td style="text-align:center">Valorem</td><td style="text-align:center"><span class="badge" style="background:#34d39922;color:#34d399">GBP</span></td><td data-val="2846220.3">$2.85M</td><td data-val="0">—</td><td data-val="0">—</td></tr>
+<tr><td style="text-align:left">CFP GP</td><td style="text-align:center">CFP</td><td style="text-align:center"><span class="badge" style="background:#34d39922;color:#34d399">GBP</span></td><td data-val="2697200.0">$2.70M</td><td data-val="0">—</td><td data-val="0">—</td></tr>
+<tr><td style="text-align:left">Post Collection (MREI II)</td><td style="text-align:center">US RE</td><td style="text-align:center"><span class="badge" style="background:#4f8ef722;color:#4f8ef7">USD</span></td><td data-val="2550000.0">$2.55M</td><td data-val="0">—</td><td data-val="0">—</td></tr>
+<tr><td style="text-align:left">South Godstone</td><td style="text-align:center">Valorem</td><td style="text-align:center"><span class="badge" style="background:#34d39922;color:#34d399">GBP</span></td><td data-val="2494910.0">$2.49M</td><td data-val="0">—</td><td data-val="0">—</td></tr>
+<tr><td style="text-align:left">Doncaster (Structured Note Lighthouse 31.12.28 on VALOREM MA</td><td style="text-align:center">Valorem</td><td style="text-align:center"><span class="badge" style="background:#34d39922;color:#34d399">GBP</span></td><td data-val="2489640.91">$2.49M</td><td data-val="0">—</td><td data-val="0">—</td></tr>
+<tr><td style="text-align:left">Ware</td><td style="text-align:center">Valorem</td><td style="text-align:center"><span class="badge" style="background:#34d39922;color:#34d399">GBP</span></td><td data-val="1888040.0">$1.89M</td><td data-val="0">—</td><td data-val="0">—</td></tr>
+<tr><td style="text-align:left">CFP III - Commitment</td><td style="text-align:center">CFP</td><td style="text-align:center"><span class="badge" style="background:#34d39922;color:#34d399">GBP</span></td><td data-val="1618320.0">$1.62M</td><td data-val="0">—</td><td data-val="0">—</td></tr>
+<tr><td style="text-align:left">149 Church</td><td style="text-align:center">US RE</td><td style="text-align:center"><span class="badge" style="background:#4f8ef722;color:#4f8ef7">USD</span></td><td data-val="1293000.0">$1.29M</td><td data-val="0">—</td><td data-val="0">—</td></tr>
+<tr><td style="text-align:left">CFP III/IV - Fundraising (loan)</td><td style="text-align:center">CFP</td><td style="text-align:center"><span class="badge" style="background:#34d39922;color:#34d399">GBP</span></td><td data-val="674300.0">$674K</td><td data-val="0">—</td><td data-val="0">—</td></tr>
+<tr><td style="text-align:left">Bedford</td><td style="text-align:center">Valorem</td><td style="text-align:center"><span class="badge" style="background:#34d39922;color:#34d399">GBP</span></td><td data-val="387722.5">$388K</td><td data-val="0">—</td><td data-val="0">—</td></tr>
+<tr><td style="text-align:left">140 West</td><td style="text-align:center">US RE</td><td style="text-align:center"><span class="badge" style="background:#4f8ef722;color:#4f8ef7">USD</span></td><td data-val="239000.0">$239K</td><td data-val="0">—</td><td data-val="0">—</td></tr>
+<tr><td style="text-align:left">Aberdeen</td><td style="text-align:center">UK PRS</td><td style="text-align:center"><span class="badge" style="background:#34d39922;color:#34d399">GBP</span></td><td data-val="195547.0">$196K</td><td data-val="0">—</td><td data-val="0">—</td></tr>
+<tr><td style="text-align:left">Menlove Loan</td><td style="text-align:center">Valorem</td><td style="text-align:center"><span class="badge" style="background:#34d39922;color:#34d399">GBP</span></td><td data-val="99307.53">$99K</td><td data-val="0">—</td><td data-val="0">—</td></tr>
 </tbody>
       </table></div>
     </div>
@@ -1280,8 +1288,17 @@ th.sort-desc::after{content:' ▼';color:var(--blue);font-size:9px}
       <button class="ev-fbtn"    data-t="other"         onclick="evFilter('other',this)">⚪ Other</button>
     </div>
   </div>
-  <div class="ev-months" id="ev-months">
-    <div style="color:var(--text3);padding:40px;text-align:center">Loading events…</div>
+  <div class="card" style="padding:0">
+    <div class="ev-month-nav" style="padding:16px 20px 8px">
+      <button class="ev-nav-btn" onclick="evNavMonth(-1)" title="Previous month">‹</button>
+      <span class="ev-month-lbl" id="ev-month-lbl"></span>
+      <button class="ev-nav-btn" onclick="evNavMonth(1)" title="Next month">›</button>
+    </div>
+    <div style="padding:0 12px 16px">
+      <div class="ev-months" id="ev-months">
+        <div style="color:var(--text3);padding:40px;text-align:center">Loading events…</div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1757,6 +1774,11 @@ function _updateKPIs(evs){
 var _MN=['January','February','March','April','May','June','July','August','September','October','November','December'];
 var _MN3=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 var _DOW=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+var _evMonthOffset=0;
+function evNavMonth(dir){
+  _evMonthOffset+=dir;
+  _renderCal();
+}
 
 function _renderCal(){
   if(!_evData)return;
@@ -1764,7 +1786,10 @@ function _renderCal(){
   var filtered=_evFilter==='all'?_evData:_evData.filter(function(e){return e.type===_evFilter;});
   var byDate={};
   filtered.forEach(function(e){if(!byDate[e.date])byDate[e.date]=[];byDate[e.date].push(e);});
-  var months=[-1,0,1].map(function(d){var x=new Date(today.getFullYear(),today.getMonth()+d,1);return{y:x.getFullYear(),m:x.getMonth()};});
+  var base=new Date(today.getFullYear(),today.getMonth()+_evMonthOffset,1);
+  var months=[{y:base.getFullYear(),m:base.getMonth()}];
+  var lbl=document.getElementById('ev-month-lbl');
+  if(lbl)lbl.textContent=_MN[base.getMonth()]+' '+base.getFullYear();
   var wrap=document.getElementById('ev-months');
   if(!wrap)return;
   wrap.innerHTML='';
@@ -1773,9 +1798,6 @@ function _renderCal(){
     var first=new Date(yr,mn,1),last=new Date(yr,mn+1,0);
     var startDow=(first.getDay()+6)%7;
     var mDiv=document.createElement('div');
-    var lbl=document.createElement('div');
-    lbl.className='ev-month-lbl';lbl.textContent=_MN[mn]+' '+yr;
-    mDiv.appendChild(lbl);
     var grid=document.createElement('div');grid.className='ev-cal';
     _DOW.forEach(function(d){var dh=document.createElement('div');dh.className='ev-dow';dh.textContent=d;grid.appendChild(dh);});
     for(var i=0;i<startDow;i++){var em=document.createElement('div');em.className='ev-day empty';grid.appendChild(em);}
@@ -1793,7 +1815,7 @@ function _renderCal(){
         cell.appendChild(dn);
         var dayEvs=byDate[ds]||[],shown=0;
         dayEvs.forEach(function(e){
-          if(shown>=3)return;
+          if(shown>=5)return;
           var c=_EV_CFG[e.type]||_EV_CFG.other;
           var pill=document.createElement('div');
           pill.className='ev-pill t-'+e.type;pill.title=e.issuer;
@@ -1802,7 +1824,7 @@ function _renderCal(){
           pill.appendChild(dot);pill.appendChild(document.createTextNode(lbl));
           cell.appendChild(pill);shown++;
         });
-        if(dayEvs.length>3){var more=document.createElement('div');more.className='ev-more';more.textContent='+'+(dayEvs.length-3)+' more';cell.appendChild(more);}
+        if(dayEvs.length>5){var more=document.createElement('div');more.className='ev-more';more.textContent='+'+(dayEvs.length-5)+' more';cell.appendChild(more);}
         grid.appendChild(cell);
       })(day);
     }
@@ -1904,6 +1926,7 @@ function evDeleteFromNews(id,btn){
 /* ── Init ─────────────────────────────────────────────── */
 function initEvents(){
   if(_evInited&&_evData){_renderCal();return;}
+  _evMonthOffset=0;
   _loadEvents(function(evs){
     _evInited=true;
     _updateBadge();
