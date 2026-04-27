@@ -1,210 +1,210 @@
 {
-  "_updated": "24.04.2026",
+  "_updated": "27.04.2026",
   "_version": 2,
   "news": {
+    "_updated": "27.04.2026",
     "bonds": [
       {
-        "importance": "watch",
-        "issuer": "Colombia",
+        "importance": "critical",
+        "issuer": "OCP SA",
         "tag": "Bond",
-        "headline": "Colombia faces potential 4th sovereign downgrade Apr-May 2026",
-        "summary": "Deficit at 6.4% GDP, S&P and Fitch already cut to BB. 4th agency cut before May election would trigger further Ecopetrol downgrade.",
+        "headline": "US-Iran dual blockade persists; Hormuz still closed, OCP sulfur supply disrupted",
+        "summary": "Islamabad talks collapsed Apr 25; dual blockade continues. Brent ~$93-95. OCP Q2 output down ~30% on sulfur shortage; $1.5B…",
         "date": "Apr 2026",
-        "source": "Bloomberg / S&P"
+        "source": "Wikipedia / Argus Media"
       },
       {
-        "importance": "watch",
-        "issuer": "Ecopetrol",
+        "importance": "critical",
+        "issuer": "Romania",
         "tag": "Bond",
-        "headline": "Fitch downgrades Ecopetrol to BB following Colombia sovereign cut",
-        "summary": "Rating capped by sovereign. Standalone bbb- intact but negative outlook on Colombia remains.",
-        "date": "Dec 2025",
-        "source": "Fitch"
+        "headline": "S&P BBB-/Negative Apr 3; Fitch review Aug 15 — junk risk within 2 years",
+        "summary": "S&P reaffirmed Apr 3 with deficit 7.7% of GDP; no post-2026 consolidation plan. EU inflation highest in EU at 9% in Mar. Next…",
+        "date": "Apr 2026",
+        "source": "S&P / Romania Insider"
       },
       {
-        "importance": "watch",
+        "importance": "critical",
+        "issuer": "Pemex",
+        "tag": "Bond",
+        "headline": "Mexico P-Cap deal covers 2026 maturities; SACP ccc+ unchanged at S&P",
+        "summary": "Asset-backed P-Cap structure avoids direct sovereign guarantee. Debt $84.5B, lowest since 2015. Moodys B1/Fitch BB+ stable but…",
+        "date": "Apr 2026",
+        "source": "S&P / Mexico News Daily"
+      },
+      {
+        "importance": "critical",
         "issuer": "CoreWeave",
         "tag": "Bond",
-        "headline": "Blue Owl fails to raise $4B for CoreWeave; financing gap risk",
-        "summary": "B+ junk rating deterred lenders. $500M bridge loan committed due Mar 2026. Fitch affirmed BB- Positive.",
-        "date": "Feb 2026",
-        "source": "S&P / Fitch"
-      },
-      {
-        "importance": "watch",
-        "issuer": "Energean / Leviathan",
-        "tag": "Bond",
-        "headline": "Iran-Hormuz crisis elevated risk for Israeli gas operations",
-        "summary": "US-Israel strike on Iran Feb 28 triggered supply disruption. Leviathan and Energean assets face heightened geopolitical risk.",
-        "date": "Mar 2026",
-        "source": "CNBC"
+        "headline": "CoreWeave total bonds now $4.75B at 9.75%; S&P revised outlook to positive",
+        "summary": "Apr 14 close of $1.75B tap brings total senior notes to $4.75B. S&P affirmed B+ and raised outlook to positive on $21B Meta deal…",
+        "date": "Apr 2026",
+        "source": "S&P / Bloomberg"
       },
       {
         "importance": "watch",
         "issuer": "KazMunayGas",
         "tag": "Bond",
-        "headline": "Kazakhstan OPEC+ output constrained by Hormuz blockade Mar 2026",
-        "summary": "KMG oil exports disrupted as Gulf shipping halted. Macro risk for KMG cashflows persists.",
+        "headline": "Iran seizes 2 ships Apr 23-24; dual Hormuz blockade intact as talks collapse",
+        "summary": "Trump canceled Pakistan negotiations Apr 25; three US carriers now in Middle East. Brent $93-95 despite ceasefire — still $20+…",
         "date": "Apr 2026",
-        "source": "CNBC / OPEC+"
+        "source": "NPR / Wikipedia"
+      },
+      {
+        "importance": "watch",
+        "issuer": "Energean Israel",
+        "tag": "Bond",
+        "headline": "Karish restarted Apr 13; Katlan FID delayed as war ceasefire fragile",
+        "summary": "Israel-Lebanon ceasefire extended 3 weeks Apr 23. Karish back at full capacity. Katlan $1.2B FID still suspended pending…",
+        "date": "Apr 2026",
+        "source": "MEES / Wikipedia"
+      },
+      {
+        "importance": "watch",
+        "issuer": "Leviathan Bond",
+        "tag": "Bond",
+        "headline": "Leviathan restarted Apr 10; recurring halt pattern and dual blockade risk remain",
+        "summary": "Second halt in under a year. Resumed post-ceasefire but talks collapsed Apr 25. Any resumption of hostilities would trigger…",
+        "date": "Apr 2026",
+        "source": "MEES / Jerusalem Post"
+      },
+      {
+        "importance": "watch",
+        "issuer": "Turkey / Turkcell",
+        "tag": "Bond",
+        "headline": "Fitch positive outlook; Imamoglu espionage trial starts May 11",
+        "summary": "Fitch raised Turkey to positive Jan 2026 on macro stability. Imamoglu arrested Feb 4 for espionage; trial May 11. Governance…",
+        "date": "Apr 2026",
+        "source": "Fitch / Reuters"
+      },
+      {
+        "importance": "watch",
+        "issuer": "Sasol",
+        "tag": "Bond",
+        "headline": "S&P and Moodys both Negative; Brent volatility adds downside risk to cash flow",
+        "summary": "S&P Ba2/Negative, Moodys Ba1/Negative. Brent ranged $73-$120 in Q1; high fuel costs compress Secunda refinery margins. FFO/debt…",
+        "date": "Apr 2026",
+        "source": "S&P / Moodys"
+      },
+      {
+        "importance": "watch",
+        "issuer": "Ecopetrol",
+        "tag": "Bond",
+        "headline": "Ecopetrol Ba1/BB+ stable; 2026 maturity pre-financed, oil price swing is key risk",
+        "summary": "2026 $2.8B maturity refinanced in 2024. Brent volatility and $6B capex keep leverage elevated. Colombia sovereign Baa2 underpins…",
+        "date": "Apr 2026",
+        "source": "Moodys"
       },
       {
         "importance": "info",
         "issuer": "Vedanta Resources",
         "tag": "Bond",
-        "headline": "Fitch upgrades Vedanta to BB- — highest rating since 2015",
-        "summary": "Two-notch upgrade citing strong EBITDA and deleveraging. HoldCo debt cut from $9.1B to under $5B. Stable outlook.",
+        "headline": "Vedanta demerger record date May 1; Fitch BB- upgrade confirmed Apr 6",
+        "summary": "Vedanta Ltd demerger into 5 entities takes effect May 1. Fitch raised VRL to BB- Apr 6 on deleveraging and EBITDA. Bond impact…",
         "date": "Apr 2026",
-        "source": "Fitch"
+        "source": "Fitch / MSN"
       },
       {
         "importance": "info",
-        "issuer": "PEMEX",
+        "issuer": "OCP SA / Morocco",
         "tag": "Bond",
-        "headline": "Fitch upgrades PEMEX to BB+; Moodys raised to B1",
-        "summary": "Two upgrades in 2025 on $12B govt bond injection. Standalone ccc unchanged — ratings rely on sovereign support.",
-        "date": "Oct 2025",
-        "source": "Fitch / Moodys"
+        "headline": "OCP gains Atlantic market share as Gulf rivals stay blocked behind Hormuz",
+        "summary": "OCP sold record volumes to Latin America in April at DAP above $650/t. S&P Morocco BBB-/stable. Hybrid bond rated at investment…",
+        "date": "Apr 2026",
+        "source": "S&P / Financial Afrik"
       },
       {
         "importance": "info",
-        "issuer": "ABN AMRO",
-        "tag": "AT1",
-        "headline": "ECB raises ABN AMRO Pillar 2 requirement to 2.60% for 2026",
-        "summary": "CET1 at 14.8% — well above required 11.5%. No material credit concern.",
-        "date": "Oct 2025",
-        "source": "ECB"
-      },
-      {
-        "importance": "info",
-        "issuer": "Colombia sovereign",
+        "issuer": "Pemex",
         "tag": "Bond",
-        "headline": "Colombia GDP growth 2.3% in 2024; inflation at 5.29% Feb 2026",
-        "summary": "Moderate recovery but fiscal deficit remains elevated. Debt/GDP at 61.3%. Rate at 10.25%.",
+        "headline": "Moodys B1 / Fitch BB+ stable; debt at $84.5B, 11-year low after $20B reduction",
+        "summary": "Sep 2025 upgrades held. High oil prices ($93+ Brent) ease cash flow pressure. SACP ccc+ at S&P remains structural drag; P-Cap…",
+        "date": "Apr 2026",
+        "source": "Moodys / Bloomberg"
+      },
+      {
+        "importance": "info",
+        "issuer": "Rakuten Group",
+        "tag": "Bond",
+        "headline": "R&I stable outlook maintained; mobile unit on track for EBITDA positive in 2026",
+        "summary": "R&I raised outlook to stable Sep 2025 on mobile improvements. Q1 2026 subscriber growth continued. S&P BB/stable. 2026 call…",
+        "date": "Sep 2025",
+        "source": "R&I / S&P"
+      },
+      {
+        "importance": "info",
+        "issuer": "Cameco / Kazatomprom",
+        "tag": "Bond",
+        "headline": "India signs landmark uranium deals with Cameco and Kazatomprom in March 2026",
+        "summary": "Cameco $1.9B India deal closed Mar 2026. Kazatomprom EGM required for India U3O8 contract. 2026 Kazatomprom output guidance…",
         "date": "Mar 2026",
-        "source": "cbonds"
-      },
-      {
-        "importance": "info",
-        "issuer": "Petrobras",
-        "tag": "Bond",
-        "headline": "Goldman raises PBR target to $19.50; Fitch affirms BB/Stable",
-        "summary": "New gas discovery in Colombia. Foz do Amazonas drilling re-authorised by regulator.",
-        "date": "Mar 2026",
-        "source": "Goldman / Fitch"
-      },
-      {
-        "importance": "info",
-        "issuer": "Turkey sovereign",
-        "tag": "Bond",
-        "headline": "S&P rates Turkey BB- Stable; Moodys Ba3 Stable",
-        "summary": "Ratings steady after disinflation progress. Policy normalisation continues under central bank guidance.",
-        "date": "2026",
-        "source": "S&P / Moodys"
-      },
-      {
-        "importance": "info",
-        "issuer": "OCP Morocco",
-        "tag": "Bond",
-        "headline": "OCP benefits from firm phosphate prices; no rating action",
-        "summary": "Morocco sovereign and OCP credit remain stable. No material credit events in past 60 days.",
-        "date": "Apr 2026",
-        "source": "Market"
-      },
-      {
-        "importance": "info",
-        "issuer": "SoftBank",
-        "tag": "Bond",
-        "headline": "SoftBank Vision Fund marks portfolio recovery in FY2025",
-        "summary": "NAV recovery reduces holding company leverage pressure. FRN 2065 bond spread stable.",
-        "date": "Q1 2026",
-        "source": "SoftBank IR"
-      },
-      {
-        "importance": "info",
-        "issuer": "LATAM Airlines",
-        "tag": "Bond",
-        "headline": "LATAM Airlines reports strong Q4 2025; capacity up 8% YoY",
-        "summary": "Post-bankruptcy recovery on track. Load factor at 84%. No covenant stress on outstanding bonds.",
-        "date": "Q4 2025",
-        "source": "LATAM IR"
-      },
-      {
-        "importance": "info",
-        "issuer": "Barclays",
-        "tag": "AT1",
-        "headline": "Barclays AT1 call dates approaching — no skip signals",
-        "summary": "Strong CET1 ratio above 13%. No indication of AT1 coupon omission or extension risk.",
-        "date": "Apr 2026",
-        "source": "Barclays IR"
+        "source": "World Nuclear News"
       }
     ],
     "equity": [
       {
-        "importance": "critical",
-        "issuer": "Energy sector",
-        "tag": "Equity",
-        "headline": "Iran-Hormuz crisis: oil at $110+; energy up 38% in Q1 2026",
-        "summary": "US-Israel strike Feb 28 closed Hormuz; Brent peaked $126. Ceasefire Apr 7 eased to $92. Repsol, Shell, Equinor, TotalEnergies strongly outperformed.",
-        "date": "Apr 2026",
-        "source": "CNBC / Bloomberg"
-      },
-      {
         "importance": "watch",
-        "issuer": "Strategy (MicroStrategy)",
-        "tag": "Equity",
-        "headline": "Strategy holds 762K BTC at $75,694 avg cost; $7.4B paper loss at BTC $66K",
-        "summary": "Carries $8.2B convertible debt plus preferred dividends. Saylor disclosed 0.9x mNAV sell threshold — first mention of potential forced sale.",
-        "date": "Apr 2026",
-        "source": "SEC 8-K"
-      },
-      {
-        "importance": "watch",
-        "issuer": "Petrobras",
-        "tag": "Equity",
-        "headline": "Petrobras cuts 5-year spending plan; dividend risk if oil below $63",
-        "summary": "Capex trimmed to $109B on $63 Brent assumption. BofA warns dividends could exceed FCF at depressed prices.",
-        "date": "Nov 2025",
-        "source": "Reuters / BofA"
-      },
-      {
-        "importance": "info",
         "issuer": "Freeport-McMoRan",
         "tag": "Equity",
-        "headline": "FCX Q4 beat; Grasberg PB2-3 restart targeted Q2 2026",
-        "summary": "EPS $0.47 vs $0.28 est. Copper near $5.65/lb after 50% tariff. Grasberg production recovery through 2026-2027.",
-        "date": "Jan 2026",
+        "headline": "FCX Q1 beat 21% but stock -12% on Grasberg 9% copper output cut over 5 years",
+        "summary": "EPS $0.57 vs $0.47 est; rev $6.23B vs $5.7B. Wet drawpoints at Grasberg rose 30% to 45%; 5-yr copper/gold cut 9%/7%. Biggest…",
+        "date": "Apr 2026",
         "source": "FCX 8-K"
       },
       {
-        "importance": "info",
-        "issuer": "Cameco",
+        "importance": "watch",
+        "issuer": "Strategy",
         "tag": "Equity",
-        "headline": "Cameco signs $2.6B uranium supply deal with India — 22M lbs through 2035",
-        "summary": "9-year contract at $86.95/lb announced Mar 2026. Record uncovered utility requirements signal structural supply gap.",
-        "date": "Mar 2026",
-        "source": "Cameco IR"
+        "headline": "Strategy bought 34,164 BTC for $2.54B Apr 13-19; on track for 1M BTC by Dec 2026",
+        "summary": "Third-largest BTC purchase ever, funded by STRC preferred shares. Total 815,061 BTC at avg $75,527. At 774 BTC/day pace, 1M BTC…",
+        "date": "Apr 2026",
+        "source": "Bloomberg / River"
+      },
+      {
+        "importance": "watch",
+        "issuer": "Alphabet / Meta / Microsoft",
+        "tag": "Equity",
+        "headline": "Alphabet, Meta, Microsoft all report Q1 2026 on April 29 — key AI spend test",
+        "summary": "Alphabet est $106.9B rev; Meta est $55.5B; MSFT fiscal Q3 results same day. Market focused on AI capex returns; Alphabet Cloud…",
+        "date": "Apr 2026",
+        "source": "TipRanks / Invezz"
       },
       {
         "importance": "info",
-        "issuer": "Constellation Energy",
+        "issuer": "Petrobras",
         "tag": "Equity",
-        "headline": "CEG acquires Calpine for $16.4B; 2026 EBITDA guided $6.8-7.6B",
-        "summary": "Deal adds gas and geothermal assets to nuclear fleet. Stock near $282, up 430% since spinoff.",
-        "date": "Mar 2026",
-        "source": "FinancialContent"
+        "headline": "Petrobras Q1 production report Apr 30; financial results May 11",
+        "summary": "Brent ~$93-95 in late April supports strong margins. Petrobras has no oil price hedges; full benefit of high Brent flows to…",
+        "date": "Apr 2026",
+        "source": "TipRanks / Petrobras IR"
       },
       {
         "importance": "info",
         "issuer": "Coinbase",
         "tag": "Equity",
-        "headline": "SEC & CFTC classify BTC, ETH and 14 others as commodities",
-        "summary": "Joint 68-page interpretation Mar 17 removes decade-long regulatory overhang. Major positive for Coinbase business model.",
-        "date": "17 Mar 2026",
-        "source": "SEC.gov"
+        "headline": "Coinbase OCC trust charter conditional Apr 2; CLARITY Act vote expected May 2026",
+        "summary": "First federal crypto custodian license in US history. Stablecoin yield clause in CLARITY Act remains unresolved; Senate vote…",
+        "date": "Apr 2026",
+        "source": "OCC / CoinDesk"
+      },
+      {
+        "importance": "info",
+        "issuer": "Cameco",
+        "tag": "Equity",
+        "headline": "Cameco $1.9B India deal signed; uranium demand structural tailwind intact",
+        "summary": "India nuclear expansion drives long-term contract demand. US nuclear license extensions confirmed by Congress. Kazatomprom 2026…",
+        "date": "Mar 2026",
+        "source": "World Nuclear News"
+      },
+      {
+        "importance": "info",
+        "issuer": "NVIDIA",
+        "tag": "Equity",
+        "headline": "NVIDIA Q4 FY26 data center $62.3B +73% YoY; Q1 FY27 guidance $78B due May 28",
+        "summary": "H20 export ban cost $4.5B in Q1 charges. Blackwell NVL72 in full production; Vera Rubin platform announced. Next earnings May 28…",
+        "date": "Apr 2026",
+        "source": "NVIDIA IR"
       }
-    ],
-    "_updated": "09.04.2026"
+    ]
   },
   "events": {
     "from_local": [
