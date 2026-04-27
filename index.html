@@ -1617,7 +1617,11 @@ function _nfFetch(cb){
   try{
     fetch('events.json?t='+Date.now())
       .then(function(r){return r.ok?r.json():Promise.reject(r.status);})
-      .then(function(d){cb((d&&Array.isArray(d.bonds)&&Array.isArray(d.equity))?d:null);})
+      .then(function(d){
+        if(!d)return cb(null);
+        var nd=d.news||d;
+        cb((nd&&Array.isArray(nd.bonds)&&Array.isArray(nd.equity))?nd:null);
+      })
       .catch(function(){cb(null);});
   }catch(e){cb(null);}
 }
@@ -1680,16 +1684,28 @@ function applyNewsData(){
   if(!raw){st.textContent='Paste events.json news content first';st.className='nm-status err';return;}
   try{
     var parsed=JSON.parse(raw);
-    if(!parsed||!Array.isArray(parsed.bonds)||!Array.isArray(parsed.equity))
+    // Accept both {bonds:[],equity:[]} and {news:{bonds:[],equity:[]}}
+    var nd=parsed.news||parsed;
+    if(!nd||!Array.isArray(nd.bonds)||!Array.isArray(nd.equity))
       throw new Error('Missing bonds/equity arrays');
-    NEWS_DATA=parsed;
-    _nfSaveCache(parsed);
+    NEWS_DATA=nd;
+    _nfSaveCache(nd);
     renderNewsFeed('bonds');
     renderNewsFeed('equity');
-    st.textContent='\u2713 Applied: '+parsed.bonds.length+' bonds, '+parsed.equity.length+' equity';
+    st.textContent='\u2713 Parsed \u00b7 saving to GitHub\u2026';
     st.className='nm-status ok';
     ta.className='ok';
-    setTimeout(closeNewsModal,1400);
+    var newsBlock={_updated:nd._updated||parsed._updated||new Date().toLocaleDateString('ru-RU'),bonds:nd.bonds,equity:nd.equity};
+    ghUpdate(
+      function(ev){ev.news=newsBlock;ev._updated=newsBlock._updated;return ev;},
+      'update news '+newsBlock._updated,
+      function(err){
+        if(err==='no_token'){st.textContent='\u2713 Saved locally (no token \u2014 use \u2699\ufe0f Settings to enable sync)';}
+        else if(err){st.textContent='\u2713 Local \u00b7 \u2717 GitHub error \u2014 check token in \u2699\ufe0f Settings';}
+        else{st.textContent='\u2713 Saved to GitHub \u00b7 all devices will update in ~60s';}
+        setTimeout(closeNewsModal,2400);
+      }
+    );
   }catch(e){
     st.textContent='JSON error: '+e.message;
     st.className='nm-status err';
