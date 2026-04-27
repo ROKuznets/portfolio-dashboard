@@ -211,9 +211,12 @@ th.sort-desc::after{content:' ▼';color:var(--blue);font-size:9px}
 .ac-status.ok{color:var(--green)}
 .ac-status.err{color:var(--red)}
 
-.nf-add-cal{display:inline-flex;align-items:center;gap:3px;margin-top:5px;padding:2px 8px;border-radius:4px;border:1px solid var(--border);background:transparent;color:var(--text3);font-size:10px;cursor:pointer;transition:all .15s}
+.nf-cal-row{display:flex;gap:6px;align-items:center;margin-top:5px}
+.nf-add-cal{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:4px;border:1px solid var(--border);background:transparent;color:var(--text3);font-size:10px;cursor:pointer;transition:all .15s}
 .nf-add-cal:hover{border-color:var(--teal);color:var(--teal)}
 .nf-add-cal.added{border-color:var(--green);color:var(--green);cursor:default}
+.nf-del-cal{border-color:rgba(248,113,113,.3)!important;color:#f87171!important;cursor:pointer!important}
+.nf-del-cal:hover{border-color:#f87171!important;background:rgba(248,113,113,.1)!important}
 
 .nf-loading{color:var(--text3);font-size:12px;padding:12px 0}
 .nf-error{color:var(--amber);font-size:12px;padding:12px 0}
@@ -1645,12 +1648,20 @@ function renderNewsFeed(tab){
   var items=NEWS_DATA[tab]||[];
   if(dateEl)dateEl.textContent=NEWS_DATA._updated?'updated '+NEWS_DATA._updated:'';
   if(!items.length){list.innerHTML='<div class="nf-loading">No news</div>';return;}
-  var _calAdded=_evGetFromNews().map(function(e){return e._news_key||'';});
-  list.innerHTML=items.map(function(n,idx){
-    var nkey=tab+'_'+idx;
-    var isAdded=_calAdded.indexOf(nkey)>=0;
-    return '<div class="nf-card '+n.importance+'">'
-      +'<div class="nf-pip"></div>'
+  // Match by issuer (stable across news refreshes)
+  var fromNews=_evGetFromNews();
+  var addedByIssuer={};
+  fromNews.forEach(function(e){
+    if(e.issuer)addedByIssuer[e.issuer.toLowerCase()]=e.id;
+  });
+  list.innerHTML='';
+  items.forEach(function(n,idx){
+    var ikey=n.issuer?n.issuer.toLowerCase():'';
+    var addedId=addedByIssuer[ikey]||'';
+    var isAdded=!!addedId;
+    var card=document.createElement('div');
+    card.className='nf-card '+n.importance;
+    card.innerHTML='<div class="nf-pip"></div>'
       +'<div class="nf-body">'
         +'<div class="nf-top">'
           +'<span class="nf-issuer">'+n.issuer+'</span>'
@@ -1660,13 +1671,21 @@ function renderNewsFeed(tab){
         +'<div class="nf-hl">'+n.headline+'</div>'
         +'<div class="nf-sub">'+n.summary+'</div>'
         +'<div class="nf-meta">'+n.date+(n.source?' &middot; '+n.source:'')+'</div>'
-        +'<button class="nf-add-cal'+(isAdded?' added':'')+'" onclick="evAddFromNews(this,\''+tab+'\','+idx+')">'+(isAdded?'✓ Added':'+ Calendar')+'</button>'
-      +'</div>'
-    +'</div>';
-  }).join('');
+        +'<div class="nf-cal-row">'
+          +(isAdded
+            ?'<button class="nf-add-cal added">&#10003; Added</button>'
+             +'<button class="nf-del-cal nf-add-cal" data-evid="'+addedId+'" data-tab="'+tab+'">&#128465; Remove</button>'
+            :'<button class="nf-add-cal" data-tab="'+tab+'" data-idx="'+idx+'">+ Calendar</button>')
+        +'</div>'
+      +'</div>';
+    // Bind clicks directly — no delegation issues
+    var addBtn=card.querySelector('.nf-add-cal:not(.added):not(.nf-del-cal)');
+    var delBtn=card.querySelector('.nf-del-cal');
+    if(addBtn)(function(b,t,i){b.addEventListener('click',function(){evAddFromNews(b,t,i);});})(addBtn,tab,idx);
+    if(delBtn)(function(b,eid,t){b.addEventListener('click',function(){evDeleteNewsCard(eid,b,t);});})(delBtn,addedId,tab);
+    list.appendChild(card);
+  });
 }
-
-// ── NEWS MODAL ────────────────────────────────────────────────────────────────
 function openNewsModal(){
   document.getElementById('nm-textarea').value='';
   document.getElementById('nm-status').textContent='';
@@ -1813,6 +1832,29 @@ function openWarnModal(){
     rows.forEach(function(r){list.appendChild(r);});
   }
   document.getElementById('ev-warn-modal').classList.add('open');
+}
+
+function evDeleteNewsCard(id,btn,tab){
+  // Remove from localStorage
+  var stored=_evGetFromNews().filter(function(e){return e.id!==id;});
+  _evSaveFromNews(stored);
+  // Remove from active _evData
+  if(_evData){
+    _evData=_evData.filter(function(e){return e.id!==id;});
+    _updateBadge();
+  }
+  // Sync to GitHub
+  ghUpdate(
+    function(data){
+      if(data.events&&data.events.from_news)
+        data.events.from_news=data.events.from_news.filter(function(e){return e.id!==id;});
+      return data;
+    },
+    'remove calendar event from news',
+    function(){}
+  );
+  // Re-render the news feed so button resets to "+ Calendar"
+  renderNewsFeed(tab);
 }
 
 function evDismiss(id,row){
@@ -2186,7 +2228,8 @@ function confirmAddToCalendar(){
       _updateKPIs(_evData);_renderCal();
     }
   }
-  if(_acBtn){_acBtn.textContent='✓ Added';_acBtn.classList.add('added');}
+  if(_acBtn){_acBtn.textContent='✓ Added';_acBtn.classList.add('added');// Re-render to show delete button
+  var _acTab=_acBtn?_acBtn.getAttribute('data-tab'):'';if(_acTab)setTimeout(function(){renderNewsFeed(_acTab);},1200);}
   st.textContent='✓ Added · syncing to GitHub…';st.className='ac-status ok';
   ghUpdate(
     function(data){
