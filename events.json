@@ -1,114 +1,114 @@
 {
-  "_updated": "27.04.2026",
+  "_updated": "04.05.2026",
   "_version": 2,
   "news": {
-    "_updated": "27.04.2026",
+    "_updated": "04.05.2026",
     "bonds": [
       {
         "importance": "critical",
         "issuer": "OCP SA",
         "tag": "Bond",
-        "headline": "US-Iran dual blockade persists; Hormuz still closed, OCP sulfur supply disrupted",
-        "summary": "Islamabad talks collapsed Apr 25; dual blockade continues. Brent ~$93-95. OCP Q2 output down ~30% on sulfur shortage; $1.5B…",
-        "date": "Apr 2026",
-        "source": "Wikipedia / Argus Media"
+        "headline": "Hormuz dual blockade intact May 4; OCP Q2 output cut 30% on sulfur shortage",
+        "summary": "US-Iran talks collapsed Apr 25; dual blockade continues. Brent ~$93-95. OCP $1.5B hybrid bond closed Apr 15; Q2 fertilizer…",
+        "date": "May 2026",
+        "source": "Wikipedia / Argus"
       },
       {
         "importance": "critical",
         "issuer": "Romania",
         "tag": "Bond",
-        "headline": "S&P BBB-/Negative Apr 3; Fitch review Aug 15 — junk risk within 2 years",
-        "summary": "S&P reaffirmed Apr 3 with deficit 7.7% of GDP; no post-2026 consolidation plan. EU inflation highest in EU at 9% in Mar. Next…",
+        "headline": "Romania BBB-/Negative at all three agencies; Fitch review due Aug 15",
+        "summary": "Fitch affirmed Feb 14 with deficit 7.4% of GDP; Moodys review Sep; S&P negative since Apr 3. Coalition tensions and far-right…",
         "date": "Apr 2026",
-        "source": "S&P / Romania Insider"
+        "source": "Fitch / Reuters"
       },
       {
         "importance": "critical",
         "issuer": "Pemex",
         "tag": "Bond",
-        "headline": "Mexico P-Cap deal covers 2026 maturities; SACP ccc+ unchanged at S&P",
-        "summary": "Asset-backed P-Cap structure avoids direct sovereign guarantee. Debt $84.5B, lowest since 2015. Moodys B1/Fitch BB+ stable but…",
+        "headline": "Pemex P-Cap deal covers 2026 maturities; SACP ccc+ at S&P unchanged",
+        "summary": "Asset-backed P-Cap structure avoids direct sovereign guarantee. Debt $84.5B at 11-yr low. Brent $93-95 eases cash flow but SACP…",
         "date": "Apr 2026",
-        "source": "S&P / Mexico News Daily"
+        "source": "S&P / Bloomberg"
       },
       {
         "importance": "critical",
         "issuer": "CoreWeave",
         "tag": "Bond",
-        "headline": "CoreWeave total bonds now $4.75B at 9.75%; S&P revised outlook to positive",
-        "summary": "Apr 14 close of $1.75B tap brings total senior notes to $4.75B. S&P affirmed B+ and raised outlook to positive on $21B Meta deal…",
-        "date": "Apr 2026",
-        "source": "S&P / Bloomberg"
+        "headline": "CoreWeave Q1 earnings May 7; $63.9B contracted backlog, debt ~$30B at B+",
+        "summary": "Wells Fargo raised PT to $135; expects Q1 rev slightly above $2B guidance. S&P B+/Positive. $8.5B GPU-backed loan rated A3 by…",
+        "date": "May 2026",
+        "source": "Wells Fargo / CNBC"
       },
       {
         "importance": "watch",
         "issuer": "KazMunayGas",
         "tag": "Bond",
-        "headline": "Iran seizes 2 ships Apr 23-24; dual Hormuz blockade intact as talks collapse",
-        "summary": "Trump canceled Pakistan negotiations Apr 25; three US carriers now in Middle East. Brent $93-95 despite ceasefire — still $20+…",
-        "date": "Apr 2026",
+        "headline": "Iran seized 2 ships Apr 23-24; dual Hormuz blockade intact, Brent $93-95",
+        "summary": "Three US carriers in Gulf since Apr 24. Iran declared Hormuz open Apr 17 for Lebanon ceasefire but dual blockade persists. Brent…",
+        "date": "May 2026",
         "source": "NPR / Wikipedia"
       },
       {
         "importance": "watch",
         "issuer": "Energean Israel",
         "tag": "Bond",
-        "headline": "Karish restarted Apr 13; Katlan FID delayed as war ceasefire fragile",
-        "summary": "Israel-Lebanon ceasefire extended 3 weeks Apr 23. Karish back at full capacity. Katlan $1.2B FID still suspended pending…",
+        "headline": "Karish fully operational; Israel-Lebanon ceasefire extended 3 weeks Apr 23",
+        "summary": "Karish restarted Apr 13 after 40-day halt. Israel-Lebanon truce extended through mid-May. Katlan $1.2B FID still suspended…",
         "date": "Apr 2026",
-        "source": "MEES / Wikipedia"
-      },
-      {
-        "importance": "watch",
-        "issuer": "Leviathan Bond",
-        "tag": "Bond",
-        "headline": "Leviathan restarted Apr 10; recurring halt pattern and dual blockade risk remain",
-        "summary": "Second halt in under a year. Resumed post-ceasefire but talks collapsed Apr 25. Any resumption of hostilities would trigger…",
-        "date": "Apr 2026",
-        "source": "MEES / Jerusalem Post"
-      },
-      {
-        "importance": "watch",
-        "issuer": "Turkey / Turkcell",
-        "tag": "Bond",
-        "headline": "Fitch positive outlook; Imamoglu espionage trial starts May 11",
-        "summary": "Fitch raised Turkey to positive Jan 2026 on macro stability. Imamoglu arrested Feb 4 for espionage; trial May 11. Governance…",
-        "date": "Apr 2026",
-        "source": "Fitch / Reuters"
+        "source": "MEES / Reuters"
       },
       {
         "importance": "watch",
         "issuer": "Sasol",
         "tag": "Bond",
-        "headline": "S&P and Moodys both Negative; Brent volatility adds downside risk to cash flow",
-        "summary": "S&P Ba2/Negative, Moodys Ba1/Negative. Brent ranged $73-$120 in Q1; high fuel costs compress Secunda refinery margins. FFO/debt…",
+        "headline": "S&P Ba2 and Moodys Ba1 both Negative; Brent volatility adds downside to cash flow",
+        "summary": "FFO/debt forecast 28.7% vs 30% BB+ floor at S&P. Brent ranged $73-$120 in Q1; Secunda refinery margins remain under pressure…",
         "date": "Apr 2026",
         "source": "S&P / Moodys"
       },
       {
         "importance": "watch",
+        "issuer": "Turkey / Turkcell",
+        "tag": "Bond",
+        "headline": "Imamoglu espionage trial opened May 2; Fitch Turkey outlook positive Jan 2026",
+        "summary": "Trial began May 2, earlier than the May 11 date set by court. Fitch raised to positive Jan 2026 on FX reserves. Governance and…",
+        "date": "May 2026",
+        "source": "Fitch / Reuters"
+      },
+      {
+        "importance": "watch",
+        "issuer": "Leviathan Bond",
+        "tag": "Bond",
+        "headline": "Leviathan operational; Israel-Lebanon ceasefire extended, but Iran war risks persist",
+        "summary": "Second halt in under a year. Field restored Apr 10. Lebanon ceasefire extended 3 weeks Apr 23. Full Iran peace deal still…",
+        "date": "Apr 2026",
+        "source": "MEES / Jerusalem Post"
+      },
+      {
+        "importance": "watch",
         "issuer": "Ecopetrol",
         "tag": "Bond",
-        "headline": "Ecopetrol Ba1/BB+ stable; 2026 maturity pre-financed, oil price swing is key risk",
-        "summary": "2026 $2.8B maturity refinanced in 2024. Brent volatility and $6B capex keep leverage elevated. Colombia sovereign Baa2 underpins…",
-        "date": "Apr 2026",
+        "headline": "Ecopetrol Ba1/BB+ stable; 2026 maturity handled, Brent volatility key risk",
+        "summary": "2026 $2.8B maturity pre-financed 2024. Moodys Ba1/stable; $6B capex and tight liquidity flagged. Brent $93-95 a tailwind for Q1…",
+        "date": "May 2026",
         "source": "Moodys"
       },
       {
         "importance": "info",
         "issuer": "Vedanta Resources",
         "tag": "Bond",
-        "headline": "Vedanta demerger record date May 1; Fitch BB- upgrade confirmed Apr 6",
-        "summary": "Vedanta Ltd demerger into 5 entities takes effect May 1. Fitch raised VRL to BB- Apr 6 on deleveraging and EBITDA. Bond impact…",
-        "date": "Apr 2026",
+        "headline": "Vedanta demerger effective May 1; Fitch BB- confirmed, limited bond impact",
+        "summary": "Vedanta Ltd spun off aluminium, power, oil, iron ore units on May 1. Fitch BB- affirmed Apr 6; agency expects neutral impact on…",
+        "date": "May 2026",
         "source": "Fitch / MSN"
       },
       {
         "importance": "info",
         "issuer": "OCP SA / Morocco",
         "tag": "Bond",
-        "headline": "OCP gains Atlantic market share as Gulf rivals stay blocked behind Hormuz",
-        "summary": "OCP sold record volumes to Latin America in April at DAP above $650/t. S&P Morocco BBB-/stable. Hybrid bond rated at investment…",
+        "headline": "S&P Morocco BBB-/stable; OCP records Atlantic phosphate sales at $650+/t",
+        "summary": "Gulf rivals blocked; OCP selling record volumes to Latin America and Europe. S&P notes OCP fiscal dividends as upside risk…",
         "date": "Apr 2026",
         "source": "S&P / Financial Afrik"
       },
@@ -116,17 +116,17 @@
         "importance": "info",
         "issuer": "Pemex",
         "tag": "Bond",
-        "headline": "Moodys B1 / Fitch BB+ stable; debt at $84.5B, 11-year low after $20B reduction",
-        "summary": "Sep 2025 upgrades held. High oil prices ($93+ Brent) ease cash flow pressure. SACP ccc+ at S&P remains structural drag; P-Cap…",
+        "headline": "Moodys B1 / Fitch BB+ stable; debt $84.5B, 11-year low after $20B reduction",
+        "summary": "Sep 2025 upgrades sustained. Brent $93+ eases cash flow. SACP ccc+ at S&P remains structural drag; P-Cap structure limits…",
         "date": "Apr 2026",
-        "source": "Moodys / Bloomberg"
+        "source": "Bloomberg / Moodys"
       },
       {
         "importance": "info",
         "issuer": "Rakuten Group",
         "tag": "Bond",
-        "headline": "R&I stable outlook maintained; mobile unit on track for EBITDA positive in 2026",
-        "summary": "R&I raised outlook to stable Sep 2025 on mobile improvements. Q1 2026 subscriber growth continued. S&P BB/stable. 2026 call…",
+        "headline": "R&I stable outlook; mobile EBITDA-positive in 2026 on track — S&P BB/stable",
+        "summary": "R&I raised outlook to stable Sep 2025 on mobile cash flow improvement. S&P BB/stable confirmed. Senior 2026-call bonds near par…",
         "date": "Sep 2025",
         "source": "R&I / S&P"
       },
@@ -134,8 +134,8 @@
         "importance": "info",
         "issuer": "Cameco / Kazatomprom",
         "tag": "Bond",
-        "headline": "India signs landmark uranium deals with Cameco and Kazatomprom in March 2026",
-        "summary": "Cameco $1.9B India deal closed Mar 2026. Kazatomprom EGM required for India U3O8 contract. 2026 Kazatomprom output guidance…",
+        "headline": "Cameco $1.9B India uranium deal closed; Kazatomprom EGM vote pending",
+        "summary": "Cameco signed landmark India supply deal Mar 2026. Kazatomprom India contract requires EGM shareholder approval still pending…",
         "date": "Mar 2026",
         "source": "World Nuclear News"
       }
@@ -143,66 +143,66 @@
     "equity": [
       {
         "importance": "watch",
-        "issuer": "Freeport-McMoRan",
+        "issuer": "Alphabet",
         "tag": "Equity",
-        "headline": "FCX Q1 beat 21% but stock -12% on Grasberg 9% copper output cut over 5 years",
-        "summary": "EPS $0.57 vs $0.47 est; rev $6.23B vs $5.7B. Wet drawpoints at Grasberg rose 30% to 45%; 5-yr copper/gold cut 9%/7%. Biggest…",
+        "headline": "Alphabet Q1: EPS $5.11 vs $2.63 est (+94% beat); stock +6%, market cap near $4.5T",
+        "summary": "Revenue $109.9B +22% YoY; Cloud $12.3B +28%. AI investments drove profit surge. Gemini app MAU at record highs. Google stock at…",
         "date": "Apr 2026",
-        "source": "FCX 8-K"
+        "source": "Alphabet 8-K / 24-7 Wall St"
       },
       {
         "importance": "watch",
-        "issuer": "Strategy",
+        "issuer": "Meta",
         "tag": "Equity",
-        "headline": "Strategy bought 34,164 BTC for $2.54B Apr 13-19; on track for 1M BTC by Dec 2026",
-        "summary": "Third-largest BTC purchase ever, funded by STRC preferred shares. Total 815,061 BTC at avg $75,527. At 774 BTC/day pace, 1M BTC…",
+        "headline": "Meta Q1 EPS $10.44 vs $6.66 est (+57% beat); capex raised to $125-145B spooks market",
+        "summary": "Revenue $56.3B +33% YoY; net income $26.8B. Capex 2026 guide raised $10B to $125-145B on component costs. JPMorgan downgraded to…",
         "date": "Apr 2026",
-        "source": "Bloomberg / River"
+        "source": "Meta 8-K / CNBC"
       },
       {
         "importance": "watch",
-        "issuer": "Alphabet / Meta / Microsoft",
+        "issuer": "Microsoft",
         "tag": "Equity",
-        "headline": "Alphabet, Meta, Microsoft all report Q1 2026 on April 29 — key AI spend test",
-        "summary": "Alphabet est $106.9B rev; Meta est $55.5B; MSFT fiscal Q3 results same day. Market focused on AI capex returns; Alphabet Cloud…",
+        "headline": "Microsoft Q3: Azure +40%, EPS $4.27 vs $4.06 est; capex $190B full-year guide",
+        "summary": "Revenue $82.9B +18% YoY; AI ARR surpassed $37B +123%. Copilot seats 20M+. Capex full-year raised to $190B on memory costs. Stock…",
         "date": "Apr 2026",
-        "source": "TipRanks / Invezz"
+        "source": "Microsoft 8-K / CNBC"
       },
       {
         "importance": "info",
         "issuer": "Petrobras",
         "tag": "Equity",
-        "headline": "Petrobras Q1 production report Apr 30; financial results May 11",
-        "summary": "Brent ~$93-95 in late April supports strong margins. Petrobras has no oil price hedges; full benefit of high Brent flows to…",
+        "headline": "Petrobras Q1 production record 3.23M boe/d +16% YoY; financials due May 11",
+        "summary": "Buzios and Mero set new daily highs. Brent $93-95 boosts margins; no hedges means full price exposure. P-79 platform first oil…",
         "date": "Apr 2026",
-        "source": "TipRanks / Petrobras IR"
+        "source": "Petrobras / IndexBox"
+      },
+      {
+        "importance": "info",
+        "issuer": "Strategy",
+        "tag": "Equity",
+        "headline": "Strategy 815K BTC at avg $75,527; on pace for 1M BTC by Dec 2026",
+        "summary": "Bought 34,164 BTC at $74,395 Apr 13-19 via STRC preferred. Total cost $61.6B; BTC ~$75K breakeven. STRC dividend 11.5% creates…",
+        "date": "Apr 2026",
+        "source": "Bloomberg / Bitcoin.com"
       },
       {
         "importance": "info",
         "issuer": "Coinbase",
         "tag": "Equity",
-        "headline": "Coinbase OCC trust charter conditional Apr 2; CLARITY Act vote expected May 2026",
-        "summary": "First federal crypto custodian license in US history. Stablecoin yield clause in CLARITY Act remains unresolved; Senate vote…",
+        "headline": "OCC conditional trust charter Apr 2; CLARITY Act Senate vote expected May 2026",
+        "summary": "First federal crypto custodian license in US history; custodies $246B. Stablecoin yield clause in CLARITY Act unresolved. Senate…",
         "date": "Apr 2026",
         "source": "OCC / CoinDesk"
       },
       {
         "importance": "info",
-        "issuer": "Cameco",
-        "tag": "Equity",
-        "headline": "Cameco $1.9B India deal signed; uranium demand structural tailwind intact",
-        "summary": "India nuclear expansion drives long-term contract demand. US nuclear license extensions confirmed by Congress. Kazatomprom 2026…",
-        "date": "Mar 2026",
-        "source": "World Nuclear News"
-      },
-      {
-        "importance": "info",
         "issuer": "NVIDIA",
         "tag": "Equity",
-        "headline": "NVIDIA Q4 FY26 data center $62.3B +73% YoY; Q1 FY27 guidance $78B due May 28",
-        "summary": "H20 export ban cost $4.5B in Q1 charges. Blackwell NVL72 in full production; Vera Rubin platform announced. Next earnings May 28…",
+        "headline": "NVIDIA Q4 FY26 data center $62.3B +73%; Q1 FY27 results with $78B guide due May 28",
+        "summary": "H20 export ban to China cost $4.5B in Q1 charges. Blackwell NVL72 in full production. Jane Street $6B compute deal signed Apr…",
         "date": "Apr 2026",
-        "source": "NVIDIA IR"
+        "source": "NVIDIA IR / CNBC"
       }
     ]
   },
