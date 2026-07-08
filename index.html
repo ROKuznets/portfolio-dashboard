@@ -2421,8 +2421,9 @@ function _loadEvents(cb){
   fetch('events.json?t='+Date.now())
     .then(function(r){if(!r.ok)throw new Error(r.status);return r.json();})
     .then(function(j){
-      var local=(j.events&&j.events.from_local)||[];
-      var fnews=(j.events&&j.events.from_news)||[];
+      var _jroot=j.events||j;
+      var local=(_jroot.from_local)||[];
+      var fnews=(_jroot.from_news)||[];
       var stored=_evGetFromNews();
       var storedIds=stored.map(function(e){return e.id;});
       var merged=fnews.filter(function(e){return storedIds.indexOf(e.id)<0;});
@@ -2484,8 +2485,8 @@ function evDeleteNewsCard(id,btn,tab){
   // Sync to GitHub
   ghUpdate(
     function(data){
-      if(data.events&&data.events.from_news)
-        data.events.from_news=data.events.from_news.filter(function(e){return e.id!==id;});
+      var _fn=data.from_news||(data.events&&data.events.from_news)||[];
+      data.from_news=_fn.filter(function(e){return e.id!==id;});
       return data;
     },
     'remove calendar event from news',
@@ -2653,8 +2654,8 @@ function evDeleteFromNews(id,btn){
   // Sync to GitHub
   ghUpdate(
     function(data){
-      if(data.events&&data.events.from_news)
-        data.events.from_news=data.events.from_news.filter(function(e){return e.id!==id;});
+      var _fn=data.from_news||(data.events&&data.events.from_news)||[];
+      data.from_news=_fn.filter(function(e){return e.id!==id;});
       return data;
     },
     'delete calendar event',
@@ -2766,8 +2767,8 @@ function applyCalData(){
     ghUpdate(
       function(ev){
         if(!ev.events)ev.events={};
-        ev.events.from_local=newLocal;
-        ev.events.from_news=newFromNews;
+        ev.from_local=newLocal;
+        ev.from_news=newFromNews;
         ev._updated=(new Date()).toLocaleDateString('ru-RU');
         return ev;
       },
@@ -2871,11 +2872,9 @@ function confirmAddToCalendar(){
   st.textContent='✓ Added · syncing to GitHub…';st.className='ac-status ok';
   ghUpdate(
     function(data){
-      if(!data.events)data.events={from_local:[],from_news:[]};
-      if(!data.events.from_news)data.events.from_news=[];
-      // avoid duplicate
-      if(!data.events.from_news.some(function(e){return e.id===ev.id;}))
-        data.events.from_news.push(ev);
+      if(!data.from_news)data.from_news=[];
+      if(!data.from_news.some(function(e){return e.id===ev.id;}))
+        data.from_news.push(ev);
       return data;
     },
     'add calendar event: '+ev.issuer,
@@ -2897,18 +2896,44 @@ var _GH_KEY   = 'gh_pat';
 function ghGetToken(){ return localStorage.getItem(_GH_KEY)||''; }
 
 function ghSaveToken(){
-  var t=document.getElementById('gh-token-input').value.trim();
+  var inp=document.getElementById('gh-token-input');
+  var t=inp?inp.value.trim():'';
   if(!t)return;
+  if(t.startsWith('•')){
+    var stored=ghGetToken();
+    if(!stored){ghUpdateDot('','err','No token — paste a new one');return;}
+    t=stored;
+  }
   localStorage.setItem(_GH_KEY,t);
-  ghTestToken();
+  ghUpdateDot('spin','spin','Saving and verifying…');
+  var _t=t;
+  fetch('https://api.github.com/repos/'+_GH_REPO+'/contents/'+_GH_FILE,{
+    headers:{'Authorization':'Bearer '+_t,'Accept':'application/vnd.github+json'}
+  }).then(function(r){
+    if(r.ok){
+      if(inp)inp.value='';
+      ghUpdateDot('','ok','✓ Saved & connected');
+      document.getElementById('gh-dot').className='gh-dot ok';
+      setTimeout(closeGhModal,2000);
+    }else{
+      ghUpdateDot('','err','Saved — API error '+r.status+' (check token scope)');
+      document.getElementById('gh-dot').className='gh-dot err';
+    }
+  }).catch(function(){
+    ghUpdateDot('','ok','✓ Saved (verify when online)');
+    setTimeout(closeGhModal,2000);
+  });
 }
 
 function openGhModal(){
   var t=ghGetToken();
   var inp=document.getElementById('gh-token-input');
-  if(inp)inp.value=t?'••••••••••••••••••••':'';
-  ghUpdateDot(t?'ok':'idle','ok','Not configured');
-  if(t)ghUpdateDot('ok','ok','Token saved — click Test to verify');
+  if(inp) inp.value=t||'';
+  if(t){
+    ghUpdateDot('','ok','Token saved — click Test to verify');
+  } else {
+    ghUpdateDot('','idle','Not configured');
+  }
   document.getElementById('gh-modal').classList.add('open');
 }
 
@@ -2925,15 +2950,13 @@ function ghUpdateDot(state,cls,msg){
 
 function ghTestToken(){
   var inp=document.getElementById('gh-token-input');
-  var raw=inp?inp.value.trim():'';
-  var token=raw.startsWith('•')?ghGetToken():raw;
+  var token=(inp?inp.value.trim():'')||ghGetToken();
   if(!token){ghUpdateDot('','err','No token entered');return;}
   ghUpdateDot('spin','spin','Testing…');
   fetch('https://api.github.com/repos/'+_GH_REPO+'/contents/'+_GH_FILE,{
     headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json'}
   }).then(function(r){
     if(r.ok){
-      if(!raw.startsWith('•'))localStorage.setItem(_GH_KEY,raw);
       ghUpdateDot('','ok','✓ Connected — token works');
       document.getElementById('gh-dot').className='gh-dot ok';
     }else{
