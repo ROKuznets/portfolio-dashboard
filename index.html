@@ -1678,9 +1678,8 @@ function _loadEvents(cb){
   fetch('events.json?t='+Date.now())
     .then(function(r){if(!r.ok)throw new Error(r.status);return r.json();})
     .then(function(j){
-      // Support both nested {events:{from_local:[]}} and flat {from_local:[]}
-      var local=(j.events&&j.events.from_local)||j.from_local||[];
-      var fnews=(j.events&&j.events.from_news)||j.from_news||[];
+      var local=(j.events&&j.events.from_local)||[];
+      var fnews=(j.events&&j.events.from_news)||[];
       var stored=_evGetFromNews();
       var storedIds=stored.map(function(e){return e.id;});
       var merged=fnews.filter(function(e){return storedIds.indexOf(e.id)<0;});
@@ -1696,7 +1695,7 @@ function _loadEvents(cb){
 function _updateBadge(){
   if(!_evData)return;
   var today=new Date();today.setHours(0,0,0,0);
-  var n=_evData.filter(function(e){return e.status==='upcoming'&&e.dt<today&&!_evDismissed[e.id];}).length;
+  var n=_evData.filter(function(e){return e.notes==='from_news'&&e.dt<today&&!_evDismissed[e.id];}).length;
   var b=document.getElementById('ev-warn-badge');
   var c=document.getElementById('ev-warn-count');
   if(!b)return;
@@ -1707,7 +1706,7 @@ function _updateBadge(){
 function openWarnModal(){
   if(!_evData)return;
   var today=new Date();today.setHours(0,0,0,0);
-  var expired=_evData.filter(function(e){return e.status==='upcoming'&&e.dt<today&&!_evDismissed[e.id];});
+  var expired=_evData.filter(function(e){return e.notes==='from_news'&&e.dt<today&&!_evDismissed[e.id];});
   var list=document.getElementById('ev-warn-list');
   if(!list)return;
   if(!expired.length){
